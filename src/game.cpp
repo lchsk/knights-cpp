@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "game.h"
 
 namespace knights
@@ -5,6 +7,11 @@ namespace knights
     Game::Game(int x, int y)
         : _window(sf::VideoMode(x, y), "knights")
     {
+        _resource_mgr.load_texture(
+            "archer",
+            "assets/images/knights_archer_bow.png"
+        );
+        _sp.setTexture(_resource_mgr.get_texture("archer"));
     }
 
     Game::~Game()
@@ -44,6 +51,7 @@ namespace knights
     void Game::render()
     {
         _window.clear();
+        _window.draw(_sp);
 
         _window.display();
     }
