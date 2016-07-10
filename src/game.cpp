@@ -4,13 +4,20 @@
 
 namespace knights
 {
-    Game::Game(int x, int y)
-        : _window(sf::VideoMode(x, y), "knights")
+    Game::Game()
     {
+        _w = 800;
+        _h = 600;
+
+        _window = std::unique_ptr<sf::RenderWindow>(
+            new sf::RenderWindow(sf::VideoMode(_w, _h), "knights")
+        );
+
         _resource_mgr.load_texture(
             "archer",
             "assets/images/knights_archer_bow.png"
         );
+
         _sp.setTexture(_resource_mgr.get_texture("archer"));
     }
 
@@ -24,7 +31,7 @@ namespace knights
         sf::Time since_last_update;
         sf::Time per_frame = sf::seconds(1.0f / 60.0f);
 
-        while (_window.isOpen()) {
+        while (_window->isOpen()) {
             bool repaint = false;
 
             sf::Time delta = clock.restart();
@@ -50,21 +57,21 @@ namespace knights
 
     void Game::render()
     {
-        _window.clear();
-        _window.draw(_sp);
+        _window->clear();
+        _window->draw(_sp);
 
-        _window.display();
+        _window->display();
     }
 
     void Game::handle_events()
     {
         sf::Event event;
 
-        while(_window.pollEvent(event)) {
+        while(_window->pollEvent(event)) {
             if (event.type == sf::Event::Closed)
-                _window.close();
+                _window->close();
             else if (event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::Escape)
-                _window.close();
+                _window->close();
         }
     }
 }

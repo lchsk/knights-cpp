@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv)
 {
-    knights::Game game(800, 640);
+    knights::Game game;
     game.run();
 
     return 0;

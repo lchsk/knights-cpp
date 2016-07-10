@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <string>
+#include <memory>
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -16,7 +17,7 @@ namespace knights
             Game(const Game&) = delete;
             Game& operator=(const Game&) = delete;
 
-            Game(int x, int y);
+            Game();
             ~Game();
 
             void run();
@@ -26,9 +27,15 @@ namespace knights
             void update(sf::Time deltaTime);
             void render();
 
+            /* Screen  width */
+            int _w;
+
+            /* Screen height */
+            int _h;
+
             knights::res::ResourceMgr _resource_mgr;
 
-            sf::RenderWindow _window;
+            std::unique_ptr<sf::RenderWindow> _window;
             sf::Texture _text;
             sf::Sprite _sp;
     };
