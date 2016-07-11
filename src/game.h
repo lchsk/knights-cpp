@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "core/resource_mgr.h"
+#include "map/level.h"
 
 namespace knights
 {
@@ -33,9 +34,13 @@ namespace knights
             /* Screen height */
             int _h;
 
-            knights::res::ResourceMgr _resource_mgr;
+            std::unique_ptr<knights::map::Level> _current_level;
+
+            std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
             std::unique_ptr<sf::RenderWindow> _window;
+            std::unique_ptr<sf::View> _view;
+
             sf::Texture _text;
             sf::Sprite _sp;
     };
