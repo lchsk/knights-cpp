@@ -1,5 +1,5 @@
 all:
-	g++ -std=c++11 \
+	g++-6 -std=c++14 \
 		src/main.cpp \
 		src/game.cpp \
 		src/core/resource_mgr.cpp \

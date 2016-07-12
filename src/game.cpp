@@ -11,16 +11,17 @@ namespace knights
 
         _resource_mgr = std::make_shared<knights::res::ResourceMgr>();
 
-        _current_level = std::unique_ptr<knights::map::Level>(
-            new knights::map::Level(_resource_mgr)
+        _current_level = std::make_unique<knights::map::Level>(
+            _resource_mgr
         );
 
-        _window = std::unique_ptr<sf::RenderWindow>(
-            new sf::RenderWindow(sf::VideoMode(_w, _h), "knights")
+        _window = std::make_unique<sf::RenderWindow>(
+            sf::VideoMode(_w, _h),
+            "knights"
         );
 
-        _view = std::unique_ptr<sf::View>(
-            new sf::View(sf::FloatRect(0, 0, _w, _h))
+        _view = std::make_unique<sf::View>(
+            sf::FloatRect(0, 0, _w, _h)
         );
 
         _window->setView(*_view);

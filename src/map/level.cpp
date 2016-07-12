@@ -9,11 +9,10 @@ namespace knights
         {
             load_level_assets();
 
-            _map = std::unique_ptr<knights::map::Map>(
-                new knights::map::Map(
+            _map = std::make_unique<knights::map::Map>(
                 resource_mgr,
                 "test"
-            ));
+            );
         }
 
         Level::~Level()
