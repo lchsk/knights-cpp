@@ -26,13 +26,7 @@ namespace knights
 
         _window->setView(*_view);
 
-        _resource_mgr->load_texture(
-            "archer",
-            "assets/images/knights_archer_bow.png"
-        );
-
-        _sp.setTexture(_resource_mgr->get_texture("archer"));
-        // _sp.setPosition(sf::Vector2f(100, 50));
+        // _view->move(1200, 200);
     }
 
     Game::~Game()
@@ -74,7 +68,6 @@ namespace knights
     void Game::render()
     {
         _window->clear();
-        // _window->draw(_sp);
         _current_level->render(*_window);
 
         _window->display();

@@ -26,21 +26,21 @@ namespace knights
 
                 std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
+                std::vector<sf::Sprite> _sprites;
+
                 /* Tile width */
                 int _tile_w;
 
                 /* Tile height */
                 int _tile_h;
 
-                /* Number of tiles in X axis */
-                int _tiles_x;
+                /* Number of rows */
+                int _tiles_rows;
 
-                /* Number of tiles in Y axis */
-                int _tiles_y;
+                /* Number of columns */
+                int _tiles_cols;
 
                 std::string _map_name;
-
-                sf::Sprite _s;
         };
     }
 }

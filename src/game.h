@@ -40,9 +40,6 @@ namespace knights
 
             std::unique_ptr<sf::RenderWindow> _window;
             std::unique_ptr<sf::View> _view;
-
-            sf::Texture _text;
-            sf::Sprite _sp;
     };
 }
 #endif
