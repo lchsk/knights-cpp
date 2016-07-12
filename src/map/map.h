@@ -14,7 +14,7 @@ namespace knights
             public:
                 Map(
                     std::shared_ptr<knights::res::ResourceMgr> resource_mgr,
-                    std::string& map_name
+                    std::string map_name
                 );
                 ~Map();
 

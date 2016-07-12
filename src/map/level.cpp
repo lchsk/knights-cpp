@@ -7,13 +7,11 @@ namespace knights
         Level::Level(std::shared_ptr<knights::res::ResourceMgr> resource_mgr)
             : _resource_mgr(resource_mgr)
         {
-            std::string abc = "test";
-
             load_level_assets();
 
             _map = std::shared_ptr<knights::map::Map>(new knights::map::Map(
                 resource_mgr,
-                abc
+                "test"
             ));
         }
 

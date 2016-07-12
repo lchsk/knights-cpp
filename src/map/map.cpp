@@ -6,7 +6,7 @@ namespace knights
     {
         Map::Map(
             std::shared_ptr<knights::res::ResourceMgr> resource_mgr,
-            std::string& map_name
+            std::string map_name
         )
             : _map_name(map_name),
               _resource_mgr(resource_mgr)
