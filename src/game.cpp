@@ -9,9 +9,7 @@ namespace knights
         _w = 800;
         _h = 600;
 
-        _resource_mgr = std::shared_ptr<knights::res::ResourceMgr>(
-            new knights::res::ResourceMgr()
-        );
+        _resource_mgr = std::make_shared<knights::res::ResourceMgr>();
 
         _current_level = std::unique_ptr<knights::map::Level>(
             new knights::map::Level(_resource_mgr)

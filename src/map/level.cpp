@@ -9,7 +9,8 @@ namespace knights
         {
             load_level_assets();
 
-            _map = std::shared_ptr<knights::map::Map>(new knights::map::Map(
+            _map = std::unique_ptr<knights::map::Map>(
+                new knights::map::Map(
                 resource_mgr,
                 "test"
             ));

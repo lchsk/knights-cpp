@@ -22,7 +22,7 @@ namespace knights
                 void render(sf::RenderWindow& window);
 
             private:
-                std::shared_ptr<knights::map::Map> _map;
+                std::unique_ptr<knights::map::Map> _map;
                 std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
                 void load_level_assets() const;
