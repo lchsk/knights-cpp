@@ -33,6 +33,7 @@ namespace knights
         );
 
         _sp.setTexture(_resource_mgr->get_texture("archer"));
+        // _sp.setPosition(sf::Vector2f(100, 50));
     }
 
     Game::~Game()
@@ -68,12 +69,14 @@ namespace knights
     void Game::update(sf::Time delta)
     {
         _window->setView(*_view);
+        _current_level->update(delta);
     }
 
     void Game::render()
     {
         _window->clear();
-        _window->draw(_sp);
+        // _window->draw(_sp);
+        _current_level->render(*_window);
 
         _window->display();
     }

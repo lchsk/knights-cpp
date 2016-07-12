@@ -15,14 +15,17 @@ namespace knights
         class Level : sf::NonCopyable
         {
             public:
-                Level(std::shared_ptr<knights::res::ResourceMgr>& resource_mgr);
+                Level(std::shared_ptr<knights::res::ResourceMgr> resource_mgr);
                 ~Level();
+
+                void update(sf::Time delta);
+                void render(sf::RenderWindow& window);
 
             private:
                 std::shared_ptr<knights::map::Map> _map;
                 std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
-
+                void load_level_assets() const;
         };
     }
 }

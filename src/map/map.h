@@ -3,18 +3,28 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../core/resource_mgr.h"
+
 namespace knights
 {
     namespace map
     {
-        class Map : sf::NonCopyable
+        class Map
         {
             public:
-                Map(std::string map_name);
+                Map(
+                    std::shared_ptr<knights::res::ResourceMgr> resource_mgr,
+                    std::string& map_name
+                );
                 ~Map();
+
+                void update(sf::Time delta);
+                void render(sf::RenderWindow& window);
 
             private:
                 void _init_map() const;
+
+                std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
                 /* Tile width */
                 int _tile_w;
@@ -29,6 +39,8 @@ namespace knights
                 int _tiles_y;
 
                 std::string _map_name;
+
+                sf::Sprite _s;
         };
     }
 }
