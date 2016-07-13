@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 #include "game.h"
 
@@ -33,34 +34,58 @@ namespace knights
     {
     }
 
+    void Game::move_view(sf::Time delta)
+    {
+        auto v = sf::Mouse::getPosition(*_window);
+
+        int percent = 5;
+        int speed = 200;
+
+        int val = std::round(speed * delta.asSeconds());
+
+        if (v.x >= (100 - percent) / 100.0f * _w
+            && _view->getCenter().x + val < _w
+        ) {
+            _view->move(val, 0);
+        }
+        else if (v.x < (percent / 100.0f * _w)
+              && _view->getCenter().x - val > _w / 2.0f
+            ) {
+            _view->move(-val, 0);
+        }
+        else if (v.y >= (100 - percent) / 100.0f * _h
+            && _view->getCenter().y + val < _h
+        ) {
+            _view->move(0, val);
+        }
+        else if (v.y < (percent / 100.0f * _h)
+              && _view->getCenter().y - val > _h / 2.0f
+            ) {
+            _view->move(0, -val);
+        }
+    }
+
     void Game::run()
     {
-        sf::Clock clock;
-        sf::Time since_last_update;
         sf::Time per_frame = sf::seconds(1.0f / 60.0f);
+        sf::Clock clock;
+        sf::Time last_update;
 
         while (_window->isOpen()) {
-            bool repaint = false;
+            sf::Time diff = clock.getElapsedTime() - last_update;
 
-            sf::Time delta = clock.restart();
-            since_last_update += delta;
-
-            if (since_last_update > per_frame) {
+            if (diff > per_frame) {
                 handle_events();
-
-                since_last_update -= per_frame;
-                repaint = true;
-
-                update(since_last_update);
-            }
-
-            if (repaint)
+                update(diff);
                 render();
+                last_update = clock.getElapsedTime();
+            }
         }
     }
 
     void Game::update(sf::Time delta)
     {
+        move_view(delta);
         _window->setView(*_view);
         _current_level->update(delta);
     }

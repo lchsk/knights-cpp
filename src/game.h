@@ -25,8 +25,10 @@ namespace knights
 
         private:
             void handle_events();
-            void update(sf::Time deltaTime);
+            void update(sf::Time delta);
             void render();
+
+            void move_view(sf::Time delta);
 
             /* Screen  width */
             int _w;
