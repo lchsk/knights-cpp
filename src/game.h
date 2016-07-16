@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "core/resource_mgr.h"
+#include "core/game_window.h"
 #include "map/level.h"
 
 namespace knights
@@ -28,20 +29,11 @@ namespace knights
             void update(sf::Time delta);
             void render();
 
-            void move_view(sf::Time delta);
-
-            /* Screen  width */
-            int _w;
-
-            /* Screen height */
-            int _h;
-
             std::unique_ptr<knights::map::Level> _current_level;
+            std::unique_ptr<knights::game::GameWindow> _window;
 
             std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
-            std::unique_ptr<sf::RenderWindow> _window;
-            std::unique_ptr<sf::View> _view;
     };
 }
 #endif

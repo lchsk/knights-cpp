@@ -33,6 +33,7 @@ add_executable(${EXECUTABLE_NAME}
 	src/core/resource_mgr.cpp
 	src/map/map.cpp
 	src/map/level.cpp
+    src/core/game_window.cpp
 )
 
 
