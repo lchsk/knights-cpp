@@ -12,6 +12,16 @@ namespace knights
 {
     namespace game
     {
+        enum CursorPosition {
+            TOP,
+            LEFT,
+            RIGHT,
+            BOTTOM,
+            // Cursor is placed far enough from the borders so the view
+            // will not be moved.
+            CENTRE
+        };
+
         class GameWindow
         {
             public:
@@ -27,14 +37,26 @@ namespace knights
                 void update(sf::Time delta);
 
             private:
-                            void move_view(sf::Time delta);
-	                       /* Screen  width */
-            int _w;
+                void move_view(sf::Time delta);
 
-            /* Screen height */
-            int _h;
-            std::unique_ptr<sf::RenderWindow> _window;
-            std::unique_ptr<sf::View> _view;
+                bool cursor_in(
+                    CursorPosition pos,
+                    int move_delta,
+                    sf::Time delta,
+                    sf::Vector2i mouse_pos
+                );
+
+                int _percent;
+                int _speed;
+
+                /* Screen  width */
+                int _w;
+
+                /* Screen height */
+                int _h;
+
+                std::unique_ptr<sf::RenderWindow> _window;
+                std::unique_ptr<sf::View> _view;
         };
     }
 }
