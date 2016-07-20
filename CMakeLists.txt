@@ -34,6 +34,7 @@ add_executable(${EXECUTABLE_NAME}
 	src/map/map.cpp
 	src/map/level.cpp
     src/core/game_window.cpp
+	src/core/animation.cpp
 )
 
 
