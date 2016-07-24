@@ -18,8 +18,13 @@ namespace knights
             _tiles_rows = 50;
 
             auto& r = _resource_mgr->get_spritesheet("knights_archer_walk");
+
+            std::vector<int> frames = {10, 11
+                                       , 12, 13, 14, 15, 16, 17
+            };
+
             _animation = std::make_shared<knights::Animation>(
-                r
+                r, frames
             );
 
             for (int r = 0; r < _tiles_rows; r++) {
@@ -46,6 +51,7 @@ namespace knights
         void
         Map::update(sf::Time delta)
         {
+            _animation->update(delta);
         }
 
         void
@@ -59,7 +65,7 @@ namespace knights
             // }
 
             for (auto& tile : _tiles) {
-                tile->render(window);
+                // tile->render(window);
             }
 
             _animation->render(window);

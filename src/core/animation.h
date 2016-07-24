@@ -13,8 +13,8 @@ namespace knights
     {
     public:
         Animation(
-            /* std::shared_ptr<knights::Spritesheet> spritesheet */
-            knights::Spritesheet& spritesheet
+            knights::Spritesheet& spritesheet,
+            std::vector<int>& frames
         );
         ~Animation();
 
@@ -22,9 +22,14 @@ namespace knights
         void render(sf::RenderWindow& window);
 
     private:
-        /* std::shared_ptr<knights::Spritesheet>& */
         knights::Spritesheet&
             _spritesheet;
+
+
+        std::vector<int> _frames;
+        int _frame;
+        sf::Time _since_update;
+        float _speed;
     };
 }
 
