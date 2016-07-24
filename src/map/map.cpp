@@ -19,10 +19,13 @@ namespace knights
 
             for (int r = 0; r < _tiles_rows; r++) {
                 for (int c = 0; c < _tiles_cols; c++) {
-                    auto s = sf::Sprite(
-                        _resource_mgr->get_texture("tiles"),
-                        sf::IntRect(0, 0, 32, 32)
-                    );
+                    auto s = _resource_mgr->get_spritesheet("tiles")
+                        .get(0, 4);
+
+                    // auto s = sf::Sprite(
+                    //     _resource_mgr->get_texture("tiles"),
+                    //     sf::IntRect(0, 0, 32, 32)
+                    // );
                     _sprites.push_back(s);
                 }
             }

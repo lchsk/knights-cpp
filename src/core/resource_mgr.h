@@ -6,6 +6,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "spritesheet.h"
+
 namespace knights
 {
     namespace res
@@ -24,11 +26,20 @@ namespace knights
                 const sf::Texture&
                 get_texture(std::string key);
 
+                knights::Spritesheet&
+                    get_spritesheet(std::string key);
+
             private:
                 std::unordered_map<
                     std::string,
                     std::unique_ptr<sf::Texture>
                 > _textures;
+
+                std::unordered_map<
+                    std::string,
+                    std::unique_ptr<knights::Spritesheet>
+                > _spritesheets;
+
         };
     }
 }

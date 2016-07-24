@@ -1,3 +1,4 @@
+
 #include "resource_mgr.h"
 
 namespace knights
@@ -6,12 +7,25 @@ namespace knights
     {
         ResourceMgr::ResourceMgr()
         {
+            // std::unique_ptr<knights::Spritesheet> tex =
+            //     std::make_unique<
+            //     knights::Spritesheet> (
+            //     "assets/images/knights_tiles.png",
+            //     32,
+            //     32
+            // );
+
+            _spritesheets["tiles"] = std::make_unique
+                <knights::Spritesheet> (
+                "assets/images/knights_tiles.png",
+                32,
+                32
+            );
 
         }
 
         ResourceMgr::~ResourceMgr()
         {
-
         }
 
         void
@@ -30,6 +44,12 @@ namespace knights
         ResourceMgr::get_texture(std::string key)
         {
             return *_textures[key];
+        }
+
+        knights::Spritesheet&
+        ResourceMgr::get_spritesheet(std::string key)
+        {
+            return *_spritesheets[key];
         }
     }
 }
