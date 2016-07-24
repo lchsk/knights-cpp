@@ -22,11 +22,15 @@ namespace knights
                     auto s = _resource_mgr->get_spritesheet("tiles")
                         .get(0, 4);
 
-                    // auto s = sf::Sprite(
-                    //     _resource_mgr->get_texture("tiles"),
-                    //     sf::IntRect(0, 0, 32, 32)
-                    // );
                     _sprites.push_back(s);
+
+                    _tiles.push_back(
+                        std::make_unique<knights::map::Tile>(
+                            s,
+                            r * _tile_w,
+                            c * _tile_h
+                        )
+                    );
                 }
             }
         }
@@ -50,7 +54,11 @@ namespace knights
                     s / _tiles_cols * 32
                 );
 
-                window.draw(_sprites[s]);
+                // window.draw(_sprites[s]);
+            }
+
+            for (int t = 0; t < _tiles.size(); t++) {
+                window.draw(_tiles[t]->get_sprite());
             }
 
         }

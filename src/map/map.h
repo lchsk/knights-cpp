@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../core/resource_mgr.h"
+#include "tile.h"
 
 namespace knights
 {
@@ -27,6 +28,9 @@ namespace knights
                 std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
                 std::vector<sf::Sprite> _sprites;
+                std::vector<
+                    std::unique_ptr<knights::map::Tile>
+                    > _tiles;
 
                 /* Tile width */
                 int _tile_w;

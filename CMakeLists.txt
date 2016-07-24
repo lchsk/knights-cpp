@@ -28,14 +28,15 @@ set(EXECUTABLE_NAME "knights")
 # set(CMAKE_CXX_FLAGS "-std=c++11")
 add_definitions(-std=c++14)
 add_executable(${EXECUTABLE_NAME}
-	src/main.cpp
-	src/game.cpp
-	src/core/resource_mgr.cpp
-	src/map/map.cpp
-	src/map/level.cpp
+    src/main.cpp
+    src/game.cpp
+    src/core/resource_mgr.cpp
+    src/map/map.cpp
+    src/map/level.cpp
+    src/map/tile.cpp
     src/core/game_window.cpp
-	src/core/animation.cpp
-	src/core/spritesheet.cpp
+    src/core/animation.cpp
+    src/core/spritesheet.cpp
 )
 
 
