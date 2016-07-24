@@ -22,8 +22,6 @@ namespace knights
                     auto s = _resource_mgr->get_spritesheet("tiles")
                         .get(0, 4);
 
-                    _sprites.push_back(s);
-
                     _tiles.push_back(
                         std::make_unique<knights::map::Tile>(
                             s,
@@ -48,19 +46,16 @@ namespace knights
         void
         Map::render(sf::RenderWindow& window)
         {
-            for (int s = 0; s < _sprites.size(); s++) {
-                _sprites[s].setPosition(
-                    s % _tiles_rows * 32,
-                    s / _tiles_cols * 32
-                );
+            // for (int s = 0; s < _sprites.size(); s++) {
+            //     _sprites[s].setPosition(
+            //         s % _tiles_rows * 32,
+            //         s / _tiles_cols * 32
+            //     );
+            // }
 
-                // window.draw(_sprites[s]);
+            for (auto& tile : _tiles) {
+                tile->render(window);
             }
-
-            for (int t = 0; t < _tiles.size(); t++) {
-                window.draw(_tiles[t]->get_sprite());
-            }
-
         }
 
         void

@@ -9,11 +9,6 @@ namespace knights
               _y(y),
               _tile(sprite)
         {
-            // _map = std::make_unique<knights::map::Map>(
-            //     resource_mgr,
-            //     "test"
-            // );
-
             _tile.setPosition(x, y);
         }
 
@@ -31,7 +26,7 @@ namespace knights
         void
         Tile::render(sf::RenderWindow& window)
         {
-            // _map->render(window);
+            window.draw(_tile);
         }
     }
 }
