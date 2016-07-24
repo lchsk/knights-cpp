@@ -37,7 +37,7 @@ namespace knights
 
                 std::unordered_map<
                     std::string,
-                    std::unique_ptr<knights::Spritesheet>
+                    std::shared_ptr<knights::Spritesheet>
                 > _spritesheets;
 
         };

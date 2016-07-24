@@ -15,13 +15,19 @@ namespace knights
             //     32
             // );
 
-            _spritesheets["tiles"] = std::make_unique
+            _spritesheets["tiles"] = std::make_shared
                 <knights::Spritesheet> (
                 "assets/images/knights_tiles.png",
                 32,
                 32
             );
 
+            _spritesheets["knights_archer_walk"] = std::make_shared
+                <knights::Spritesheet> (
+                "assets/images/knights_archer_walk.png",
+                64,
+                64
+            );
         }
 
         ResourceMgr::~ResourceMgr()

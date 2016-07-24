@@ -17,6 +17,11 @@ namespace knights
             _tiles_cols = 70;
             _tiles_rows = 50;
 
+            auto& r = _resource_mgr->get_spritesheet("knights_archer_walk");
+            _animation = std::make_shared<knights::Animation>(
+                r
+            );
+
             for (int r = 0; r < _tiles_rows; r++) {
                 for (int c = 0; c < _tiles_cols; c++) {
                     auto s = _resource_mgr->get_spritesheet("tiles")
@@ -56,6 +61,8 @@ namespace knights
             for (auto& tile : _tiles) {
                 tile->render(window);
             }
+
+            _animation->render(window);
         }
 
         void
