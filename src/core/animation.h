@@ -21,15 +21,26 @@ namespace knights
         void update(sf::Time delta);
         void render(sf::RenderWindow& window);
 
+        bool is_playing();
+        void play();
+        void stop();
+        void reset();
+        void set_speed(float speed);
+
     private:
-        knights::Spritesheet&
-            _spritesheet;
+        knights::Spritesheet& _spritesheet;
 
-
+        /* IDs of frames from _spritesheet */
         std::vector<int> _frames;
+
+        /* Current frame */
         int _frame;
+
         sf::Time _since_update;
+
         float _speed;
+
+        bool _is_playing;
     };
 }
 

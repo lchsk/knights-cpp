@@ -27,6 +27,9 @@ namespace knights
                 r, frames
             );
 
+            _animation->set_speed(0.5);
+            _animation->play();
+
             for (int r = 0; r < _tiles_rows; r++) {
                 for (int c = 0; c < _tiles_cols; c++) {
                     auto s = _resource_mgr->get_spritesheet("tiles")
