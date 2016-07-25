@@ -16,6 +16,10 @@ namespace knights
         if (! _texture->loadFromFile(_path)) {
             throw std::runtime_error("Unable to load " + _path);
         }
+
+        auto texture_size = _texture->getSize();
+        _tiles_n.x = texture_size.x / tile_width;
+        _tiles_n.y = texture_size.y / tile_height;
     }
 
     Spritesheet::~Spritesheet()
@@ -36,4 +40,9 @@ namespace knights
         );
     }
 
+    const sf::Vector2u&
+    Spritesheet::get_size()
+    {
+        return _tiles_n;
+    }
 }

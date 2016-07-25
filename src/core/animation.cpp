@@ -43,9 +43,10 @@ namespace knights
         // Enumerate spritesheet frames from 0
         int frame = _frames[_frame];
 
-        printf("%d\n", frame);
-        auto row = frame / 9;
-        auto col = frame % 9;
+        auto tiles = _spritesheet.get_size();
+
+        auto row = frame / tiles.x;
+        auto col = frame % tiles.x;
 
         auto s = _spritesheet.get(row, col);
         s.setPosition(200, 300);

@@ -19,11 +19,16 @@ namespace knights
 
         sf::Sprite get(int row, int col);
 
+        /* Texture size in tiles */
+        const sf::Vector2u& get_size();
+
     private:
         std::unique_ptr<sf::Texture> _texture;
         std::string _path;
         int _tile_width;
         int _tile_height;
+
+        sf::Vector2u _tiles_n;
     };
 }
 
