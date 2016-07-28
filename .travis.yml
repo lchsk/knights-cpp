@@ -29,6 +29,19 @@ matrix:
           packages: ['g++-6']
       env: COMPILER=g++-6
 
+    - os: linux
+      compiler: clang
+      before_install:
+        - sudo apt-add-repository ppa:sonkun/sfml-development -y
+        - sudo apt-get update -qq
+      install:
+        - sudo apt-get install libsfml-dev
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.4']
+          packages: ['clang-3.4']
+      env: COMPILER=clang-3.4
+
 script:
   - uname -a
   - $COMPILER --version
