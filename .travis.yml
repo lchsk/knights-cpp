@@ -17,4 +17,4 @@ matrix:
 script:
   - uname -a
   - $COMPILER --version
-  - CXX=$COMPILER cmake . && make -j
+  - cmake -DCMAKE_CXX_COMPILER=$COMPILER . && make -j
