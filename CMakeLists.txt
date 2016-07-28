@@ -37,6 +37,7 @@ add_executable(${EXECUTABLE_NAME}
     src/core/game_window.cpp
     src/core/animation.cpp
     src/core/spritesheet.cpp
+    src/game/character.cpp
 )
 
 
