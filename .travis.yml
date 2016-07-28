@@ -38,9 +38,9 @@ matrix:
         - sudo apt-get install libsfml-dev
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.4']
-          packages: ['clang-3.4']
-      env: COMPILER=clang-3.4
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.5']
+          packages: ['clang-3.5']
+      env: COMPILER=clang-3.5
 
 script:
   - uname -a
