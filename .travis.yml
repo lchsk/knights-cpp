@@ -1,0 +1,20 @@
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      compiler: g++
+      before_install:
+        - sudo apt-add-repository ppa:sonkun/sfml-development -y
+      install:
+        - sudo apt-get install libsfml-dev
+      addons:
+        apt:
+          sources: ['ubuntu-toolchain-r-test']
+          packages: ['g++-6']
+      env: COMPILER=g++-6
+
+script:
+  - uname -a
+  - $COMPILER --version
+  - CC=$COMPILER cmake . && make -j
