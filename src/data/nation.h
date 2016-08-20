@@ -9,13 +9,18 @@
 
 namespace knights
 {
+    enum class NationType {
+        Knights,
+        Skeletons
+    };
+
     namespace data
     {
-        class nation_t
+        class Nation
         {
         public:
-            nation_t(const nation_t&) = delete;
-            nation_t& operator=(const nation_t&) = delete;
+            Nation();
+            ~Nation();
         };
     }
 }

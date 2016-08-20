@@ -2,11 +2,13 @@
 #define LEVEL_H
 
 #include <memory>
+#include <unordered_map>
 
 #include <SFML/Graphics.hpp>
 
 #include "map.h"
 #include "../core/resource_mgr.h"
+#include "../data/nation.h"
 
 namespace knights
 {
@@ -25,7 +27,12 @@ namespace knights
                 std::unique_ptr<knights::map::Map> _map;
                 std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
 
+                std::unordered_map
+                    <NationType, std::shared_ptr<knights::data::Nation> >
+                    _nations;
+
                 void load_level_assets() const;
+                void init_nations();
         };
     }
 }

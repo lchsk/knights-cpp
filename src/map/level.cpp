@@ -8,6 +8,7 @@ namespace knights
             : _resource_mgr(resource_mgr)
         {
             load_level_assets();
+            init_nations();
 
             _map = std::make_unique<knights::map::Map>(
                 resource_mgr,
@@ -30,6 +31,15 @@ namespace knights
         Level::render(sf::RenderWindow& window)
         {
             _map->render(window);
+        }
+
+        void Level::init_nations()
+        {
+            _nations[NationType::Knights] = std::make_shared<
+                knights::data::Nation>();
+
+            _nations[NationType::Skeletons] = std::make_shared<
+                knights::data::Nation>();
         }
 
         void Level::load_level_assets() const

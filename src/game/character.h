@@ -7,6 +7,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "../data/nation.h"
+
 namespace knights
 {
     namespace game
@@ -14,10 +16,7 @@ namespace knights
         class Character
         {
         public:
-            Character(const Character&) = delete;
-            Character& operator=(const Character&) = delete;
-
-            Character();
+            Character(knights::data::Nation nation);
             ~Character();
 
             void run();

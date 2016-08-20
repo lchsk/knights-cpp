@@ -6,6 +6,14 @@ namespace knights
 {
     namespace data
     {
+        Nation::Nation()
+        {
 
+        }
+
+        Nation::~Nation()
+        {
+
+        }
     }
 }

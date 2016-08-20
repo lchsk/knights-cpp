@@ -6,7 +6,7 @@ namespace knights
 {
     namespace game
     {
-        Character::Character()
+        Character::Character(knights::data::Nation nation)
         {
         }
 
