@@ -9,7 +9,7 @@
 
 namespace knights
 {
-    enum class NationType {
+    enum NationType {
         Knights,
         Skeletons
     };

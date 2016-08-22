@@ -35,11 +35,6 @@ namespace knights
 
         void Level::init_nations()
         {
-            _nations[NationType::Knights] = std::make_shared<
-                knights::data::Nation>();
-
-            _nations[NationType::Skeletons] = std::make_shared<
-                knights::data::Nation>();
         }
 
         void Level::load_level_assets() const
