@@ -4,24 +4,21 @@
 
 namespace knights
 {
-    namespace game
+    Character::Character(knights::Nation nation)
     {
-        Character::Character(knights::data::Nation nation)
-        {
-        }
+    }
 
-        Character::~Character()
-        {
-        }
+    Character::~Character()
+    {
+    }
 
-        void
-        Character::update(sf::Time delta)
-        {
-        }
+    void
+    Character::update(sf::Time delta)
+    {
+    }
 
-        void
-        Character::render()
-        {
-        }
+    void
+    Character::render()
+    {
     }
 }

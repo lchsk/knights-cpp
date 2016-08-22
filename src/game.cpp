@@ -7,13 +7,13 @@ namespace knights
     Game::Game()
     {
 
-        _resource_mgr = std::make_shared<knights::res::ResourceMgr>();
+        _resource_mgr = std::make_shared<knights::ResourceMgr>();
 
-        _current_level = std::make_unique<knights::map::Level>(
+        _current_level = std::make_unique<knights::Level>(
             _resource_mgr
         );
 
-        _window = std::make_unique<knights::game::GameWindow>(
+        _window = std::make_unique<knights::GameWindow>(
             _resource_mgr
         );
 

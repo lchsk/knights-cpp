@@ -9,47 +9,44 @@
 
 namespace knights
 {
-    namespace map
+    class Map
     {
-        class Map
-        {
-            public:
-                Map(
-                    std::shared_ptr<knights::res::ResourceMgr> resource_mgr,
-                    std::string map_name
-                );
-                ~Map();
+    public:
+        Map(
+            std::shared_ptr<knights::ResourceMgr> resource_mgr,
+            std::string map_name
+            );
+        ~Map();
 
-                void update(sf::Time delta);
-                void render(sf::RenderWindow& window);
+        void update(sf::Time delta);
+        void render(sf::RenderWindow& window);
 
-            private:
-                void _init_map() const;
+    private:
+        void _init_map() const;
 
-                std::shared_ptr<knights::res::ResourceMgr>
-                    _resource_mgr;
+        std::shared_ptr<knights::ResourceMgr>
+            _resource_mgr;
 
-                std::vector<
-                    std::unique_ptr<knights::map::Tile>
-                    > _tiles;
+        std::vector<
+            std::unique_ptr<knights::Tile>
+            > _tiles;
 
-                std::shared_ptr<knights::Animation> _animation;
+        std::shared_ptr<knights::Animation> _animation;
 
-                /* Tile width */
-                int _tile_w;
+        /* Tile width */
+        int _tile_w;
 
-                /* Tile height */
-                int _tile_h;
+        /* Tile height */
+        int _tile_h;
 
-                /* Number of rows */
-                int _tiles_rows;
+        /* Number of rows */
+        int _tiles_rows;
 
-                /* Number of columns */
-                int _tiles_cols;
+        /* Number of columns */
+        int _tiles_cols;
 
-                std::string _map_name;
-        };
-    }
+        std::string _map_name;
+    };
 }
 
 #endif

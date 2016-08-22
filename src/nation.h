@@ -14,14 +14,11 @@ namespace knights
         Skeletons
     };
 
-    namespace data
+    class Nation
     {
-        class Nation
-        {
-        public:
-            Nation();
-            ~Nation();
-        };
-    }
+    public:
+        Nation();
+        ~Nation();
+    };
 }
 #endif

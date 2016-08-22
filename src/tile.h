@@ -10,27 +10,24 @@
 
 namespace knights
 {
-    namespace map
+    class Tile
     {
-        class Tile
-        {
-        public:
-            Tile(sf::Sprite& sprite, int x, int y);
-            ~Tile();
+    public:
+        Tile(sf::Sprite& sprite, int x, int y);
+        ~Tile();
 
-            /* void update(sf::Time delta); */
-            void render(sf::RenderWindow& window);
+        /* void update(sf::Time delta); */
+        void render(sf::RenderWindow& window);
 
-            sf::Sprite&
-                get_sprite();
+        sf::Sprite&
+            get_sprite();
 
-        private:
-            /* std::unique_ptr<sf::Sprite> _tile; */
-            sf::Sprite _tile;
-            int _x;
-            int _y;
-        };
-    }
+    private:
+        /* std::unique_ptr<sf::Sprite> _tile; */
+        sf::Sprite _tile;
+        int _x;
+        int _y;
+    };
 }
 
 #endif

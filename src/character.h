@@ -11,20 +11,17 @@
 
 namespace knights
 {
-    namespace game
+    class Character
     {
-        class Character
-        {
-        public:
-            Character(knights::data::Nation nation);
-            ~Character();
+    public:
+        Character(knights::Nation nation);
+        ~Character();
 
-            void run();
+        void run();
 
-        private:
-            void update(sf::Time delta);
-            void render();
-        };
-    }
+    private:
+        void update(sf::Time delta);
+        void render();
+    };
 }
 #endif

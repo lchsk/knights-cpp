@@ -29,10 +29,10 @@ namespace knights
             void update(sf::Time delta);
             void render();
 
-            std::unique_ptr<knights::map::Level> _current_level;
-            std::unique_ptr<knights::game::GameWindow> _window;
+            std::unique_ptr<knights::Level> _current_level;
+            std::unique_ptr<knights::GameWindow> _window;
 
-            std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
+            std::shared_ptr<knights::ResourceMgr> _resource_mgr;
 
     };
 }

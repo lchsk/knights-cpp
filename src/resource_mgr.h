@@ -10,38 +10,35 @@
 
 namespace knights
 {
-    namespace res
+    class ResourceMgr
     {
-        class ResourceMgr
-        {
-            public:
-                ResourceMgr(const ResourceMgr&) = delete;
-                ResourceMgr& operator=(const ResourceMgr&) = delete;
+    public:
+        ResourceMgr(const ResourceMgr&) = delete;
+        ResourceMgr& operator=(const ResourceMgr&) = delete;
 
-                ResourceMgr();
-                ~ResourceMgr();
+        ResourceMgr();
+        ~ResourceMgr();
 
-                void load_texture(std::string key, std::string path);
+        void load_texture(std::string key, std::string path);
 
-                const sf::Texture&
-                get_texture(std::string key);
+        const sf::Texture&
+            get_texture(std::string key);
 
-                knights::Spritesheet&
-                    get_spritesheet(std::string key);
+        knights::Spritesheet&
+            get_spritesheet(std::string key);
 
-            private:
-                std::unordered_map<
-                    std::string,
-                    std::unique_ptr<sf::Texture>
-                > _textures;
+    private:
+        std::unordered_map<
+            std::string,
+            std::unique_ptr<sf::Texture>
+            > _textures;
 
-                std::unordered_map<
-                    std::string,
-                    std::shared_ptr<knights::Spritesheet>
-                > _spritesheets;
+        std::unordered_map<
+            std::string,
+            std::shared_ptr<knights::Spritesheet>
+            > _spritesheets;
 
-        };
-    }
+    };
 }
 
 #endif

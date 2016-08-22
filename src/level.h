@@ -11,25 +11,22 @@
 
 namespace knights
 {
-    namespace map
+    class Level : sf::NonCopyable
     {
-        class Level : sf::NonCopyable
-        {
-            public:
-                Level(std::shared_ptr<knights::res::ResourceMgr> resource_mgr);
-                ~Level();
+    public:
+        Level(std::shared_ptr<knights::ResourceMgr> resource_mgr);
+        ~Level();
 
-                void update(sf::Time delta);
-                void render(sf::RenderWindow& window);
+        void update(sf::Time delta);
+        void render(sf::RenderWindow& window);
 
-            private:
-                std::unique_ptr<knights::map::Map> _map;
-                std::shared_ptr<knights::res::ResourceMgr> _resource_mgr;
+    private:
+        std::unique_ptr<knights::Map> _map;
+        std::shared_ptr<knights::ResourceMgr> _resource_mgr;
 
-                void load_level_assets() const;
-                void init_nations();
-        };
-    }
+        void load_level_assets() const;
+        void init_nations();
+    };
 }
 
 #endif
