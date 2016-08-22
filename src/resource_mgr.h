@@ -8,7 +8,7 @@
 
 #include "spritesheet.h"
 
-namespace knights
+namespace ks
 {
     class ResourceMgr
     {
@@ -24,7 +24,7 @@ namespace knights
         const sf::Texture&
             get_texture(std::string key);
 
-        knights::Spritesheet&
+        ks::Spritesheet&
             get_spritesheet(std::string key);
 
     private:
@@ -35,7 +35,7 @@ namespace knights
 
         std::unordered_map<
             std::string,
-            std::shared_ptr<knights::Spritesheet>
+            std::shared_ptr<ks::Spritesheet>
             > _spritesheets;
 
     };

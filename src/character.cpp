@@ -2,9 +2,9 @@
 
 #include "character.h"
 
-namespace knights
+namespace ks
 {
-    Character::Character(knights::Nation nation)
+    Character::Character(ks::Nation nation)
     {
     }
 

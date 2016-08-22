@@ -1,7 +1,7 @@
 
 #include "resource_mgr.h"
 
-namespace knights
+namespace ks
 {
     ResourceMgr::ResourceMgr()
     {
@@ -14,14 +14,14 @@ namespace knights
         // );
 
         _spritesheets["tiles"] = std::make_shared
-            <knights::Spritesheet> (
+            <ks::Spritesheet> (
                 "assets/images/knights_tiles.png",
                 32,
                 32
                 );
 
         _spritesheets["knights_archer_walk"] = std::make_shared
-            <knights::Spritesheet> (
+            <ks::Spritesheet> (
                 "assets/images/knights_archer_walk.png",
                 64,
                 64
@@ -50,7 +50,7 @@ namespace knights
         return *_textures[key];
     }
 
-    knights::Spritesheet&
+    ks::Spritesheet&
     ResourceMgr::get_spritesheet(std::string key)
     {
         return *_spritesheets[key];

@@ -11,7 +11,7 @@
 #include "game_window.h"
 #include "level.h"
 
-namespace knights
+namespace ks
 {
     class Game
     {
@@ -29,10 +29,10 @@ namespace knights
             void update(sf::Time delta);
             void render();
 
-            std::unique_ptr<knights::Level> _current_level;
-            std::unique_ptr<knights::GameWindow> _window;
+            std::unique_ptr<ks::Level> _current_level;
+            std::unique_ptr<ks::GameWindow> _window;
 
-            std::shared_ptr<knights::ResourceMgr> _resource_mgr;
+            std::shared_ptr<ks::ResourceMgr> _resource_mgr;
 
     };
 }

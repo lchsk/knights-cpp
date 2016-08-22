@@ -2,7 +2,7 @@
 
 #include "nation.h"
 
-namespace knights
+namespace ks
 {
     Nation::Nation()
     {

@@ -1,6 +1,6 @@
 #include "tile.h"
 
-namespace knights
+namespace ks
 {
     Tile::Tile(sf::Sprite& sprite, int x, int y)
         : _x(x),

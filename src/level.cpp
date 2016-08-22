@@ -1,14 +1,14 @@
 #include "level.h"
 
-namespace knights
+namespace ks
 {
-    Level::Level(std::shared_ptr<knights::ResourceMgr> resource_mgr)
+    Level::Level(std::shared_ptr<ks::ResourceMgr> resource_mgr)
         : _resource_mgr(resource_mgr)
     {
         load_level_assets();
         init_nations();
 
-        _map = std::make_unique<knights::Map>(
+        _map = std::make_unique<ks::Map>(
             resource_mgr,
             "test"
             );

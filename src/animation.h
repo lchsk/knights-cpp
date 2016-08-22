@@ -7,13 +7,13 @@
 
 #include "spritesheet.h"
 
-namespace knights
+namespace ks
 {
     class Animation
     {
     public:
         Animation(
-            knights::Spritesheet& spritesheet,
+            ks::Spritesheet& spritesheet,
             std::vector<int>& frames
         );
         ~Animation();
@@ -28,7 +28,7 @@ namespace knights
         void set_speed(float speed);
 
     private:
-        knights::Spritesheet& _spritesheet;
+        ks::Spritesheet& _spritesheet;
 
         /* IDs of frames from _spritesheet */
         std::vector<int> _frames;

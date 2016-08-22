@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace knights
+namespace ks
 {
     class Spritesheet
     {

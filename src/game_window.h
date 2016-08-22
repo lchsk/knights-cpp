@@ -8,7 +8,7 @@
 
 #include "resource_mgr.h"
 
-namespace knights
+namespace ks
 {
     enum CursorPosition {
         TOP,
@@ -27,7 +27,7 @@ namespace knights
         GameWindow& operator=(const GameWindow&) = delete;
 
         GameWindow(
-            std::shared_ptr<knights::ResourceMgr> resource_mgr
+            std::shared_ptr<ks::ResourceMgr> resource_mgr
             );
         ~GameWindow();
 

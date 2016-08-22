@@ -1,6 +1,6 @@
 #include "spritesheet.h"
 
-namespace knights
+namespace ks
 {
     Spritesheet::Spritesheet(
         std::string path,

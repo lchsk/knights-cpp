@@ -9,12 +9,12 @@
 
 #include "nation.h"
 
-namespace knights
+namespace ks
 {
     class Character
     {
     public:
-        Character(knights::Nation nation);
+        Character(ks::Nation nation);
         ~Character();
 
         void run();

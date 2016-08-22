@@ -1,9 +1,9 @@
 #include "game_window.h"
 
-namespace knights
+namespace ks
 {
     GameWindow::GameWindow(
-        std::shared_ptr<knights::ResourceMgr> resource_mgr
+        std::shared_ptr<ks::ResourceMgr> resource_mgr
         )
     {
         _w = 800;

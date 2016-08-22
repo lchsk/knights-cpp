@@ -1,9 +1,9 @@
 #include "map.h"
 
-namespace knights
+namespace ks
 {
     Map::Map(
-        std::shared_ptr<knights::ResourceMgr> resource_mgr,
+        std::shared_ptr<ks::ResourceMgr> resource_mgr,
         std::string map_name
         )
         : _map_name(map_name),
@@ -21,7 +21,7 @@ namespace knights
                                    , 12, 13, 14, 15, 16, 17
         };
 
-        _animation = std::make_shared<knights::Animation>(
+        _animation = std::make_shared<ks::Animation>(
             r, frames
             );
 
@@ -34,7 +34,7 @@ namespace knights
                     .get(0, 4);
 
                 _tiles.push_back(
-                    std::make_unique<knights::Tile>(
+                    std::make_unique<ks::Tile>(
                         s,
                         r * _tile_w,
                         c * _tile_h

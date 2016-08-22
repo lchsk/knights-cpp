@@ -8,7 +8,7 @@
 /* #include "map.h" */
 /* #include "../core/resource_mgr.h" */
 
-namespace knights
+namespace ks
 {
     class Tile
     {

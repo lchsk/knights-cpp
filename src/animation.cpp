@@ -1,9 +1,9 @@
 #include "animation.h"
 
-namespace knights
+namespace ks
 {
     Animation::Animation(
-        knights::Spritesheet& spritesheet,
+        ks::Spritesheet& spritesheet,
         std::vector<int>& frames
     ) :
         _spritesheet(spritesheet),

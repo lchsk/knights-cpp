@@ -7,7 +7,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-namespace knights
+namespace ks
 {
     enum NationType {
         Knights,

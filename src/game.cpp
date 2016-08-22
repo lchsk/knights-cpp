@@ -2,18 +2,18 @@
 
 #include "game.h"
 
-namespace knights
+namespace ks
 {
     Game::Game()
     {
 
-        _resource_mgr = std::make_shared<knights::ResourceMgr>();
+        _resource_mgr = std::make_shared<ks::ResourceMgr>();
 
-        _current_level = std::make_unique<knights::Level>(
+        _current_level = std::make_unique<ks::Level>(
             _resource_mgr
         );
 
-        _window = std::make_unique<knights::GameWindow>(
+        _window = std::make_unique<ks::GameWindow>(
             _resource_mgr
         );
 
