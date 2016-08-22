@@ -6,8 +6,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "map.h"
-#include "../core/resource_mgr.h"
-#include "../data/nation.h"
+#include "resource_mgr.h"
+#include "nation.h"
 
 namespace knights
 {

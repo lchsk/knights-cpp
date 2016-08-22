@@ -7,9 +7,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "core/resource_mgr.h"
-#include "core/game_window.h"
-#include "map/level.h"
+#include "resource_mgr.h"
+#include "game_window.h"
+#include "level.h"
 
 namespace knights
 {

@@ -7,7 +7,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "../data/nation.h"
+#include "nation.h"
 
 namespace knights
 {

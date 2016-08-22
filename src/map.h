@@ -3,8 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../core/resource_mgr.h"
-#include "../core/animation.h"
+#include "resource_mgr.h"
+#include "animation.h"
 #include "tile.h"
 
 namespace knights

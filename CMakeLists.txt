@@ -30,15 +30,15 @@ add_definitions(-std=c++14)
 add_executable(${EXECUTABLE_NAME}
     src/main.cpp
     src/game.cpp
-    src/core/resource_mgr.cpp
-    src/map/map.cpp
-    src/map/level.cpp
-    src/map/tile.cpp
-    src/core/game_window.cpp
-    src/core/animation.cpp
-    src/core/spritesheet.cpp
-    src/game/character.cpp
-    src/data/nation.cpp
+    src/resource_mgr.cpp
+    src/map.cpp
+    src/level.cpp
+    src/tile.cpp
+    src/game_window.cpp
+    src/animation.cpp
+    src/spritesheet.cpp
+    src/character.cpp
+    src/nation.cpp
 )
 
 
