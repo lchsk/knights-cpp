@@ -39,6 +39,7 @@ add_executable(${EXECUTABLE_NAME}
     src/spritesheet.cpp
     src/character.cpp
     src/nation.cpp
+    src/data_loader.cpp
 )
 
 

@@ -4,7 +4,7 @@
 
 namespace ks
 {
-    Character::Character(ks::Nation nation)
+    Character::Character(ks::Nation nation, std::string unit_name)
     {
     }
 

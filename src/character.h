@@ -14,7 +14,7 @@ namespace ks
     class Character
     {
     public:
-        Character(ks::Nation nation);
+        Character(ks::Nation nation, std::string unit_type);
         ~Character();
 
         void run();
