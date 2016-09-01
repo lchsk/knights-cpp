@@ -10,6 +10,8 @@
 
 #include "../thirdparty/json/src/json.hpp"
 
+#include "resource_mgr.h"
+
 using json = nlohmann::json;
 
 namespace ks
@@ -21,6 +23,8 @@ namespace ks
         ~DataLoader();
 
         void load_jsons();
+
+        const json& get_json(const std::string name);
 
     private:
         std::unordered_map<std::string, json> _jsons;

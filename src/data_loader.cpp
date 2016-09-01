@@ -29,7 +29,7 @@ namespace ks
                 std::stringstream buffer;
                 buffer << stream.rdbuf();
 
-                _jsons[filename] = json::parse(buffer.str());
+                _jsons[std::string(filename.begin(), filename.end() - 5)] = json::parse(buffer.str());
 
                 std::cout << _jsons[filename] << std::endl;
             } else {
@@ -41,5 +41,10 @@ namespace ks
                     << std::endl;
             }
         }
-	}
+    }
+
+    const json& DataLoader::get_json(const std::string name)
+    {
+        return _jsons[name];
+    }
 }

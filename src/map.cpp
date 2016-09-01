@@ -15,19 +15,6 @@ namespace ks
         _tiles_cols = 70;
         _tiles_rows = 50;
 
-        auto& r = _resource_mgr->get_spritesheet("knights_archer_walk");
-
-        std::vector<int> frames = {10, 11
-                                   , 12, 13, 14, 15, 16, 17
-        };
-
-        _animation = std::make_shared<ks::Animation>(
-            r, frames
-            );
-
-        _animation->set_speed(0.5);
-        _animation->play();
-
         for (int r = 0; r < _tiles_rows; r++) {
             for (int c = 0; c < _tiles_cols; c++) {
                 auto s = _resource_mgr->get_spritesheet("tiles")
@@ -52,11 +39,11 @@ namespace ks
     void
     Map::update(sf::Time delta)
     {
-        _animation->update(delta);
     }
 
     void
-    Map::render(sf::RenderWindow& window)
+    Map::render(sf::RenderWindow& window,
+                std::vector<std::shared_ptr<ks::Character> >& characters)
     {
         // for (int s = 0; s < _sprites.size(); s++) {
         //     _sprites[s].setPosition(
@@ -69,7 +56,10 @@ namespace ks
             // tile->render(window);
         }
 
-        _animation->render(window);
+        for (auto& character : characters) {
+            character->render(window);
+        }
+
     }
 
     void

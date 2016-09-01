@@ -6,6 +6,7 @@
 #include "resource_mgr.h"
 #include "animation.h"
 #include "tile.h"
+#include "character.h"
 
 namespace ks
 {
@@ -19,7 +20,8 @@ namespace ks
         ~Map();
 
         void update(sf::Time delta);
-        void render(sf::RenderWindow& window);
+        void render(sf::RenderWindow& window,
+                    std::vector<std::shared_ptr<ks::Character> >& characters);
 
     private:
         void _init_map() const;
@@ -30,8 +32,6 @@ namespace ks
         std::vector<
             std::unique_ptr<ks::Tile>
             > _tiles;
-
-        std::shared_ptr<ks::Animation> _animation;
 
         /* Tile width */
         int _tile_w;
