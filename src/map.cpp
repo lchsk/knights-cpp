@@ -53,7 +53,7 @@ namespace ks
         // }
 
         for (auto& tile : _tiles) {
-            // tile->render(window);
+            tile->render(window);
         }
 
         for (auto& character : characters) {

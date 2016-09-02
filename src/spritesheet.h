@@ -18,6 +18,7 @@ namespace ks
         ~Spritesheet();
 
         sf::Sprite get(int row, int col);
+        sf::Sprite get(int frame);
 
         /* Texture size in tiles */
         const sf::Vector2u& get_size();
@@ -29,6 +30,8 @@ namespace ks
         int _tile_height;
 
         sf::Vector2u _tiles_n;
+
+        std::vector<std::unique_ptr<sf::Sprite> > _sprites;
     };
 }
 

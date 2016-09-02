@@ -49,8 +49,8 @@ namespace ks
         auto row = frame / tiles.x;
         auto col = frame % tiles.x;
 
-        auto s = _spritesheet.get(row, col);
-        s.setPosition(200, 300);
+        auto s = _spritesheet.get(frame);
+        // s.setPosition(200, 300);
         window.draw(s);
     }
 

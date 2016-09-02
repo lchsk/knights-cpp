@@ -10,7 +10,8 @@ namespace ks
         std::string unit_name,
         std::shared_ptr<ks::DataLoader>& data_loader,
         std::shared_ptr<ks::ResourceMgr>& resource_mgr
-        )
+        ) :
+        _x(0), _y(0)
     {
         auto animations = data_loader->get_json("knights_archer")["animations"];
 
@@ -26,6 +27,7 @@ namespace ks
 
             a->set_speed(it.value()["speed"]);
             a->play();
+
 
             std::string name = it.key();
 

@@ -35,6 +35,10 @@ namespace ks
             std::string,
             std::shared_ptr<ks::Animation>
         > _animations;
+
+        int _x;
+
+        int _y;
     };
 }
 #endif
