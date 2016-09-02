@@ -44,13 +44,8 @@ namespace ks
         // Enumerate spritesheet frames from 0
         int frame = _frames[_frame];
 
-        auto tiles = _spritesheet.get_size();
-
-        auto row = frame / tiles.x;
-        auto col = frame % tiles.x;
-
         auto s = _spritesheet.get(frame);
-        // s.setPosition(200, 300);
+
         window.draw(s);
     }
 

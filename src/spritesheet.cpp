@@ -1,4 +1,5 @@
 #include "spritesheet.h"
+#include "util.h"
 
 namespace ks
 {
@@ -48,22 +49,13 @@ namespace ks
 
     sf::Sprite Spritesheet::get(int row, int col)
     {
-        return *_sprites[row * _tiles_n.x + col];
+        return *_sprites[ks::flatten_int(row, col, _tiles_n.x)];
     }
 
     sf::Sprite
     Spritesheet::get(int frame)
     {
         return *_sprites[frame];
-        // return sf::Sprite(
-        //     *_texture.get(),
-        //     sf::IntRect(
-        //         col * _tile_height,
-        //         row * _tile_width,
-        //         _tile_height,
-        //         _tile_width
-        //     )
-        // );
     }
 
     const sf::Vector2u&
