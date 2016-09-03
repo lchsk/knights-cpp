@@ -1,10 +1,44 @@
 {
-    "name": "asd",
-    "pi": 3.14,
     "animations": {
-        "walk": {
+        "stand_up": {
+            "frames": [0],
+            "speed": 1.0,
+            "image": "knights_archer_walk"
+        },
+        "stand_left": {
+            "frames": [9],
+            "speed": 1.0,
+            "image": "knights_archer_walk"
+        },
+        "stand_down": {
+            "frames": [18],
+            "speed": 1.0,
+            "image": "knights_archer_walk"
+        },
+        "stand_right": {
+            "frames": [27],
+            "speed": 1.0,
+            "image": "knights_archer_walk"
+        },
+        "walk_up": {
+            "frames": [1, 2, 3, 4, 5, 6, 7, 8],
+            "speed": 0.5,
+            "image": "knights_archer_walk"
+        },
+        "walk_left": {
             "frames": [10, 11, 12, 13, 14, 15, 16, 17],
-            "speed": 0.5
+            "speed": 0.5,
+            "image": "knights_archer_walk"
+        },
+        "walk_down": {
+            "frames": [19, 20, 21, 22, 23, 24, 25, 26],
+            "speed": 0.5,
+            "image": "knights_archer_walk"
+        },
+        "walk_right": {
+            "frames": [28, 29, 30, 31, 32, 33, 34, 35],
+            "speed": 0.5,
+            "image": "knights_archer_walk"
         }
     }
 }

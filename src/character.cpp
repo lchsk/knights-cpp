@@ -10,10 +10,14 @@ namespace ks
         std::string unit_name,
         std::shared_ptr<ks::DataLoader>& data_loader,
         std::shared_ptr<ks::ResourceMgr>& resource_mgr
-        ) :
-        _x(0), _y(0)
+    ) :
+        _x(0),
+        _y(0),
+        _animation("stand_left"),
+        _nation(nation),
+        _unit_name(unit_name)
     {
-        auto animations = data_loader->get_json("knights_archer")["animations"];
+        auto animations = data_loader->get_json(unit_name)["animations"];
 
         json::iterator it = animations.begin();
 
@@ -21,13 +25,12 @@ namespace ks
             std::vector<int> frames = it.value()["frames"];
 
             auto a = std::make_shared<ks::Animation>(
-                resource_mgr->get_spritesheet("knights_archer_walk"),
+                resource_mgr->get_spritesheet(it.value()["image"]),
                 frames
                 );
 
             a->set_speed(it.value()["speed"]);
             a->play();
-
 
             std::string name = it.key();
 
@@ -41,12 +44,12 @@ namespace ks
 
     void Character::update(sf::Time delta)
     {
-        _animations["walk"]->update(delta);
+        _animations[_animation]->update(delta);
     }
 
     void Character::render(sf::RenderWindow& window)
     {
-        _animations["walk"]->render(window);
+        _animations[_animation]->render(window);
 
     }
 }

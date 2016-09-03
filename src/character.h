@@ -39,6 +39,11 @@ namespace ks
         int _x;
 
         int _y;
+
+        ks::NationType _nation;
+        std::string _unit_name;
+
+        std::string _animation;
     };
 }
 #endif

@@ -13,10 +13,8 @@ namespace ks
     class Map
     {
     public:
-        Map(
-            std::shared_ptr<ks::ResourceMgr> resource_mgr,
-            std::string map_name
-            );
+        Map(std::shared_ptr<ks::ResourceMgr> resource_mgr,
+            std::string map_name);
         ~Map();
 
         void update(sf::Time delta);
