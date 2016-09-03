@@ -22,7 +22,7 @@ namespace ks
 
                 _tiles.push_back(
                     std::make_unique<ks::Tile>(
-                        s,
+                        *s,
                         r * _tile_w,
                         c * _tile_h
                         )

@@ -29,7 +29,7 @@ namespace ks
         for (int row = 0; row < _tiles_n.y; row++) {
             for (int col = 0; col < _tiles_n.x; col++) {
                 _sprites.push_back(
-                    std::make_unique<sf::Sprite>(
+                    std::make_shared<sf::Sprite>(
                         *_texture.get(),
                         sf::IntRect(
                             col * _tile_height,
@@ -47,15 +47,16 @@ namespace ks
     {
     }
 
-    sf::Sprite Spritesheet::get(int row, int col)
+    std::shared_ptr<sf::Sprite>&
+    Spritesheet::get(int row, int col)
     {
-        return *_sprites[ks::flatten_int(row, col, _tiles_n.x)];
+        return _sprites[ks::flatten_int(row, col, _tiles_n.x)];
     }
 
-    sf::Sprite
+    std::shared_ptr<sf::Sprite>&
     Spritesheet::get(int frame)
     {
-        return *_sprites[frame];
+        return _sprites[frame];
     }
 
     const sf::Vector2u&

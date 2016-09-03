@@ -17,8 +17,8 @@ namespace ks
         );
         ~Spritesheet();
 
-        sf::Sprite get(int row, int col);
-        sf::Sprite get(int frame);
+        std::shared_ptr<sf::Sprite>& get(int row, int col);
+        std::shared_ptr<sf::Sprite>& get(int frame);
 
         /* Texture size in tiles */
         const sf::Vector2u& get_size();
@@ -31,7 +31,7 @@ namespace ks
 
         sf::Vector2u _tiles_n;
 
-        std::vector<std::unique_ptr<sf::Sprite> > _sprites;
+        std::vector<std::shared_ptr<sf::Sprite> > _sprites;
     };
 }
 

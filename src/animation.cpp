@@ -46,7 +46,7 @@ namespace ks
 
         auto s = _spritesheet.get(frame);
 
-        window.draw(s);
+        window.draw(*s);
     }
 
     bool
