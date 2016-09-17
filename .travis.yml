@@ -59,3 +59,4 @@ script:
   - uname -a
   - $COMPILER --version
   - cmake -DCMAKE_CXX_COMPILER=$COMPILER . && make -j
+  - cd tests && make && make check
