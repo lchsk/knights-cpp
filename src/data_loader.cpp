@@ -3,6 +3,7 @@
 namespace ks
 {
     static const std::string DATA_DIR = "data/";
+    static const std::string MAPS_DIR = "maps/";
 
     DataLoader::DataLoader()
     {
@@ -46,5 +47,19 @@ namespace ks
     const json& DataLoader::get_json(const std::string name)
     {
         return _jsons[name];
+    }
+
+    const json& DataLoader::load_map(const std::string filename)
+    {
+        std::ifstream stream(MAPS_DIR + filename);
+
+        if (stream.is_open()) {
+            std::stringstream buffer;
+            buffer << stream.rdbuf();
+
+            _map = json::parse(buffer.str());
+
+            return _map;
+        }
     }
 }

@@ -7,6 +7,7 @@
 #include "animation.h"
 #include "tile.h"
 #include "character.h"
+#include "data_loader.h"
 
 namespace ks
 {
@@ -14,6 +15,7 @@ namespace ks
     {
     public:
         Map(std::shared_ptr<ks::ResourceMgr> resource_mgr,
+            std::shared_ptr<ks::DataLoader> data_loader,
             std::string map_name);
         ~Map();
 

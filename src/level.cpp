@@ -12,6 +12,7 @@ namespace ks
 
         _map = std::make_unique<ks::Map>(
             resource_mgr,
+            data_loader,
             "test"
             );
 

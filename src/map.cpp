@@ -1,11 +1,15 @@
+/*
+Defines and draws current map - tiles
+*/
+
 #include "map.h"
 
 namespace ks
 {
     Map::Map(
         std::shared_ptr<ks::ResourceMgr> resource_mgr,
-        std::string map_name
-        )
+        std::shared_ptr<ks::DataLoader> data_loader,
+        std::string map_name)
         : _map_name(map_name),
           _resource_mgr(resource_mgr)
     {
@@ -14,6 +18,8 @@ namespace ks
 
         _tiles_cols = 70;
         _tiles_rows = 50;
+
+        json map = data_loader->load_map("map1.json");
 
         for (int r = 0; r < _tiles_rows; r++) {
             for (int c = 0; c < _tiles_cols; c++) {
