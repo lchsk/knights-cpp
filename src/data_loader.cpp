@@ -22,25 +22,9 @@ namespace ks
         };
 
         for (const auto& filename : filenames) {
-            std::ifstream stream(DATA_DIR + filename);
+            std::string name = std::string(filename.begin(), filename.end() - 5);
 
-            if (stream.is_open()) {
-                std::cout << filename << " " << "open" << std::endl;
-
-                std::stringstream buffer;
-                buffer << stream.rdbuf();
-
-                _jsons[std::string(filename.begin(), filename.end() - 5)] = json::parse(buffer.str());
-
-                std::cout << _jsons[filename] << std::endl;
-            } else {
-                std::cout
-                    << filename
-                    << " "
-                    << "not found in "
-                    << DATA_DIR
-                    << std::endl;
-            }
+            _jsons[name] = load_json(DATA_DIR + filename);
         }
     }
 
@@ -51,15 +35,20 @@ namespace ks
 
     const json& DataLoader::load_map(const std::string filename)
     {
-        std::ifstream stream(MAPS_DIR + filename);
+        _map = load_json(MAPS_DIR + filename);
+
+        return _map;
+    }
+
+    json DataLoader::load_json(std::string path)
+    {
+        std::ifstream stream(path);
 
         if (stream.is_open()) {
             std::stringstream buffer;
             buffer << stream.rdbuf();
 
-            _map = json::parse(buffer.str());
-
-            return _map;
+            return json::parse(buffer.str());
         }
     }
 }
