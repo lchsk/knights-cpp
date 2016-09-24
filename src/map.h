@@ -8,6 +8,7 @@
 #include "tile.h"
 #include "character.h"
 #include "data_loader.h"
+#include "game_window.h"
 
 namespace ks
 {
@@ -16,6 +17,7 @@ namespace ks
     public:
         Map(std::shared_ptr<ks::ResourceMgr> resource_mgr,
             std::shared_ptr<ks::DataLoader> data_loader,
+            std::shared_ptr<ks::GameWindow> window,
             std::string map_name);
         ~Map();
 
@@ -26,8 +28,8 @@ namespace ks
     private:
         void _init_map() const;
 
-        std::shared_ptr<ks::ResourceMgr>
-            _resource_mgr;
+        std::shared_ptr<ks::ResourceMgr> _resource_mgr;
+        std::shared_ptr<ks::GameWindow> _window;
 
         std::vector<
             std::unique_ptr<ks::Tile>

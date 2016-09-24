@@ -3,9 +3,11 @@
 namespace ks
 {
     Level::Level(std::shared_ptr<ks::ResourceMgr> resource_mgr,
-                 std::shared_ptr<ks::DataLoader> data_loader)
+                 std::shared_ptr<ks::DataLoader> data_loader,
+                 std::shared_ptr<ks::GameWindow> window)
         : _resource_mgr(resource_mgr),
-          _data_loader(data_loader)
+          _data_loader(data_loader),
+          _window(window)
     {
         load_level_assets();
         init_nations();
@@ -13,7 +15,8 @@ namespace ks
         _map = std::make_unique<ks::Map>(
             resource_mgr,
             data_loader,
-            "test"
+            window,
+            "map1.json"
             );
 
         auto c_ptr = std::make_shared<ks::Character>(

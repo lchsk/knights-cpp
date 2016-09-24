@@ -9,17 +9,21 @@ namespace ks
     Map::Map(
         std::shared_ptr<ks::ResourceMgr> resource_mgr,
         std::shared_ptr<ks::DataLoader> data_loader,
+        std::shared_ptr<ks::GameWindow> window,
         std::string map_name)
         : _map_name(map_name),
-          _resource_mgr(resource_mgr)
+          _resource_mgr(resource_mgr),
+          _window(window)
     {
         _tile_w = 32;
         _tile_h = 32;
 
-        json map = data_loader->load_map("map1.json");
+        json map = data_loader->load_map(map_name);
 
         _tiles_cols = map["metadata"]["columns"];
         _tiles_rows = map["metadata"]["rows"];
+
+        _window->set_map_size(_tile_w * _tiles_cols, _tile_h * _tiles_rows);
 
         std::vector<ks::Spritesheet*> spritesheets;
 

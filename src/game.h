@@ -31,7 +31,7 @@ namespace ks
             void render();
 
             std::unique_ptr<ks::Level> _current_level;
-            std::unique_ptr<ks::GameWindow> _window;
+            std::shared_ptr<ks::GameWindow> _window;
 
             std::shared_ptr<ks::ResourceMgr> _resource_mgr;
             std::shared_ptr<ks::DataLoader> _data_loader;

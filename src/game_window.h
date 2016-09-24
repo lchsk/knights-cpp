@@ -10,7 +10,7 @@
 
 namespace ks
 {
-    enum CursorPosition {
+    enum class CursorPosition {
         TOP,
         LEFT,
         RIGHT,
@@ -26,32 +26,34 @@ namespace ks
         GameWindow(const GameWindow&) = delete;
         GameWindow& operator=(const GameWindow&) = delete;
 
-        GameWindow(
-            std::shared_ptr<ks::ResourceMgr> resource_mgr
-            );
+        GameWindow(std::shared_ptr<ks::ResourceMgr> resource_mgr);
         ~GameWindow();
 
         sf::RenderWindow& get_window() const;
         void update(sf::Time delta);
 
+        void set_map_size(int, int);
+
     private:
         void move_view(sf::Time delta);
 
-        bool cursor_in(
-            CursorPosition pos,
-            int move_delta,
-            sf::Time delta,
-            sf::Vector2i mouse_pos
-            );
+        bool cursor_in(CursorPosition pos, int move_delta, sf::Time delta,
+                       sf::Vector2i mouse_pos);
 
         int _percent;
         int _speed;
 
-        /* Screen  width */
+        /* Window  width */
         int _w;
 
-        /* Screen height */
+        /* Window height */
         int _h;
+
+        /* Map width */
+        int _map_w;
+
+        /* Map height */
+        int _map_h;
 
         std::unique_ptr<sf::RenderWindow> _window;
         std::unique_ptr<sf::View> _view;

@@ -9,6 +9,7 @@
 #include "resource_mgr.h"
 #include "nation.h"
 #include "data_loader.h"
+#include "game_window.h"
 
 namespace ks
 {
@@ -17,7 +18,8 @@ namespace ks
     public:
         Level(
             std::shared_ptr<ks::ResourceMgr> resource_mgr,
-            std::shared_ptr<ks::DataLoader> data_loader
+            std::shared_ptr<ks::DataLoader> data_loader,
+            std::shared_ptr<ks::GameWindow> window
         );
         ~Level();
 
@@ -28,6 +30,7 @@ namespace ks
         std::unique_ptr<ks::Map> _map;
         std::shared_ptr<ks::ResourceMgr> _resource_mgr;
         std::shared_ptr<ks::DataLoader> _data_loader;
+        std::shared_ptr<ks::GameWindow> _window;
 
         std::vector<std::shared_ptr<ks::Character> > _characters;
 

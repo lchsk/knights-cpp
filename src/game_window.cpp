@@ -1,10 +1,11 @@
 #include "game_window.h"
 
+#include <iostream>
 namespace ks
 {
-    GameWindow::GameWindow(
-        std::shared_ptr<ks::ResourceMgr> resource_mgr
-        )
+    GameWindow::GameWindow(std::shared_ptr<ks::ResourceMgr> resource_mgr)
+        : _map_h(600),
+          _map_w(800)
     {
         _w = 800;
         _h = 600;
@@ -47,46 +48,23 @@ namespace ks
 
         int move_delta = std::round(_speed * delta.asSeconds());
 
-        if (
-            cursor_in(
-                CursorPosition::CENTRE,
-                move_delta,
-                delta,
-                mouse_pos
-                )) {
+        if (cursor_in(CursorPosition::CENTRE, move_delta, delta, mouse_pos))
             return;
-        }
 
         int dx = 0;
         int dy = 0;
 
-        bool top = cursor_in(
-            CursorPosition::TOP,
-            move_delta,
-            delta,
-            mouse_pos
-            );
+        bool top = cursor_in(CursorPosition::TOP, move_delta,
+                             delta, mouse_pos);
 
-        bool right = cursor_in(
-            CursorPosition::RIGHT,
-            move_delta,
-            delta,
-            mouse_pos
-            );
+        bool right = cursor_in(CursorPosition::RIGHT, move_delta,
+                               delta, mouse_pos);
 
-        bool left = cursor_in(
-            CursorPosition::LEFT,
-            move_delta,
-            delta,
-            mouse_pos
-            );
+        bool left = cursor_in(CursorPosition::LEFT, move_delta,
+                              delta, mouse_pos);
 
-        bool bottom = cursor_in(
-            CursorPosition::BOTTOM,
-            move_delta,
-            delta,
-            mouse_pos
-            );
+        bool bottom = cursor_in(CursorPosition::BOTTOM, move_delta,
+                                delta, mouse_pos );
 
         if (bottom)
             dy = move_delta;
@@ -104,48 +82,42 @@ namespace ks
             _view->move(dx, dy);
     }
 
-    bool
-    GameWindow::cursor_in(
-        CursorPosition pos,
-        int move_delta,
-        sf::Time delta,
-        sf::Vector2i mouse_pos
-        )
+    bool GameWindow::cursor_in(CursorPosition pos, int move_delta,
+                               sf::Time delta, sf::Vector2i mouse_pos)
     {
-        if (
-            pos == CursorPosition::RIGHT
-            and mouse_pos.x >= (100 - _percent) / 100.0f * _w
-            and _view->getCenter().x + move_delta < _w
-            ) {
-            return true;
-        } else if (
-            pos == CursorPosition::LEFT
-            and mouse_pos.x < (_percent / 100.0f * _w)
-            and _view->getCenter().x - move_delta > _w / 2.0f
-            ) {
-            return true;
-        } else if (
-            pos == CursorPosition::BOTTOM
-            and mouse_pos.y >= (100 - _percent) / 100.0f * _h
-            and  _view->getCenter().y + move_delta < _h
-            ) {
-            return true;
-        } else if (
-            pos == CursorPosition::TOP
-            and mouse_pos.y < (_percent / 100.0f * _h)
-            and _view->getCenter().y - move_delta > _h / 2.0f
-            ) {
-            return true;
-        } else if (
-            pos == CursorPosition::CENTRE
+        if (pos == CursorPosition::CENTRE
             and mouse_pos.x >= (_percent / 100.0f * _w)
             and mouse_pos.x <= (100 - _percent) / 100.0f * _w
             and mouse_pos.y >= (_percent / 100.0f * _h)
-            and mouse_pos.y <= (100 - _percent) / 100.0f * _h
-            ) {
+            and mouse_pos.y <= (100 - _percent) / 100.0f * _h)
             return true;
-        }
+
+        if (pos == CursorPosition::RIGHT
+            and mouse_pos.x >= (100 - _percent) / 100.0f * _w
+            and (_view->getCenter().x + _w / 2.0) < _map_w)
+            return true;
+
+        if (pos == CursorPosition::LEFT
+            and mouse_pos.x < (_percent / 100.0f * _w)
+            and _view->getCenter().x - move_delta > _w / 2.0f)
+            return true;
+
+        if (pos == CursorPosition::BOTTOM
+            and mouse_pos.y >= (100 - _percent) / 100.0f * _h
+            and (_view->getCenter().y + _h / 2.0) < _map_h)
+            return true;
+
+        if (pos == CursorPosition::TOP
+            and mouse_pos.y < (_percent / 100.0f * _h)
+            and _view->getCenter().y - move_delta > _h / 2.0f)
+            return true;
 
         return false;
+    }
+
+    void GameWindow::set_map_size(int map_w, int map_h)
+    {
+        _map_w = map_w;
+        _map_h = map_h;
     }
 }
