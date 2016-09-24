@@ -12,6 +12,9 @@
 
 namespace ks
 {
+    /* Side of each tile */
+    const int TILE = 32;
+
     class Map
     {
     public:
@@ -28,18 +31,15 @@ namespace ks
     private:
         void _init_map() const;
 
+        void load();
+
         std::shared_ptr<ks::ResourceMgr> _resource_mgr;
         std::shared_ptr<ks::GameWindow> _window;
+        std::shared_ptr<ks::DataLoader> _data_loader;
 
         std::vector<
             std::unique_ptr<ks::Tile>
             > _tiles;
-
-        /* Tile width */
-        int _tile_w;
-
-        /* Tile height */
-        int _tile_h;
 
         /* Number of rows */
         int _tiles_rows;

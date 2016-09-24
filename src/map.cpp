@@ -13,58 +13,57 @@ namespace ks
         std::string map_name)
         : _map_name(map_name),
           _resource_mgr(resource_mgr),
+          _data_loader(data_loader),
           _window(window)
     {
-        _tile_w = 32;
-        _tile_h = 32;
+        load();
+    }
 
-        json map = data_loader->load_map(map_name);
+    Map::~Map()
+    {
 
-        _tiles_cols = map["metadata"]["columns"];
-        _tiles_rows = map["metadata"]["rows"];
+    }
 
-        _window->set_map_size(_tile_w * _tiles_cols, _tile_h * _tiles_rows);
+    void Map::load()
+    {
+        json j_map = _data_loader->load_map(_map_name);
+
+        _tiles_cols = j_map["metadata"]["columns"];
+        _tiles_rows = j_map["metadata"]["rows"];
+
+        _window->set_map_size(ks::TILE * _tiles_cols, ks::TILE * _tiles_rows);
 
         std::vector<ks::Spritesheet*> spritesheets;
 
-        json j_sheets = map["spritesheets"];
-        json j_data = map["data"];
+        json j_sheets = j_map["spritesheets"];
+        json j_data = j_map["data"];
         json j_land = j_data["land"];
 
         for (json::iterator it = j_sheets.begin(); it != j_sheets.end(); ++it) {
             spritesheets.push_back(&_resource_mgr->get_spritesheet(it.value()));
         }
 
-        int r = 0;
-        int c = 0;
+        int row = 0;
+        int col = 0;
 
         for (json::iterator it = j_land.begin(); it != j_land.end(); ++it) {
             auto item = it.value();
 
-            int spritesheet_id = item[0];
-            int tile_id = item[1];
+            auto tile = spritesheets[item[0]]->get(item[1]);
 
-            auto s = spritesheets[spritesheet_id]->get(tile_id);
+            _tiles.push_back(std::make_unique<ks::Tile>(
+                                 *tile,
+                                 col * ks::TILE,
+                                 row * ks::TILE
+                                 ));
 
-            _tiles.push_back(
-                    std::make_unique<ks::Tile>(
-                        *s,
-                        c * _tile_w,
-                        r * _tile_h
-                        )
-                    );
+            col++;
 
-            c++;
-
-            if (c == _tiles_cols) {
-                c = 0;
-                r++;
+            if (col == _tiles_cols) {
+                col = 0;
+                row++;
             }
         }
-    }
-
-    Map::~Map()
-    {
 
     }
 
@@ -77,13 +76,6 @@ namespace ks
     Map::render(sf::RenderWindow& window,
                 std::vector<std::shared_ptr<ks::Character> >& characters)
     {
-        // for (int s = 0; s < _sprites.size(); s++) {
-        //     _sprites[s].setPosition(
-        //         s % _tiles_rows * 32,
-        //         s / _tiles_cols * 32
-        //     );
-        // }
-
         for (auto& tile : _tiles) {
             tile->render(window);
         }
@@ -91,7 +83,6 @@ namespace ks
         for (auto& character : characters) {
             character->render(window);
         }
-
     }
 
     void
