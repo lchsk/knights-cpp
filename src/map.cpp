@@ -70,6 +70,9 @@ namespace ks
                     col = 0;
                     row++;
                 }
+
+                if (row == _tiles_rows)
+                    break;
             }
         }
 
