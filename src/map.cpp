@@ -26,7 +26,8 @@ namespace ks
 
     void Map::load()
     {
-        json j_map = _data_loader->load_map(_map_name);
+        _data_loader->load_map(_map_name);
+        json j_map = _data_loader->get_json(_map_name);
 
         _tiles_cols = j_map["metadata"]["columns"];
         _tiles_rows = j_map["metadata"]["rows"];

@@ -26,7 +26,7 @@ namespace ks
         const json& load_map(const std::string filename);
 
     private:
-        const std::shared_ptr<json> load_json(std::string path);
+        void load_json(std::string path, std::string identifier);
         std::unordered_map<std::string, json> _jsons;
         json _map;
     };

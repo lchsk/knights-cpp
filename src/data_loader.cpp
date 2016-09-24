@@ -24,34 +24,37 @@ namespace ks
         for (const auto& filename : filenames) {
             std::string name = std::string(filename.begin(), filename.end() - 5);
 
-            _jsons[name] = *load_json(DATA_DIR + filename);
+            load_json(DATA_DIR + filename, name);
         }
     }
 
     const json& DataLoader::get_json(const std::string name)
     {
+        if (_jsons.find(name) == _jsons.end())
+            throw std::runtime_error(name + " not found");
+
         return _jsons[name];
     }
 
     const json& DataLoader::load_map(const std::string filename)
     {
-        _map = *load_json(MAPS_DIR + filename);
-
-        return _map;
+        load_json(MAPS_DIR + filename, filename);
     }
 
-    const std::shared_ptr<json> DataLoader::load_json(std::string path)
+    void DataLoader::load_json(std::string path, std::string identifier)
     {
+        if (_jsons.find(identifier) != _jsons.end())
+            throw std::runtime_error(identifier + " already exists");
+
         std::ifstream stream(path);
 
         if (stream.is_open()) {
             std::stringstream buffer;
             buffer << stream.rdbuf();
 
-            std::shared_ptr<json> json_obj = std::make_shared<json>();
-            *json_obj = json::parse(buffer.str());
-
-            return json_obj;
+            _jsons[identifier] = json::parse(buffer.str());
+        } else {
+            throw std::runtime_error(path + " was not found");
         }
     }
 }
