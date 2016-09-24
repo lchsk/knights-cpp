@@ -24,7 +24,7 @@ namespace ks
         for (const auto& filename : filenames) {
             std::string name = std::string(filename.begin(), filename.end() - 5);
 
-            _jsons[name] = load_json(DATA_DIR + filename);
+            _jsons[name] = *load_json(DATA_DIR + filename);
         }
     }
 
@@ -35,12 +35,12 @@ namespace ks
 
     const json& DataLoader::load_map(const std::string filename)
     {
-        _map = load_json(MAPS_DIR + filename);
+        _map = *load_json(MAPS_DIR + filename);
 
         return _map;
     }
 
-    json DataLoader::load_json(std::string path)
+    const std::shared_ptr<json> DataLoader::load_json(std::string path)
     {
         std::ifstream stream(path);
 
@@ -48,7 +48,10 @@ namespace ks
             std::stringstream buffer;
             buffer << stream.rdbuf();
 
-            return json::parse(buffer.str());
+            std::shared_ptr<json> json_obj = std::make_shared<json>();
+            *json_obj = json::parse(buffer.str());
+
+            return json_obj;
         }
     }
 }

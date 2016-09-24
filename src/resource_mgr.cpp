@@ -7,14 +7,6 @@ namespace ks
     {
         _data_loader = std::make_shared<ks::DataLoader>();
 
-        // std::unique_ptr<knights::Spritesheet> tex =
-        //     std::make_unique<
-        //     knights::Spritesheet> (
-        //     "assets/images/knights_tiles.png",
-        //     32,
-        //     32
-        // );
-
         _spritesheets["tiles"] = std::make_shared
             <ks::Spritesheet> (
                 "assets/images/knights_tiles.png",
