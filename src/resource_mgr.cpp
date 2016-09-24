@@ -5,6 +5,8 @@ namespace ks
 {
     ResourceMgr::ResourceMgr()
     {
+        _data_loader = std::make_shared<ks::DataLoader>();
+
         // std::unique_ptr<knights::Spritesheet> tex =
         //     std::make_unique<
         //     knights::Spritesheet> (
@@ -54,5 +56,10 @@ namespace ks
     ResourceMgr::get_spritesheet(std::string key)
     {
         return *_spritesheets[key];
+    }
+
+    std::shared_ptr<ks::DataLoader> ResourceMgr::get_data_loader()
+    {
+        return _data_loader;
     }
 }

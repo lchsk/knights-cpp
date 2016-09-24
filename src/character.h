@@ -11,6 +11,7 @@
 #include "nation.h"
 #include "animation.h"
 #include "data_loader.h"
+#include "resource_mgr.h"
 
 namespace ks
 {

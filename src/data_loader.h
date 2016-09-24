@@ -10,8 +10,6 @@
 
 #include "../thirdparty/json/src/json.hpp"
 
-#include "resource_mgr.h"
-
 using json = nlohmann::json;
 
 namespace ks

@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "data_loader.h"
 #include "spritesheet.h"
 
 namespace ks
@@ -27,6 +28,8 @@ namespace ks
         ks::Spritesheet&
             get_spritesheet(std::string key);
 
+        std::shared_ptr<ks::DataLoader> get_data_loader();
+
     private:
         std::unordered_map<
             std::string,
@@ -38,6 +41,7 @@ namespace ks
             std::shared_ptr<ks::Spritesheet>
             > _spritesheets;
 
+        std::shared_ptr<ks::DataLoader> _data_loader;
     };
 }
 

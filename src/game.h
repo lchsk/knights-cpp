@@ -10,7 +10,6 @@
 #include "resource_mgr.h"
 #include "game_window.h"
 #include "level.h"
-#include "data_loader.h"
 
 namespace ks
 {
@@ -34,8 +33,6 @@ namespace ks
             std::shared_ptr<ks::GameWindow> _window;
 
             std::shared_ptr<ks::ResourceMgr> _resource_mgr;
-            std::shared_ptr<ks::DataLoader> _data_loader;
-
     };
 }
 #endif

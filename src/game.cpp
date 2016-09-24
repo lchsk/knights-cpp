@@ -6,17 +6,13 @@ namespace ks
 {
     Game::Game()
     {
-
         _resource_mgr = std::make_shared<ks::ResourceMgr>();
-        _data_loader = std::make_shared<ks::DataLoader>();
 
-        _window = std::make_shared<ks::GameWindow>(
-            _resource_mgr
-        );
+        _window = std::make_shared<ks::GameWindow>(_resource_mgr);
 
         _current_level = std::make_unique<ks::Level>(
             _resource_mgr,
-            _data_loader,
+            _resource_mgr->get_data_loader(),
             _window
         );
     }
