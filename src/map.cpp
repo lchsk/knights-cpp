@@ -35,33 +35,41 @@ namespace ks
 
         std::vector<ks::Spritesheet*> spritesheets;
 
+        // Names of spritesheets used in this map
         json j_sheets = j_map["spritesheets"];
-        json j_data = j_map["data"];
-        json j_land = j_data["land"];
 
-        for (json::iterator it = j_sheets.begin(); it != j_sheets.end(); ++it) {
-            spritesheets.push_back(&_resource_mgr->get_spritesheet(it.value()));
+        // Map data (tiles IDs)
+        json j_data = j_map["data"];
+
+        // List of layers to draw: layers are drawn from left to right
+        json j_layers = j_map["draw_layers"];
+
+        for (const std::string& spritesheet : j_sheets) {
+            spritesheets.push_back(&_resource_mgr->get_spritesheet(spritesheet));
         }
 
         int row = 0;
         int col = 0;
 
-        for (json::iterator it = j_land.begin(); it != j_land.end(); ++it) {
-            auto item = it.value();
+        for (const std::string& layer : j_layers) {
+            auto j_layer = j_data[layer];
 
-            auto tile = spritesheets[item[0]]->get(item[1]);
+            for (const auto& tile_info : j_layer) {
+                // 0: spritesheet_id, 1: tile_id
+                auto tile = spritesheets[tile_info[0]]->get(tile_info[1]);
 
-            _tiles.push_back(std::make_unique<ks::Tile>(
+                _tiles.push_back(std::make_unique<ks::Tile>(
                                  *tile,
                                  col * ks::TILE,
                                  row * ks::TILE
                                  ));
 
-            col++;
+                col++;
 
-            if (col == _tiles_cols) {
-                col = 0;
-                row++;
+                if (col == _tiles_cols) {
+                    col = 0;
+                    row++;
+                }
             }
         }
 
