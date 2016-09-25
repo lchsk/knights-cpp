@@ -18,7 +18,8 @@ namespace ks
     void DataLoader::load_jsons()
     {
         std::vector<std::string> filenames = {
-            "knights_archer.json"
+            "knights_archer.json",
+            "knights_tiles.json"
         };
 
         for (const auto& filename : filenames) {

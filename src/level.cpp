@@ -55,9 +55,9 @@ namespace ks
 
     void Level::load_level_assets() const
     {
-        _resource_mgr->load_texture(
-            "tiles",
-            "assets/images/knights_tiles.png"
-            );
+        // _resource_mgr->load_texture(
+            // "tiles",
+            // "assets/images/knights_tiles.png"
+            // );
     }
 }

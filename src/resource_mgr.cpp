@@ -8,18 +8,12 @@ namespace ks
         _data_loader = std::make_shared<ks::DataLoader>();
 
         _spritesheets["tiles"] = std::make_shared
-            <ks::Spritesheet> (
-                "assets/images/knights_tiles.png",
-                32,
-                32
-                );
+            <ks::Spritesheet>("assets/images/knights_tiles.png",
+                              _data_loader->get_json("knights_tiles"), 32, 32);
 
         _spritesheets["knights_archer_walk"] = std::make_shared
-            <ks::Spritesheet> (
-                "assets/images/knights_archer_walk.png",
-                64,
-                64
-                );
+            <ks::Spritesheet>("assets/images/knights_archer_walk.png",
+                              nullptr, 64, 64);
     }
 
     ResourceMgr::~ResourceMgr()

@@ -3,8 +3,20 @@
 
 namespace ks
 {
+    TileInfo::TileInfo(int id)
+        : _id(id)
+    {
+
+    }
+
+    TileInfo::~TileInfo()
+    {
+
+    }
+
     Spritesheet::Spritesheet(
         std::string path,
+        const json& j_data,
         int tile_width,
         int tile_height
     ) :
@@ -12,6 +24,8 @@ namespace ks
         _tile_width(tile_width),
         _tile_height(tile_height)
     {
+        _insert_tile_info(j_data);
+
         _texture = std::make_unique<sf::Texture>();
 
         if (! _texture->loadFromFile(_path)) {
@@ -63,5 +77,17 @@ namespace ks
     Spritesheet::get_size()
     {
         return _tiles_n;
+    }
+
+    void Spritesheet::_insert_tile_info(const json& j_data)
+    {
+        if (j_data != nullptr) {
+            for (auto const& tile_info : j_data["data"]) {
+                int id = tile_info["id"];
+
+                _tiles_info[id] = std::make_shared<TileInfo>(id);
+            }
+        }
+
     }
 }
