@@ -1,5 +1,5 @@
-#ifndef CHARACTER_H
-#define CHARACTER_H
+#ifndef UNIT_H
+#define UNIT_H
 
 #include <string>
 #include <memory>
@@ -15,16 +15,17 @@
 
 namespace ks
 {
-    class Character
+
+    class Unit
     {
     public:
-        Character(
+        Unit(
             ks::NationType nation,
             std::string unit_type,
             std::shared_ptr<ks::DataLoader>& data_loader,
             std::shared_ptr<ks::ResourceMgr>& resource_mgr
             );
-        ~Character();
+        ~Unit();
 
         void run();
 

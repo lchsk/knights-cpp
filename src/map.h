@@ -6,7 +6,7 @@
 #include "resource_mgr.h"
 #include "animation.h"
 #include "tile.h"
-#include "character.h"
+#include "unit.h"
 #include "data_loader.h"
 #include "game_window.h"
 
@@ -26,7 +26,7 @@ namespace ks
 
         void update(sf::Time delta);
         void render(sf::RenderWindow& window,
-                    std::vector<std::shared_ptr<ks::Character> >& characters);
+                    std::vector<std::shared_ptr<ks::Unit> >& units);
 
     private:
         void _init_map() const;

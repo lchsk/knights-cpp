@@ -2,6 +2,7 @@
 #define LEVEL_H
 
 #include <memory>
+#include <unordered_map>
 
 #include <SFML/Graphics.hpp>
 
@@ -10,6 +11,7 @@
 #include "nation.h"
 #include "data_loader.h"
 #include "game_window.h"
+#include "unit.h"
 
 namespace ks
 {
@@ -26,13 +28,15 @@ namespace ks
         void update(sf::Time delta);
         void render(sf::RenderWindow& window);
 
+        void select_objects();
+
     private:
         std::unique_ptr<ks::Map> _map;
         std::shared_ptr<ks::ResourceMgr> _resource_mgr;
         std::shared_ptr<ks::DataLoader> _data_loader;
         std::shared_ptr<ks::GameWindow> _window;
 
-        std::vector<std::shared_ptr<ks::Character> > _characters;
+        std::vector<std::shared_ptr<ks::Unit> > _units;
 
         void load_level_assets() const;
         void init_nations();

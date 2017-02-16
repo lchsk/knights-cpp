@@ -19,10 +19,14 @@ namespace ks
             "map1.json"
             );
 
-        auto c_ptr = std::make_shared<ks::Character>(
-            ks::NationType::Knights, "knights_archer", data_loader, resource_mgr);
+        auto unit = std::make_shared<ks::Unit>(
+            ks::NationType::Knights,
+            "knights_archer",
+            data_loader,
+            resource_mgr
+        );
 
-        _characters.push_back(c_ptr);
+        _units.push_back(unit);
 
     }
 
@@ -31,21 +35,31 @@ namespace ks
 
     }
 
-    void
-    Level::update(sf::Time delta)
+    void Level::select_objects()
     {
-        _map->update(delta);
+        auto mouse_pos = sf::Mouse::getPosition(_window->get_window());
 
-        for (auto& character : _characters) {
-            character->update(delta);
+        // std::cout << mouse_pos.x << "\n";
+
+        for (auto& unit : _units) {
+
         }
+
 
     }
 
-    void
-    Level::render(sf::RenderWindow& window)
+    void Level::update(sf::Time delta)
     {
-        _map->render(window, _characters);
+        _map->update(delta);
+
+        for (auto& unit : _units) {
+            unit->update(delta);
+        }
+    }
+
+    void Level::render(sf::RenderWindow& window)
+    {
+        _map->render(window, _units);
     }
 
     void Level::init_nations()

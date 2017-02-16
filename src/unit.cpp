@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "character.h"
+#include "unit.h"
 #include "data_loader.h"
 
 namespace ks
 {
-    Character::Character(
+    Unit::Unit(
         ks::NationType nation,
         std::string unit_name,
         std::shared_ptr<ks::DataLoader>& data_loader,
@@ -38,16 +38,16 @@ namespace ks
         }
     }
 
-    Character::~Character()
+    Unit::~Unit()
     {
     }
 
-    void Character::update(sf::Time delta)
+    void Unit::update(sf::Time delta)
     {
         _animations[_animation]->update(delta);
     }
 
-    void Character::render(sf::RenderWindow& window)
+    void Unit::render(sf::RenderWindow& window)
     {
         _animations[_animation]->render(window);
 

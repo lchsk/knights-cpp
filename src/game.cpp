@@ -60,7 +60,9 @@ namespace ks
         while(_window->get_window().pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 _window->get_window().close();
-            else if (
+            else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                _current_level->select_objects();
+            } else if (
                 event.type == sf::Event::KeyPressed
                 and event.key.code == sf::Keyboard::Escape
             )

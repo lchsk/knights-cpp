@@ -79,21 +79,20 @@ namespace ks
 
     }
 
-    void
-    Map::update(sf::Time delta)
+    void Map::update(sf::Time delta)
     {
     }
 
-    void
-    Map::render(sf::RenderWindow& window,
-                std::vector<std::shared_ptr<ks::Character> >& characters)
+    void Map::render(
+        sf::RenderWindow& window,
+        std::vector<std::shared_ptr<ks::Unit> >& units)
     {
         for (auto& tile : _tiles) {
             tile->render(window);
         }
 
-        for (auto& character : characters) {
-            character->render(window);
+        for (auto& unit : units) {
+            unit->render(window);
         }
     }
 
