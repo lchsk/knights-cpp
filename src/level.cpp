@@ -11,6 +11,7 @@ namespace ks
     {
         load_level_assets();
         init_nations();
+        units::init_units();
 
         _map = std::make_unique<ks::Map>(
             resource_mgr,

@@ -11,6 +11,7 @@
 #include "nation.h"
 #include "data_loader.h"
 #include "game_window.h"
+#include "unit_template.h"
 #include "unit.h"
 
 namespace ks
