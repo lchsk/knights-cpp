@@ -2,16 +2,17 @@
 
 namespace ks
 {
-    Level::Level(std::shared_ptr<ks::ResourceMgr> resource_mgr,
+    Level::Level(std::shared_ptr<ks::ResourceMgr>& resource_mgr,
                  std::shared_ptr<ks::DataLoader> data_loader,
-                 std::shared_ptr<ks::GameWindow> window)
+                 std::shared_ptr<ks::GameWindow>& window)
         : _resource_mgr(resource_mgr),
           _data_loader(data_loader),
           _window(window)
     {
         load_level_assets();
         init_nations();
-        units::init_units();
+
+        _unit_library = std::make_shared<ks::UnitLibrary>(resource_mgr);
 
         _map = std::make_unique<ks::Map>(
             resource_mgr,

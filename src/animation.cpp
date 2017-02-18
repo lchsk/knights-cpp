@@ -4,7 +4,7 @@ namespace ks
 {
     Animation::Animation(
         ks::Spritesheet& spritesheet,
-        std::vector<int>& frames
+        const std::vector<int>& frames
     ) :
         _spritesheet(spritesheet),
         _frames(frames),

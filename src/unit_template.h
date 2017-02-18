@@ -17,20 +17,33 @@ namespace ks
     public:
         UnitTemplate(std::string name, ks::NationType nation);
         ~UnitTemplate();
-        std::string test;
+
+        void add_animation(
+            std::shared_ptr<ks::ResourceMgr>& resource_mgr,
+            const std::string name,
+            const std::string image,
+            const double speed,
+            const std::vector<int>& frames);
+
     private:
         std::string _name;
         ks::NationType _nation;
 
         std::unordered_map<
             std::string,
-            std::shared_ptr<ks::Animation>
-        > _animations;
+            std::shared_ptr<ks::Animation> > _animations;
     };
 
-    namespace units
+    class UnitLibrary
     {
-        void init_units();
-    }
+    public:
+        UnitLibrary(std::shared_ptr<ks::ResourceMgr>& resource_mgr);
+        ~UnitLibrary();
+
+    private:
+        std::shared_ptr<UnitTemplate> KnightsArcher;
+
+        std::shared_ptr<ks::ResourceMgr> _resource_mgr;
+    };
 }
 #endif

@@ -20,9 +20,9 @@ namespace ks
     {
     public:
         Level(
-            std::shared_ptr<ks::ResourceMgr> resource_mgr,
+            std::shared_ptr<ks::ResourceMgr>& resource_mgr,
             std::shared_ptr<ks::DataLoader> data_loader,
-            std::shared_ptr<ks::GameWindow> window
+            std::shared_ptr<ks::GameWindow>& window
         );
         ~Level();
 
@@ -36,6 +36,7 @@ namespace ks
         std::shared_ptr<ks::ResourceMgr> _resource_mgr;
         std::shared_ptr<ks::DataLoader> _data_loader;
         std::shared_ptr<ks::GameWindow> _window;
+        std::shared_ptr<ks::UnitLibrary> _unit_library;
 
         std::vector<std::shared_ptr<ks::Unit> > _units;
 

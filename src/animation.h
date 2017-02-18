@@ -14,7 +14,7 @@ namespace ks
     public:
         Animation(
             ks::Spritesheet& spritesheet,
-            std::vector<int>& frames
+            const std::vector<int>& frames
         );
         ~Animation();
 
@@ -31,7 +31,7 @@ namespace ks
         ks::Spritesheet& _spritesheet;
 
         /* IDs of frames from _spritesheet */
-        std::vector<int> _frames;
+        const std::vector<int> _frames;
 
         /* Current frame */
         int _frame;
