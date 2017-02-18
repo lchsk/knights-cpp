@@ -40,8 +40,11 @@ namespace ks
         UnitLibrary(std::shared_ptr<ks::ResourceMgr>& resource_mgr);
         ~UnitLibrary();
 
+        const std::shared_ptr<UnitTemplate>& get_template(const std::string) const;
+
     private:
-        std::shared_ptr<UnitTemplate> KnightsArcher;
+        const std::unordered_map<std::string, std::shared_ptr<UnitTemplate> >
+            _templates;
 
         std::shared_ptr<ks::ResourceMgr> _resource_mgr;
     };

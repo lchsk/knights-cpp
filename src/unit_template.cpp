@@ -32,56 +32,61 @@ namespace ks
     }
 
     UnitLibrary::UnitLibrary(std::shared_ptr<ks::ResourceMgr>& resource_mgr)
-        : _resource_mgr(resource_mgr)
+        : _resource_mgr(resource_mgr),
+          _templates({
+             {
+                 "knights_archer",
+                 std::make_shared<ks::UnitTemplate>(
+                     "knights_archer", ks::NationType::Knights)
+             }
+          })
     {
-        ks::UnitLibrary::KnightsArcher
-            = std::make_shared<ks::UnitTemplate>(
-                "knights_archer", ks::NationType::Knights);
+        auto knights_archer = get_template("knights_archer");
 
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "stand_up",
             "knights_archer_walk",
             1.0,
             {0});
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "stand_left",
             "knights_archer_walk",
             1.0,
             {9});
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "stand_down",
             "knights_archer_walk",
             1.0,
             {18});
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "stand_right",
             "knights_archer_walk",
             1.0,
             {27});
 
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "walk_up",
             "knights_archer_walk",
             0.5,
             {1, 2, 3, 4, 5, 6, 7, 8});
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "walk_left",
             "knights_archer_walk",
             0.5,
             {10, 11, 12, 13, 14, 15, 16, 17});
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "walk_down",
             "knights_archer_walk",
             0.5,
             {19, 20, 21, 22, 23, 24, 25, 26});
-        ks::UnitLibrary::KnightsArcher->add_animation(
+        knights_archer->add_animation(
             resource_mgr,
             "walk_right",
             "knights_archer_walk",
@@ -91,5 +96,11 @@ namespace ks
 
     UnitLibrary::~UnitLibrary()
     {
+    }
+
+    const std::shared_ptr<UnitTemplate>&
+    UnitLibrary::get_template(const std::string name) const
+    {
+        return _templates.at(name);
     }
 }
