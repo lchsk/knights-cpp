@@ -7,7 +7,6 @@
 
 #include "nation.h"
 #include "animation.h"
-#include "data_loader.h"
 #include "resource_mgr.h"
 
 namespace ks
@@ -24,6 +23,8 @@ namespace ks
             const std::string image,
             const double speed,
             const std::vector<int>& frames);
+
+        std::shared_ptr<ks::Animation>& get_animation(const std::string);
 
     private:
         std::string _name;

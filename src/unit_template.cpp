@@ -31,6 +31,12 @@ namespace ks
         _animations[name] = anim;
     }
 
+    std::shared_ptr<ks::Animation>&
+    UnitTemplate::get_animation(const std::string name)
+    {
+        return _animations.at(name);
+    }
+
     UnitLibrary::UnitLibrary(std::shared_ptr<ks::ResourceMgr>& resource_mgr)
         : _resource_mgr(resource_mgr),
           _templates({

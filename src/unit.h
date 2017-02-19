@@ -8,23 +8,14 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "nation.h"
-#include "animation.h"
-#include "data_loader.h"
-#include "resource_mgr.h"
+#include "unit_template.h"
 
 namespace ks
 {
-
     class Unit
     {
     public:
-        Unit(
-            ks::NationType nation,
-            std::string unit_type,
-            std::shared_ptr<ks::DataLoader>& data_loader,
-            std::shared_ptr<ks::ResourceMgr>& resource_mgr
-            );
+        Unit(const std::shared_ptr<ks::UnitTemplate>& unit_template);
         ~Unit();
 
         void run();
@@ -33,17 +24,10 @@ namespace ks
         void render(sf::RenderWindow& window);
 
     private:
-        std::unordered_map<
-            std::string,
-            std::shared_ptr<ks::Animation>
-        > _animations;
+        const std::shared_ptr<ks::UnitTemplate>& _unit_template;
 
         int _x;
-
         int _y;
-
-        ks::NationType _nation;
-        std::string _unit_name;
 
         std::string _animation;
     };

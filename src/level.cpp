@@ -22,10 +22,7 @@ namespace ks
             );
 
         auto unit = std::make_shared<ks::Unit>(
-            ks::NationType::Knights,
-            "knights_archer",
-            data_loader,
-            resource_mgr
+            _unit_library->get_template("knights_archer")
         );
 
         _units.push_back(unit);
