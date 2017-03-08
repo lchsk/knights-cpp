@@ -26,7 +26,7 @@ message(STATUS "CMAKE_COMPILER_IS_GNUCXX   = ${CMAKE_COMPILER_IS_GNUCXX}"  )
 # Define sources and executable
 set(EXECUTABLE_NAME "knights")
 # set(CMAKE_CXX_FLAGS "-std=c++11")
-add_definitions(-std=c++14)
+add_definitions(-std=c++14 -O0)
 add_executable(${EXECUTABLE_NAME}
     src/main.cpp
     src/game.cpp
