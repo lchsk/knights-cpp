@@ -22,11 +22,16 @@ namespace ks
             );
 
         auto unit = std::make_shared<ks::Unit>(
-            _unit_library->get_template("knights_archer")
+            _unit_library->build_knights_archer()
+        );
+        auto unit2 = std::make_shared<ks::Unit>(
+            _unit_library->build_knights_archer()
         );
 
-        _units.push_back(unit);
+        unit2->set_position(20, 30);
 
+        _units.push_back(unit);
+        _units.push_back(unit2);
     }
 
     Level::~Level()
