@@ -3,30 +3,32 @@
 namespace ks
 {
     Animation::Animation(
-        ks::Spritesheet& spritesheet,
+        const std::shared_ptr<ks::Spritesheet>& spritesheet,
         const std::vector<int>& frames
     ) :
-        _spritesheet(spritesheet),
-        _frames(frames),
         _speed(1.0f)
     {
         reset();
+
+        auto& texture = spritesheet->get_texture();
+
+        auto texture_size = texture->getSize();
+
+        for (int frame : frames) {
+            _frames.push_back(std::move(spritesheet->get_new_sprite(frame)));
+        }
     }
 
     Animation::~Animation()
     {
-
     }
 
-    void
-    Animation::update(sf::Time delta)
+    void Animation::update(sf::Time delta)
     {
         if (! _is_playing) return;
 
-        if (
-            (_since_update - delta).asSeconds()
-            > (delta.asSeconds() / _speed)
-        ) {
+        if ((_since_update - delta).asSeconds()
+            > (delta.asSeconds() / _speed)) {
             if (_frame >= _frames.size() - 1)
                 _frame = 0;
             else
@@ -38,37 +40,28 @@ namespace ks
         }
     }
 
-    void
-    Animation::render(sf::RenderWindow& window)
+    void Animation::render(sf::RenderWindow& window)
     {
-        // Enumerate spritesheet frames from 0
-        int frame = _frames[_frame];
-
-        auto s = _spritesheet.get(frame);
-
-        window.draw(*s);
+        if (_is_playing)
+            window.draw(*_frames[_frame]);
     }
 
-    bool
-    Animation::is_playing()
+    bool Animation::is_playing()
     {
         return _is_playing;
     }
     
-    void
-    Animation::play()
+    void Animation::play()
     {
         _is_playing = true;
     }
 
-    void
-    Animation::stop()
+    void Animation::stop()
     {
         _is_playing = false;
     }
 
-    void
-    Animation::reset()
+    void Animation::reset()
     {
         _is_playing = false;
         _frame = -1;
@@ -77,9 +70,17 @@ namespace ks
         _since_update = sf::seconds(99999);
     }
 
-    void
-    Animation::set_speed(float speed)
+    void Animation::set_speed(float speed)
     {
         _speed = speed;
+    }
+
+    void Animation::set_position(double x, double y)
+    {
+        auto pos = sf::Vector2f(x, y);
+
+        for (auto& frame : _frames) {
+            frame->setPosition(pos);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace ks
     {
     public:
         Animation(
-            ks::Spritesheet& spritesheet,
+            const std::shared_ptr<ks::Spritesheet>& spritesheet,
             const std::vector<int>& frames
         );
         ~Animation();
@@ -25,13 +25,12 @@ namespace ks
         void play();
         void stop();
         void reset();
+
         void set_speed(float speed);
+        void set_position(double x, double y);
 
     private:
-        ks::Spritesheet& _spritesheet;
-
-        /* IDs of frames from _spritesheet */
-        const std::vector<int> _frames;
+        std::vector<std::unique_ptr<sf::Sprite> > _frames;
 
         /* Current frame */
         int _frame;
@@ -39,7 +38,6 @@ namespace ks
         sf::Time _since_update;
 
         float _speed;
-
         bool _is_playing;
     };
 }
