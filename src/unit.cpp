@@ -26,4 +26,9 @@ namespace ks
     {
         _unit_template->get_animation(_animation)->render(window);
     }
+
+    void Unit::set_position(double x, double y)
+    {
+        _unit_template->get_animation(_animation)->set_position(x, y);
+    }
 }
