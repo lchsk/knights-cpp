@@ -18,9 +18,8 @@ namespace ks
         ~UnitTemplate();
 
         void add_animation(
-            std::shared_ptr<ks::ResourceMgr>& resource_mgr,
+            const std::shared_ptr<ks::Spritesheet>& spritesheet,
             const std::string name,
-            const std::string image,
             const double speed,
             const std::vector<int>& frames);
 
@@ -41,10 +40,10 @@ namespace ks
         UnitLibrary(std::shared_ptr<ks::ResourceMgr>& resource_mgr);
         ~UnitLibrary();
 
-        const std::shared_ptr<UnitTemplate>& get_template(const std::string) const;
+        const std::shared_ptr<UnitTemplate> build_knights_archer();
 
     private:
-        const std::unordered_map<std::string, std::shared_ptr<UnitTemplate> >
+        std::unordered_map<std::string, std::shared_ptr<UnitTemplate> >
             _templates;
 
         std::shared_ptr<ks::ResourceMgr> _resource_mgr;
