@@ -25,6 +25,7 @@ namespace ks
         void render(sf::RenderWindow& window);
 
         void set_position(double x, double y);
+        void set_animation(const std::string animation);
 
     private:
         const std::shared_ptr<ks::UnitTemplate> _unit_template;

@@ -29,6 +29,7 @@ namespace ks
         );
 
         unit2->set_position(20, 30);
+        unit2->set_animation("walk_right");
 
         _units.push_back(unit);
         _units.push_back(unit2);

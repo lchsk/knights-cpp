@@ -29,6 +29,20 @@ namespace ks
 
     void Unit::set_position(double x, double y)
     {
+        _x = x;
+        _y = y;
+
         _unit_template->get_animation(_animation)->set_position(x, y);
+    }
+
+    void Unit::set_animation(const std::string animation)
+    {
+        _unit_template->get_animation(_animation)->stop();
+
+        _animation = animation;
+
+        set_position(_x, _y);
+
+        _unit_template->get_animation(_animation)->play();
     }
 }
