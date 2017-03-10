@@ -34,18 +34,15 @@ namespace ks
 
         auto texture_size = _texture->getSize();
 
-        // Columns
-        _tiles_n.x = texture_size.x / tile_width;
+        _cols = texture_size.x / tile_width;
+        _rows = texture_size.y / tile_height;
 
-        // Rows
-        _tiles_n.y = texture_size.y / tile_height;
-
-        for (int row = 0; row < _tiles_n.y; row++) {
-            for (int col = 0; col < _tiles_n.x; col++) {
+        // TODO: That's only for map: replace it!
+        for (int row = 0; row < _rows; row++) {
+            for (int col = 0; col < _cols; col++) {
                 _sprites.push_back(
                     std::make_shared<sf::Sprite>(
-                        *_texture.get(),
-                        sf::IntRect(
+                        *_texture.get(), sf::IntRect(
                             col * _tile_height,
                             row * _tile_width,
                             _tile_height,
@@ -61,22 +58,33 @@ namespace ks
     {
     }
 
-    std::shared_ptr<sf::Sprite>&
-    Spritesheet::get(int row, int col)
+    std::shared_ptr<sf::Sprite>& Spritesheet::get(int row, int col)
     {
-        return _sprites[ks::flatten_int(row, col, _tiles_n.x)];
+        return _sprites[ks::flatten_int(row, col, _cols)];
     }
 
-    std::shared_ptr<sf::Sprite>&
-    Spritesheet::get(int frame)
+    std::shared_ptr<sf::Sprite>& Spritesheet::get(int frame)
     {
         return _sprites[frame];
     }
 
-    const sf::Vector2u&
-    Spritesheet::get_size()
+    std::unique_ptr<sf::Sprite> Spritesheet::get_new_sprite(int frame)
     {
-        return _tiles_n;
+        return std::make_unique<sf::Sprite>(*_texture.get(), _get_rect(frame));
+    }
+
+    const std::unique_ptr<sf::Texture>& Spritesheet::get_texture() const
+    {
+        return _texture;
+    }
+
+    void Spritesheet::set_position(double x, double y)
+    {
+        const auto& pos = sf::Vector2f(x, y);
+
+        for (auto& sprite : _sprites) {
+            sprite->setPosition(pos);
+        }
     }
 
     void Spritesheet::_insert_tile_info(const json& j_data)
@@ -88,6 +96,13 @@ namespace ks
                 _tiles_info[id] = std::make_shared<TileInfo>(id);
             }
         }
+    }
 
+    sf::IntRect Spritesheet::_get_rect(int frame)
+    {
+        return sf::IntRect(
+            get_col(frame, _cols) * _tile_width,
+            get_row(frame, _cols) * _tile_height,
+            _tile_width, _tile_height);
     }
 }
