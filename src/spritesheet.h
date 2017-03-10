@@ -33,12 +33,9 @@ namespace ks
         );
         ~Spritesheet();
 
-        std::shared_ptr<sf::Sprite>& get(int row, int col);
-        std::shared_ptr<sf::Sprite>& get(int frame);
-
         std::unique_ptr<sf::Sprite> get_new_sprite(int frame);
 
-        void set_position(double x, double y);
+        /* void set_position(double x, double y); */
 
         const std::unique_ptr<sf::Texture>& get_texture() const;
 
@@ -54,8 +51,6 @@ namespace ks
         int _cols;
         int _rows;
 
-        // TODO: Can this Sprite a unique_ptr?
-        std::vector<std::shared_ptr<sf::Sprite> > _sprites;
         std::unordered_map<int, std::shared_ptr<ks::TileInfo> > _tiles_info;
     };
 }

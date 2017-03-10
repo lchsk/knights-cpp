@@ -57,13 +57,11 @@ namespace ks
 
             for (const auto& tile_info : j_layer) {
                 // 0: spritesheet_id, 1: tile_id
-                auto tile = spritesheets[tile_info[0]]->get(tile_info[1]);
-
-                _tiles.push_back(std::make_unique<ks::Tile>(
-                                 *tile,
-                                 col * ks::TILE,
-                                 row * ks::TILE
-                                 ));
+                _tiles.push_back(
+                    std::make_unique<ks::Tile>(
+                        spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
+                        col * ks::TILE,
+                        row * ks::TILE));
 
                 col++;
 
@@ -76,7 +74,6 @@ namespace ks
                     break;
             }
         }
-
     }
 
     void Map::update(sf::Time delta)

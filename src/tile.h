@@ -5,26 +5,20 @@
 
 #include <SFML/Graphics.hpp>
 
-/* #include "map.h" */
-/* #include "../core/resource_mgr.h" */
-
 namespace ks
 {
     class Tile
     {
     public:
-        Tile(sf::Sprite& sprite, int x, int y);
+        Tile(std::unique_ptr<sf::Sprite>&& sprite, int x, int y);
         ~Tile();
 
         /* void update(sf::Time delta); */
         void render(sf::RenderWindow& window);
 
-        sf::Sprite&
-            get_sprite();
-
     private:
-        /* std::unique_ptr<sf::Sprite> _tile; */
-        sf::Sprite _tile;
+        std::unique_ptr<sf::Sprite> _tile;
+
         int _x;
         int _y;
     };

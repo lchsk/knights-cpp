@@ -2,12 +2,12 @@
 
 namespace ks
 {
-    Tile::Tile(sf::Sprite& sprite, int x, int y)
+    Tile::Tile(std::unique_ptr<sf::Sprite>&& sprite, int x, int y)
         : _x(x),
           _y(y),
-          _tile(sprite)
+          _tile(std::move(sprite))
     {
-        _tile.setPosition(x, y);
+        _tile->setPosition(x, y);
     }
 
     Tile::~Tile()
@@ -15,16 +15,8 @@ namespace ks
 
     }
 
-    sf::Sprite&
-    Tile::get_sprite()
+    void Tile::render(sf::RenderWindow& window)
     {
-        return _tile;
+        window.draw(*_tile);
     }
-
-    void
-    Tile::render(sf::RenderWindow& window)
-    {
-        window.draw(_tile);
-    }
-
 }
