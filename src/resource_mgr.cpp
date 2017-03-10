@@ -38,11 +38,24 @@ namespace ks
         return *_textures[key];
     }
 
+    // const std::unique_ptr<sf::Texture>&
+    // ResourceMgr::get_texture_ptr(const std::string key)
+    // {
+        // return _textures[key];
+    // }
+
     ks::Spritesheet&
     ResourceMgr::get_spritesheet(std::string key)
     {
         return *_spritesheets[key];
     }
+
+    const std::shared_ptr<ks::Spritesheet>&
+    ResourceMgr::get_spritesheet_ptr(const std::string key)
+    {
+        return _spritesheets[key];
+    }
+
 
     std::shared_ptr<ks::DataLoader> ResourceMgr::get_data_loader()
     {

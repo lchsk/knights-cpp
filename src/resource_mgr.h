@@ -25,8 +25,13 @@ namespace ks
         const sf::Texture&
             get_texture(std::string key);
 
+        /* const std::unique_ptr<sf::Texture>& get_texture_ptr(const std::string key); */
+
         ks::Spritesheet&
             get_spritesheet(std::string key);
+
+        const std::shared_ptr<ks::Spritesheet>&
+            get_spritesheet_ptr(const std::string key);
 
         std::shared_ptr<ks::DataLoader> get_data_loader();
 
