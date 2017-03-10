@@ -1,5 +1,5 @@
-#ifndef UNIT_DEFINITION_H
-#define UNIT_DEFINITION_H
+#ifndef UNIT_TEMPLATE_H
+#define UNIT_TEMPLATE_H
 
 #include <string>
 #include <memory>
@@ -32,21 +32,6 @@ namespace ks
         std::unordered_map<
             std::string,
             std::shared_ptr<ks::Animation> > _animations;
-    };
-
-    class UnitLibrary
-    {
-    public:
-        UnitLibrary(std::shared_ptr<ks::ResourceMgr>& resource_mgr);
-        ~UnitLibrary();
-
-        const std::shared_ptr<UnitTemplate> build_knights_archer();
-
-    private:
-        std::unordered_map<std::string, std::shared_ptr<UnitTemplate> >
-            _templates;
-
-        std::shared_ptr<ks::ResourceMgr> _resource_mgr;
     };
 }
 #endif
