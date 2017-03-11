@@ -48,19 +48,31 @@ namespace ks
         int row = 0;
         int col = 0;
 
+        const int v_per_tile = 4;
+        const int dpx = ks::TILE / v_per_tile;
+
         for (const std::string& layer : j_layers) {
             auto j_layer = j_data[layer];
 
             for (const auto& tile_info : j_layer) {
                 // 0: spritesheet_id, 1: tile_id
 
+                int x = col * ks::TILE;
+                int y = row * ks::TILE;
+
                 auto tile = std::make_unique<ks::Tile>(
                     spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
-                    col * ks::TILE, row * ks::TILE, tile_info[0], tile_info[1]);
+                    x, y, tile_info[0], tile_info[1]);
 
 				_tiles.push_back(std::move(tile));
 
-                // boost::add_vertex(vertex, *_graph);
+                for (int i = 0; i < v_per_tile; i++) {
+                    for (int j = 0; j < v_per_tile; j++) {
+                        boost::add_vertex(
+                            std::make_shared<ks::Vertex>(
+                                x + i * dpx, y + j * dpx), *_graph);
+                    }
+                }
 
                 col++;
 

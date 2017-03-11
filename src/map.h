@@ -18,13 +18,22 @@ namespace ks
     /* Side of each tile */
     const int TILE = 32;
 
+    struct Vertex{
+        Vertex(int x, int y)
+        : x(x), y(y)
+            {
+
+            }
+
+        int x, y;
+    };
     struct Edge{};
 
     typedef boost::adjacency_list<
         boost::vecS,
         boost::vecS,
         boost::directedS,
-        std::shared_ptr<Tile>,
+        std::shared_ptr<Vertex>,
         Edge > Graph;
 
     typedef boost::graph_traits<Graph>::vertex_descriptor vertex_t;
