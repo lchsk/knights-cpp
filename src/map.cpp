@@ -64,13 +64,14 @@ namespace ks
                     spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
                     x, y, tile_info[0], tile_info[1]);
 
-				_tiles.push_back(std::move(tile));
+                _tiles.push_back(std::move(tile));
 
                 for (int i = 0; i < v_per_tile; i++) {
                     for (int j = 0; j < v_per_tile; j++) {
                         boost::add_vertex(
                             std::make_shared<ks::Vertex>(
-                                x + i * dpx, y + j * dpx), *_graph);
+                                x + i * dpx, y + j * dpx,
+                                tile_info[0], tile_info[1]), *_graph);
                     }
                 }
 

@@ -19,13 +19,13 @@ namespace ks
     const int TILE = 32;
 
     struct Vertex{
-        Vertex(int x, int y)
-        : x(x), y(y)
+    Vertex(int x, int y, int spritesheet_id, int tile_id)
+    : x(x), y(y), spritesheet_id(spritesheet_id), tile_id(tile_id)
             {
-
             }
 
         int x, y;
+        int spritesheet_id, tile_id;
     };
     struct Edge{};
 
