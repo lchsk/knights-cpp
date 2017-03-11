@@ -54,11 +54,13 @@ namespace ks
             for (const auto& tile_info : j_layer) {
                 // 0: spritesheet_id, 1: tile_id
 
-                auto vertex = std::make_shared<ks::Tile>(
+                auto tile = std::make_unique<ks::Tile>(
                     spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
                     col * ks::TILE, row * ks::TILE, tile_info[0], tile_info[1]);
 
-                boost::add_vertex(vertex, *_graph);
+				_tiles.push_back(std::move(tile));
+
+                // boost::add_vertex(vertex, *_graph);
 
                 col++;
 
@@ -81,8 +83,8 @@ namespace ks
         sf::RenderWindow& window,
         std::vector<std::shared_ptr<ks::Unit> >& units)
     {
-        for (int v = 0; v < boost::num_vertices(*_graph); v++) {
-            (*_graph)[v]->render(window);
+        for (auto& tile : _tiles) {
+            tile->render(window);
         }
 
         for (auto& unit : units) {
