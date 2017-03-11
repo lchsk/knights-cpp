@@ -19,8 +19,9 @@ namespace ks
     private:
         std::unique_ptr<sf::Sprite> _tile;
 
-        int _x;
-        int _y;
+        // In Pixels
+        const int _x;
+        const int _y;
     };
 }
 

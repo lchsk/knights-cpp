@@ -1,7 +1,3 @@
-/*
-Defines and draws current map - tiles
-*/
-
 #include "map.h"
 
 namespace ks
@@ -16,12 +12,13 @@ namespace ks
           _data_loader(data_loader),
           _window(window)
     {
+        _graph = std::make_unique<ks::Graph>();
+
         load();
     }
 
     Map::~Map()
     {
-
     }
 
     void Map::load()
@@ -57,11 +54,13 @@ namespace ks
 
             for (const auto& tile_info : j_layer) {
                 // 0: spritesheet_id, 1: tile_id
-                _tiles.push_back(
-                    std::make_unique<ks::Tile>(
-                        spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
-                        col * ks::TILE,
-                        row * ks::TILE));
+
+                auto vertex = std::make_shared<ks::Tile>(
+                    spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
+                    col * ks::TILE,
+                    row * ks::TILE);
+
+                boost::add_vertex(vertex, *_graph);
 
                 col++;
 
@@ -84,8 +83,8 @@ namespace ks
         sf::RenderWindow& window,
         std::vector<std::shared_ptr<ks::Unit> >& units)
     {
-        for (auto& tile : _tiles) {
-            tile->render(window);
+        for (auto v = 0; v < boost::num_vertices(*_graph); v++) {
+            (*_graph)[v]->render(window);
         }
 
         for (auto& unit : units) {

@@ -3,6 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <boost/graph/graph_traits.hpp>
+#include <boost/graph/adjacency_list.hpp>
+
 #include "resource_mgr.h"
 #include "animation.h"
 #include "tile.h"
@@ -14,6 +17,18 @@ namespace ks
 {
     /* Side of each tile */
     const int TILE = 32;
+
+    struct Edge{};
+
+    typedef boost::adjacency_list<
+        boost::vecS,
+        boost::vecS,
+        boost::directedS,
+        std::shared_ptr<Tile>,
+        Edge > Graph;
+
+    typedef boost::graph_traits<Graph>::vertex_descriptor vertex_t;
+    typedef boost::graph_traits<Graph>::edge_descriptor edge_t;
 
     class Map
     {
@@ -30,6 +45,8 @@ namespace ks
 
     private:
         void _init_map() const;
+
+        std::unique_ptr<ks::Graph> _graph;
 
         void load();
 
