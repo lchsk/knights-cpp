@@ -10,10 +10,9 @@ namespace ks
         : _map_name(map_name),
           _resource_mgr(resource_mgr),
           _data_loader(data_loader),
-          _window(window)
+          _window(window),
+          _graph(std::make_unique<ks::Graph>())
     {
-        _graph = std::make_unique<ks::Graph>();
-
         load();
     }
 
@@ -57,8 +56,7 @@ namespace ks
 
                 auto vertex = std::make_shared<ks::Tile>(
                     spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
-                    col * ks::TILE,
-                    row * ks::TILE);
+                    col * ks::TILE, row * ks::TILE, tile_info[0], tile_info[1]);
 
                 boost::add_vertex(vertex, *_graph);
 
@@ -83,7 +81,7 @@ namespace ks
         sf::RenderWindow& window,
         std::vector<std::shared_ptr<ks::Unit> >& units)
     {
-        for (auto v = 0; v < boost::num_vertices(*_graph); v++) {
+        for (int v = 0; v < boost::num_vertices(*_graph); v++) {
             (*_graph)[v]->render(window);
         }
 

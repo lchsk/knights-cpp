@@ -10,14 +10,18 @@ namespace ks
     class Tile
     {
     public:
-        Tile(std::unique_ptr<sf::Sprite>&& sprite, int x, int y);
+        Tile(std::unique_ptr<sf::Sprite>&& sprite, const int x, const int y,
+             const int spritesheet_id, const int tile_id);
         ~Tile();
 
         /* void update(sf::Time delta); */
         void render(sf::RenderWindow& window);
 
     private:
-        std::unique_ptr<sf::Sprite> _tile;
+        std::unique_ptr<sf::Sprite> _sprite;
+
+        const int _spritesheet_id;
+        const int _tile_id;
 
         // In Pixels
         const int _x;
