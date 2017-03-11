@@ -3,8 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <boost/config.hpp>
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_list.hpp>
+#include <boost/property_map/property_map.hpp>
 
 #include "resource_mgr.h"
 #include "animation.h"
@@ -32,9 +34,9 @@ namespace ks
     typedef boost::adjacency_list<
         boost::vecS,
         boost::vecS,
-        boost::directedS,
+        boost::undirectedS,
         std::shared_ptr<Vertex>,
-        Edge > Graph;
+        boost::property<boost::edge_weight_t, int> > Graph;
 
     typedef boost::graph_traits<Graph>::vertex_descriptor vertex_t;
     typedef boost::graph_traits<Graph>::edge_descriptor edge_t;
@@ -53,8 +55,6 @@ namespace ks
                     std::vector<std::shared_ptr<ks::Unit> >& units);
 
     private:
-        void _init_map() const;
-
         std::unique_ptr<ks::Graph> _graph;
 
         void load();
@@ -74,6 +74,18 @@ namespace ks
         int _tiles_cols;
 
         std::string _map_name;
+
+        int _get_nw(const int v) const;
+        int _get_n(const int v) const;
+        int _get_ne(const int v) const;
+        int _get_e(const int v) const;
+        int _get_se(const int v) const;
+        int _get_s(const int v) const;
+        int _get_sw(const int v) const;
+        int _get_w(const int v) const;
+
+        void _add_edge(const int v1, const int v2) const;
+        void _build_initial_graph() const;
     };
 }
 

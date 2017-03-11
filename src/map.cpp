@@ -86,6 +86,8 @@ namespace ks
                     break;
             }
         }
+
+        _build_initial_graph();
     }
 
     void Map::update(sf::Time delta)
@@ -105,9 +107,70 @@ namespace ks
         }
     }
 
-    void
-    Map::_init_map() const
+    int Map::_get_nw(const int v) const
     {
+        return v - _tiles_cols - 1;
+    }
 
+    int Map::_get_n(const int v) const
+    {
+        return v - _tiles_cols;
+    }
+
+    int Map::_get_ne(const int v) const
+    {
+        return v - _tiles_cols + 1;
+    }
+
+    int Map::_get_e(const int v) const
+    {
+        return v + 1;
+    }
+
+    int Map::_get_se(const int v) const
+    {
+        return v + _tiles_cols + 1;
+    }
+
+    int Map::_get_s(const int v) const
+    {
+        return v + _tiles_cols;
+    }
+
+    int Map::_get_sw(const int v) const
+    {
+        return v + _tiles_cols - 1;
+    }
+
+    int Map::_get_w(const int v) const
+    {
+        return v - 1;
+    }
+
+    void Map::_add_edge(const int v1, const int v2) const
+    {
+        if (v2 < 0) return;
+
+        auto edge = boost::edge(v1, v2, *_graph);
+
+        if (edge.second) return;
+
+        boost::add_edge(v1, v2, 1, *_graph);
+    }
+
+    void Map::_build_initial_graph() const
+    {
+        const int v_cnt = boost::num_vertices(*_graph);
+
+        for (int v = 0; v < v_cnt; v++) {
+            _add_edge(v, _get_nw(v));
+            _add_edge(v, _get_n(v));
+            _add_edge(v, _get_ne(v));
+            _add_edge(v, _get_e(v));
+            _add_edge(v, _get_se(v));
+            _add_edge(v, _get_s(v));
+            _add_edge(v, _get_sw(v));
+            _add_edge(v, _get_w(v));
+        }
     }
 }
