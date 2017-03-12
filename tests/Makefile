@@ -6,15 +6,16 @@ CPP_TEST_FLAGS = -pthread
 
 ##############################
 #                            #
-#	 List of tests	     #
+#        List of tests       #
 #                            #
 ##############################
 
 TEST_UTIL = test_util
+TEST_GPS = test_gps
 
 ##############################
 
-TESTS = $(TEST_UTIL)
+TESTS = $(TEST_UTIL) $(TEST_GPS)
 
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 		$(GTEST_DIR)/include/gtest/internal/*.h
@@ -45,3 +46,7 @@ gtest_main.a: gtest-all.o gtest_main.o
 test_util:
 	$(CXX) -I $(GTEST_DIR)/include/ \
 	test_util.cpp gtest.a $(CPP_TEST_FLAGS) -o $(TEST_UTIL)
+
+test_gps:
+	$(CXX) -I $(GTEST_DIR)/include/ \
+	test_gps.cpp gtest.a $(CPP_TEST_FLAGS) -o $(TEST_GPS)
