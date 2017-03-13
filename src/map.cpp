@@ -11,6 +11,7 @@ namespace ks
           _resource_mgr(resource_mgr),
           _data_loader(data_loader),
           _window(window),
+          _gps(std::make_unique<ks::Gps>()),
           _graph(std::make_unique<ks::Graph>())
     {
         load();
@@ -27,6 +28,8 @@ namespace ks
 
         _tiles_cols = j_map["metadata"]["columns"];
         _tiles_rows = j_map["metadata"]["rows"];
+
+        _v_col = _tiles_cols * _v_per_tile;
 
         _window->set_map_size(ks::TILE * _tiles_cols, ks::TILE * _tiles_rows);
 
@@ -48,32 +51,20 @@ namespace ks
         int row = 0;
         int col = 0;
 
-        const int v_per_tile = 4;
-        const int dpx = ks::TILE / v_per_tile;
-
         for (const std::string& layer : j_layers) {
             auto j_layer = j_data[layer];
 
             for (const auto& tile_info : j_layer) {
                 // 0: spritesheet_id, 1: tile_id
 
-                int x = col * ks::TILE;
-                int y = row * ks::TILE;
+                int c = col * ks::TILE;
+                int r = row * ks::TILE;
 
                 auto tile = std::make_unique<ks::Tile>(
                     spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
-                    x, y, tile_info[0], tile_info[1]);
+                    c, r, tile_info[0], tile_info[1]);
 
                 _tiles.push_back(std::move(tile));
-
-                for (int i = 0; i < v_per_tile; i++) {
-                    for (int j = 0; j < v_per_tile; j++) {
-                        boost::add_vertex(
-                            std::make_shared<ks::Vertex>(
-                                x + i * dpx, y + j * dpx,
-                                tile_info[0], tile_info[1]), *_graph);
-                    }
-                }
 
                 col++;
 
@@ -87,7 +78,56 @@ namespace ks
             }
         }
 
+        for (int R = 0; R < _tiles_rows * 4 * 8; R += 8) {
+            for (int C = 0; C < _tiles_cols * 4 * 8; C += 8) {
+                boost::add_vertex(
+                    std::make_shared<ks::Vertex>(
+                        C,
+                        R,
+                        0, 0), *_graph);
+            }
+        }
+
         _build_initial_graph();
+
+		vertex_t s = boost::vertex(0, *_graph);
+		vertex_t goal = boost::vertex(37, *_graph);
+
+        auto ss = (*_graph)[0];
+        auto gg = (*_graph)[37];
+
+        std::vector<vertex_t> p(boost::num_vertices(*_graph));
+        std::vector<int> d(boost::num_vertices(*_graph));
+
+        dijkstra_shortest_paths(*_graph, s,
+                                predecessor_map(boost::make_iterator_property_map(p.begin(), get(boost::vertex_index, *_graph))).
+                                distance_map(boost::make_iterator_property_map(d.begin(), get(boost::vertex_index, *_graph))));
+
+        std::vector<ks::vertex_t> path;
+        ks::vertex_t current = goal;
+
+        while (current != s) {
+            path.push_back(current);
+
+            current = p[current];
+        }
+
+        path.push_back(s);
+
+        std::vector<boost::graph_traits<ks::Graph>::vertex_descriptor >::iterator it;
+
+        for (it = path.begin(); it != path.end(); it++) {
+            auto t = (*_graph)[*it];
+
+            auto l = std::make_unique<sf::RectangleShape>();
+
+            l->setFillColor(sf::Color::Red);
+            l->setSize(sf::Vector2f(8, 8));
+            l->setPosition(sf::Vector2f(t->x, t->y));
+
+            _path.push_back(std::move(l));
+        }
+        std::cout << std::endl;
     }
 
     void Map::update(sf::Time delta)
@@ -105,46 +145,10 @@ namespace ks
         for (auto& unit : units) {
             unit->render(window);
         }
-    }
 
-    int Map::_get_nw(const int v) const
-    {
-        return v - _tiles_cols - 1;
-    }
-
-    int Map::_get_n(const int v) const
-    {
-        return v - _tiles_cols;
-    }
-
-    int Map::_get_ne(const int v) const
-    {
-        return v - _tiles_cols + 1;
-    }
-
-    int Map::_get_e(const int v) const
-    {
-        return v + 1;
-    }
-
-    int Map::_get_se(const int v) const
-    {
-        return v + _tiles_cols + 1;
-    }
-
-    int Map::_get_s(const int v) const
-    {
-        return v + _tiles_cols;
-    }
-
-    int Map::_get_sw(const int v) const
-    {
-        return v + _tiles_cols - 1;
-    }
-
-    int Map::_get_w(const int v) const
-    {
-        return v - 1;
+        for (auto& l : _path) {
+            window.draw(*l);
+        }
     }
 
     void Map::_add_edge(const int v1, const int v2) const
@@ -158,19 +162,25 @@ namespace ks
         boost::add_edge(v1, v2, 1, *_graph);
     }
 
+    bool Map::_is_connected(const int v1, const int v2) const
+    {
+        return boost::edge(v1, v2, *_graph).second;
+    }
+
     void Map::_build_initial_graph() const
     {
-        const int v_cnt = boost::num_vertices(*_graph);
+        _gps->v_cnt = boost::num_vertices(*_graph);
+        _gps->v_col = _v_col;
 
-        for (int v = 0; v < v_cnt; v++) {
-            _add_edge(v, _get_nw(v));
-            _add_edge(v, _get_n(v));
-            _add_edge(v, _get_ne(v));
-            _add_edge(v, _get_e(v));
-            _add_edge(v, _get_se(v));
-            _add_edge(v, _get_s(v));
-            _add_edge(v, _get_sw(v));
-            _add_edge(v, _get_w(v));
+        for (int v = 0; v < _gps->v_cnt; v++) {
+            _add_edge(v, _gps->get_nw(v));
+            _add_edge(v, _gps->get_n(v));
+            _add_edge(v, _gps->get_ne(v));
+            _add_edge(v, _gps->get_e(v));
+            _add_edge(v, _gps->get_se(v));
+            _add_edge(v, _gps->get_s(v));
+            _add_edge(v, _gps->get_sw(v));
+            _add_edge(v, _gps->get_w(v));
         }
     }
 }
