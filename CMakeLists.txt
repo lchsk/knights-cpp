@@ -31,6 +31,7 @@ add_executable(${EXECUTABLE_NAME}
     src/main.cpp
     src/game.cpp
     src/resource_mgr.cpp
+    src/graph.cpp
     src/map.cpp
     src/level.cpp
     src/tile.cpp
