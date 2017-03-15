@@ -1,5 +1,5 @@
-#ifndef UNIT_H
-#define UNIT_H
+#ifndef UTIL_H
+#define UTIL_H
 
 namespace ks
 {
