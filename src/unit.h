@@ -9,6 +9,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "unit_template.h"
+#include "graph.h"
+
+#define DEBUG_UNIT_PATHS
 
 namespace ks
 {
@@ -27,6 +30,8 @@ namespace ks
         void set_position(double x, double y);
         void set_animation(const std::string animation);
 
+        void set_path(const std::shared_ptr<std::vector<ks::Vertex> >& path);
+
     private:
         const std::shared_ptr<ks::UnitTemplate> _unit_template;
 
@@ -34,6 +39,12 @@ namespace ks
         int _y;
 
         std::string _animation;
+
+        std::shared_ptr<std::vector<ks::Vertex> > _path;
+
+        #ifdef DEBUG_UNIT_PATHS
+        std::vector<std::unique_ptr<sf::RectangleShape> > _debug_path;
+        #endif
     };
 }
 #endif
