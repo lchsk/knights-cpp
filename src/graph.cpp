@@ -27,7 +27,7 @@ namespace ks
         }
 
         _gps->v_cnt = boost::num_vertices(*_graph);
-        _gps->v_col = _cols;
+        _gps->v_col = cols / 8;
 
         for (int v = 0; v < _gps->v_cnt; v++) {
             _add_edge(v, _gps->get_n(v));
@@ -35,6 +35,38 @@ namespace ks
             _add_edge(v, _gps->get_s(v));
             _add_edge(v, _gps->get_w(v));
         }
+    }
+
+    void Graph::find_path(std::shared_ptr<std::vector<ks::Vertex> >& path,
+                          const int start_id, const int goal_id) const
+    {
+        vertex_t start = boost::vertex(start_id, *_graph);
+        vertex_t goal = boost::vertex(goal_id, *_graph);
+
+        std::vector<vertex_t> p(boost::num_vertices(*_graph));
+        std::vector<int> d(boost::num_vertices(*_graph));
+
+        dijkstra_shortest_paths(
+            *_graph,
+            start,
+            predecessor_map(
+                boost::make_iterator_property_map(
+                    p.begin(), get(boost::vertex_index, *_graph))).
+            distance_map(
+                boost::make_iterator_property_map(
+                    d.begin(), get(boost::vertex_index, *_graph))));
+
+        ks::vertex_t current = goal;
+
+        while (current != start) {
+            auto vertex = (*_graph)[current];
+            path->push_back(*vertex);
+
+            current = p[current];
+        }
+
+        auto vertex = (*_graph)[start];
+        path->push_back(*vertex);
     }
 
     void Graph::_add_edge(const int v1, const int v2) const
