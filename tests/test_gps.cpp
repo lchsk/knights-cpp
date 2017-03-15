@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include "../src/map.h"
+#include "../src/graph.h"
 
 // Vertices of the graph used in this file:
 // 0   1  2  3
