@@ -39,7 +39,7 @@ namespace ks
         std::shared_ptr<ks::GameWindow> _window;
         std::shared_ptr<ks::UnitLibrary> _unit_library;
 
-        std::vector<std::shared_ptr<ks::Unit> > _units;
+        std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _units;
 
         void load_level_assets() const;
         void init_nations();
