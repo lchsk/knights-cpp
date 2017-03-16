@@ -47,6 +47,9 @@ namespace ks
             spritesheets.push_back(&_resource_mgr->get_spritesheet(spritesheet));
         }
 
+        std::map<std::pair<int, int>, std::vector<std::pair<int, int> > >
+            layers;
+
         for (const std::string& layer : j_layers) {
             auto j_layer = j_data[layer];
 
@@ -63,6 +66,9 @@ namespace ks
                     spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
                     c, r, tile_info[0], tile_info[1]);
 
+                layers[std::make_pair(row, col)].push_back(
+                    std::make_pair(tile_info[0], tile_info[1]));
+
                 _tiles.push_back(std::move(tile));
 
                 col++;
@@ -77,14 +83,15 @@ namespace ks
             }
         }
 
-        _graph->init(_tiles_rows * ks::TILE, _tiles_cols * ks::TILE);
+        _graph->init(_tiles_rows * ks::TILE, _tiles_cols * ks::TILE,
+            layers);
 
         // Find path:
 
         std::shared_ptr<std::vector<ks::Vertex> > path
             = std::make_shared<std::vector<ks::Vertex> >();
 
-        _graph->find_path(path, 0, 60);
+        _graph->find_path(path, 0, 55);
 
         (*_units)[0]->set_path(path);
     }
