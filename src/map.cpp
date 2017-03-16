@@ -47,11 +47,11 @@ namespace ks
             spritesheets.push_back(&_resource_mgr->get_spritesheet(spritesheet));
         }
 
-        int row = 0;
-        int col = 0;
-
         for (const std::string& layer : j_layers) {
             auto j_layer = j_data[layer];
+
+            int row = 0;
+            int col = 0;
 
             for (const auto& tile_info : j_layer) {
                 // 0: spritesheet_id, 1: tile_id
