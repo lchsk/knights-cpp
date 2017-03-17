@@ -14,15 +14,28 @@ namespace ks
     {
     }
 
-    void Graph::init(const int rows, const int cols)
+    void Graph::init(
+        const int rows,
+        const int cols,
+        std::map<std::pair<int, int>, std::vector<std::pair<int, int> > >&
+        layers)
     {
         _rows = rows;
         _cols = cols;
 
         for (int r = 0; r < rows; r += 8) {
             for (int c = 0; c < cols; c += 8) {
+                int tile_row = r / 32;
+                int tile_col = c / 32;
+
+                std::vector<std::pair<int, int> > tile
+                    = layers[std::make_pair(tile_row, tile_col)];
+
+                auto& top = tile[tile.size() - 1];
+
                 boost::add_vertex(
-                    std::make_shared<ks::Vertex>(c, r, 0, 0), *_graph);
+                    std::make_shared<ks::Vertex>
+                    (c, r, top.first, top.second), *_graph);
             }
         }
 
@@ -30,11 +43,16 @@ namespace ks
         _gps->v_col = cols / 8;
 
         for (int v = 0; v < _gps->v_cnt; v++) {
-            _add_edge(v, _gps->get_n(v));
-            _add_edge(v, _gps->get_e(v));
-            _add_edge(v, _gps->get_s(v));
-            _add_edge(v, _gps->get_w(v));
+            _add_edge(v, _gps->get_n(v), 1);
+            _add_edge(v, _gps->get_e(v), 1);
+            _add_edge(v, _gps->get_s(v), 1);
+            _add_edge(v, _gps->get_w(v), 1);
         }
+    }
+
+    const bool Graph::is_connected(const int v1, const int v2) const
+    {
+        return boost::edge(v1, v2, *_graph).second;
     }
 
     void Graph::find_path(std::shared_ptr<std::vector<ks::Vertex> >& path,
@@ -46,42 +64,59 @@ namespace ks
         std::vector<vertex_t> p(boost::num_vertices(*_graph));
         std::vector<int> d(boost::num_vertices(*_graph));
 
-        dijkstra_shortest_paths(
-            *_graph,
-            start,
-            predecessor_map(
-                boost::make_iterator_property_map(
-                    p.begin(), get(boost::vertex_index, *_graph))).
-            distance_map(
-                boost::make_iterator_property_map(
-                    d.begin(), get(boost::vertex_index, *_graph))));
+        auto pred_map = boost::make_iterator_property_map(
+            p.begin(), boost::get(boost::vertex_index, *_graph));
+        auto dist_map = boost::make_iterator_property_map(
+            d.begin(), boost::get(boost::vertex_index, *_graph));
+        // auto w_map = boost::get(&ks::edge_t, *_graph);
+        // auto n_map = boost::get(&ks::vector_t, *_graph);
+
+         boost::dijkstra_shortest_paths(
+             *_graph, start,
+              predecessor_map(pred_map).
+             distance_map(dist_map));
 
         ks::vertex_t current = goal;
 
+		bool path_found = true;
+
         while (current != start) {
+            if (p[current] == current) {
+                path_found = false;
+
+                break;
+            }
+
             auto vertex = (*_graph)[current];
             path->push_back(*vertex);
 
             current = p[current];
         }
 
-        auto vertex = (*_graph)[start];
-        path->push_back(*vertex);
+        if (path_found) {
+            auto vertex = (*_graph)[start];
+            path->push_back(*vertex);
+        } else {
+            path->clear();
+        }
     }
 
-    void Graph::_add_edge(const int v1, const int v2) const
+    void Graph::_add_edge(const int v1, const int v2, const int weight) const
     {
         if (v2 < 0) return;
 
         auto edge = boost::edge(v1, v2, *_graph);
 
+        // Edge already exists
         if (edge.second) return;
 
-        boost::add_edge(v1, v2, 1, *_graph);
-    }
+        auto V1 = (*_graph)[boost::vertex(v1, *_graph)];
+        auto V2 = (*_graph)[boost::vertex(v2, *_graph)];
 
-    const bool Graph::_is_connected(const int v1, const int v2) const
-    {
-        return boost::edge(v1, v2, *_graph).second;
+        if ((V1->tile_id == 0 && V2->tile_id == 1) || (
+                V1->tile_id == 1 && V2->tile_id == 0))
+            return;
+
+        boost::add_edge(v1, v2, weight, *_graph);
     }
 }

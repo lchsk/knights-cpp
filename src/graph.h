@@ -34,6 +34,7 @@ namespace ks
         std::shared_ptr<ks::Vertex>,
         boost::property<boost::edge_weight_t, int> > graph_t;
 
+
     typedef boost::graph_traits<ks::graph_t>::vertex_descriptor vertex_t;
     typedef boost::graph_traits<ks::graph_t>::edge_descriptor edge_t;
 
@@ -45,14 +46,19 @@ namespace ks
         Graph();
         ~Graph();
 
-        void init(const int rows, const int cols);
+        void init(
+            const int rows,
+            const int cols,
+            std::map<std::pair<int, int>, std::vector<std::pair<int, int> > >&
+            layers);
 
         void find_path(std::shared_ptr<std::vector<ks::Vertex> >& path,
                        const int start_id, const int goal_id) const;
 
+        const bool is_connected(const int v1, const int v2) const;
+
     private:
-        void _add_edge(const int v1, const int v2) const;
-        const bool _is_connected(const int v1, const int v2) const;
+        void _add_edge(const int v1, const int v2, const int weight) const;
 
         std::unique_ptr<ks::graph_t> _graph;
         std::unique_ptr<ks::Gps> _gps;
