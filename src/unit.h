@@ -27,16 +27,20 @@ namespace ks
         void update(sf::Time delta);
         void render(sf::RenderWindow& window);
 
-        void set_position(double x, double y);
+        void set_position(const double x, const double y);
+        const sf::Vector2i get_position() const;
         void set_animation(const std::string animation);
 
         void set_path(const std::shared_ptr<std::vector<ks::Vertex> >& path);
 
+        const bool is_walking() const;
     private:
+        void _move_step(sf::Time& delta);
+
         const std::shared_ptr<ks::UnitTemplate> _unit_template;
 
-        int _x;
-        int _y;
+        double _x;
+        double _y;
 
         std::string _animation;
 

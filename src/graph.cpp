@@ -23,6 +23,8 @@ namespace ks
         _rows = rows;
         _cols = cols;
 
+        int id = 0;
+
         for (int r = 0; r < rows; r += 8) {
             for (int c = 0; c < cols; c += 8) {
                 int tile_row = r / 32;
@@ -35,7 +37,7 @@ namespace ks
 
                 boost::add_vertex(
                     std::make_shared<ks::Vertex>
-                    (c, r, top.first, top.second), *_graph);
+                    (id++, c, r, top.first, top.second), *_graph);
             }
         }
 

@@ -12,11 +12,12 @@ namespace ks
     class Vertex
     {
     public:
-    Vertex(int x, int y, int spritesheet_id, int tile_id):
-        x(x), y(y), spritesheet_id(spritesheet_id), tile_id(tile_id)
+    Vertex(int id, int x, int y, int spritesheet_id, int tile_id):
+        id(id), x(x), y(y), spritesheet_id(spritesheet_id), tile_id(tile_id)
         {
         };
 
+        int id;
         int x;
         int y;
         int spritesheet_id;
@@ -148,5 +149,17 @@ namespace ks
             return v % v_col == (v_col - 1);
         }
     };
+
+    inline const int get_direction(const int from, const int to)
+    {
+        int col = 256 / 8;
+
+        if ((from + 1) == to) return 1;
+        if ((from - 1) == to) return 3;
+        if ((from + col) == to) return 2;
+        if ((from - col) == to) return 0;
+
+        return -1;
+    }
 }
 #endif
