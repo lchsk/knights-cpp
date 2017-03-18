@@ -28,7 +28,7 @@ namespace ks
         _units->push_back(unit);
         _units->push_back(unit2);
 
-        _map = std::make_unique<ks::Map>(
+        _map = std::make_shared<ks::Map>(
             resource_mgr,
             data_loader,
             window,

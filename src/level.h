@@ -33,7 +33,7 @@ namespace ks
         void select_objects();
 
     private:
-        std::unique_ptr<ks::Map> _map;
+        std::shared_ptr<ks::Map> _map;
         std::shared_ptr<ks::ResourceMgr> _resource_mgr;
         std::shared_ptr<ks::DataLoader> _data_loader;
         std::shared_ptr<ks::GameWindow> _window;
