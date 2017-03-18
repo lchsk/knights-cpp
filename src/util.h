@@ -3,6 +3,11 @@
 
 namespace ks
 {
+	const int UNIT_WIDTH = 64;
+	const int UNIT_HEIGHT = 64;
+	const int UNIT_OFFSET_W = UNIT_WIDTH / 2;
+	const int UNIT_OFFSET_H = UNIT_HEIGHT / 2;
+
 	inline int flatten_int(int row, int col, int columns) {
 		return row * columns + col;
 	}

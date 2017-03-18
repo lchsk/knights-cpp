@@ -26,8 +26,8 @@ namespace ks
         void stop();
         void reset();
 
-        void set_speed(float speed);
-        void set_position(double x, double y);
+        void set_speed(const float speed);
+        void set_position(const double x, const double y) const;
 
     private:
         std::vector<std::unique_ptr<sf::Sprite> > _frames;

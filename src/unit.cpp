@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "unit.h"
+#include "util.h"
 
 namespace ks
 {
@@ -91,13 +92,13 @@ namespace ks
 
     void Unit::render(sf::RenderWindow& window)
     {
-        _unit_template->get_animation(_animation)->render(window);
-
         #ifdef DEBUG_UNIT_PATHS
         for (auto& step : _debug_path) {
             window.draw(*step);
         }
         #endif
+
+        _unit_template->get_animation(_animation)->render(window);
     }
 
     const bool Unit::is_walking() const
@@ -109,6 +110,10 @@ namespace ks
         const std::shared_ptr<std::vector<ks::Vertex> >& path)
     {
         _path->clear();
+
+        #ifdef DEBUG_UNIT_PATHS
+        _debug_path.clear();
+        #endif
 
         std::vector<ks::Vertex>::reverse_iterator it;
 
@@ -137,7 +142,7 @@ namespace ks
         _x = x;
         _y = y;
 
-        _unit_template->get_animation(_animation)->set_position((int)x, (int)y);
+        _unit_template->get_animation(_animation)->set_position(x, y);
     }
 
     const sf::Vector2i Unit::get_position() const
@@ -147,7 +152,11 @@ namespace ks
 
     const sf::Rect<int> Unit::get_rectangle() const
     {
-        sf::Rect<int> r(_x, _y, 64, 64);
+        sf::Rect<int> r(
+            _x - ks::UNIT_OFFSET_W,
+            _y - ks::UNIT_OFFSET_H,
+            ks::UNIT_WIDTH,
+            ks::UNIT_HEIGHT);
 
         return r;
     }

@@ -1,5 +1,6 @@
 
 #include "resource_mgr.h"
+#include "util.h"
 
 namespace ks
 {
@@ -13,7 +14,7 @@ namespace ks
 
         _spritesheets["knights_archer_walk"] = std::make_shared
             <ks::Spritesheet>("assets/images/knights_archer_walk.png",
-                              nullptr, 64, 64);
+                              nullptr, ks::UNIT_WIDTH, ks::UNIT_HEIGHT);
     }
 
     ResourceMgr::~ResourceMgr()

@@ -1,4 +1,5 @@
 #include "animation.h"
+#include "util.h"
 
 namespace ks
 {
@@ -70,14 +71,15 @@ namespace ks
         _since_update = sf::seconds(99999);
     }
 
-    void Animation::set_speed(float speed)
+    void Animation::set_speed(const float speed)
     {
         _speed = speed;
     }
 
-    void Animation::set_position(double x, double y)
+    void Animation::set_position(const double x, const double y) const
     {
-        auto pos = sf::Vector2f(x, y);
+        const auto pos = sf::Vector2f(
+            x - ks::UNIT_OFFSET_W, y - ks::UNIT_OFFSET_H);
 
         for (auto& frame : _frames) {
             frame->setPosition(pos);

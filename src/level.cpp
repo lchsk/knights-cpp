@@ -31,8 +31,8 @@ namespace ks
             _unit_library->build_knights_archer()
         );
 
-        unit2->set_position(20, 30);
-        unit2->set_animation("walk_right");
+        unit->set_position(0, 0);
+        unit2->set_position(50, 60);
 
         _units->push_back(unit);
         _units->push_back(unit2);
