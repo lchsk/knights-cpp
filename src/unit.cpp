@@ -8,7 +8,7 @@ namespace ks
         : _x(0),
           _y(0),
           _path(std::make_shared<std::vector<ks::Vertex> >()),
-          _animation("walk_left"),
+          _animation("stand_left"),
           _unit_template(unit_template)
     {
         _unit_template->get_animation(_animation)->play();
@@ -41,15 +41,19 @@ namespace ks
         switch (dir) {
         case 0:
             _y -= speed * delta.asSeconds();
+            set_animation("walk_up");
             break;
         case 2:
             _y += speed * delta.asSeconds();
+            set_animation("walk_down");
             break;
         case 1:
             _x += speed * delta.asSeconds();
+            set_animation("walk_right");
             break;
         case 3:
             _x -= speed * delta.asSeconds();
+            set_animation("walk_left");
             break;
         }
 
@@ -65,6 +69,22 @@ namespace ks
 
         if (_path->size() == 1) {
             // Path finished
+
+            switch (dir) {
+            case 0:
+                set_animation("stand_up");
+                break;
+            case 2:
+                set_animation("stand_down");
+                break;
+            case 1:
+                set_animation("stand_right");
+                break;
+            case 3:
+                set_animation("stand_left");
+                break;
+            }
+
             _path->clear();
         }
     }
