@@ -4,9 +4,11 @@
 
 namespace ks
 {
-    UnitTemplate::UnitTemplate(std::string name, ks::NationType nation)
+    UnitTemplate::UnitTemplate(std::string name, ks::NationType nation,
+                               const int speed)
         : _name(name),
-        _nation(nation)
+          _nation(nation),
+          _speed(speed)
     {
         
     }
@@ -32,5 +34,10 @@ namespace ks
     UnitTemplate::get_animation(const std::string name)
     {
         return _animations[name];
+    }
+
+    const int UnitTemplate::get_speed() const
+    {
+        return _speed;
     }
 }

@@ -14,7 +14,7 @@ namespace ks
     const std::shared_ptr<UnitTemplate> UnitLibrary::build_knights_archer()
     {
         const auto unit = std::make_shared<ks::UnitTemplate>(
-            "knights_archer", ks::NationType::Knights);
+            "knights_archer", ks::NationType::Knights, 25);
 
         const auto& s = _resource_mgr->get_spritesheet_ptr(
             "knights_archer_walk");
