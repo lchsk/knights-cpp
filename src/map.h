@@ -32,6 +32,11 @@ namespace ks
         void set_position(const std::shared_ptr<ks::Unit>& unit,
                           const int v) const;
 
+        void move_unit(
+            const std::shared_ptr<ks::Unit>& unit,
+            const int x,
+            const int y) const;
+
     private:
         void load();
 

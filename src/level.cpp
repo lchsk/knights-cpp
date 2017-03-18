@@ -47,10 +47,16 @@ namespace ks
     {
         auto mouse_pos = sf::Mouse::getPosition(_window->get_window());
 
-        for (auto& unit : *_units) {
-            if (unit->get_rectangle().contains(mouse_pos)) {
-                _selected->clear();
-                _selected->push_back(unit);
+        if (_selected->size() == 1) {
+            // Move selected unit
+            _map->move_unit((*_selected)[0], mouse_pos.x, mouse_pos.y);
+            _selected->clear();
+        } else {
+            for (auto& unit : *_units) {
+                if (unit->get_rectangle().contains(mouse_pos)) {
+                    _selected->clear();
+                    _selected->push_back(unit);
+                }
             }
         }
     }

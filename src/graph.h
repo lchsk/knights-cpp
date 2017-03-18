@@ -58,6 +58,8 @@ namespace ks
 
         const bool is_connected(const int v1, const int v2) const;
         const std::shared_ptr<ks::Vertex>& get_vertex(const int v) const;
+        const std::shared_ptr<ks::Vertex>&
+            get_closest_vertex(const int x, const int y) const;
 
     private:
         void _add_edge(const int v1, const int v2, const int weight) const;

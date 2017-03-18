@@ -93,15 +93,25 @@ namespace ks
 
         _graph->init(_tiles_rows * ks::TILE, _tiles_cols * ks::TILE,
             layers);
+    }
 
-        // Find path:
-
+    void Map::move_unit(
+        const std::shared_ptr<ks::Unit>& unit,
+        const int x,
+        const int y) const
+    {
         std::shared_ptr<std::vector<ks::Vertex> > path
             = std::make_shared<std::vector<ks::Vertex> >();
 
-        _graph->find_path(path, 0, 30);
+        const sf::Vector2i current_pos = unit->get_position();;
 
-        // (*_units)[0]->set_path(path);
+        const auto& from = _graph->get_closest_vertex(
+            current_pos.x, current_pos.y);
+        const auto& to = _graph->get_closest_vertex(x, y);
+
+        _graph->find_path(path, from->id, to->id);
+
+        unit->set_path(path);
     }
 
     void Map::update(sf::Time delta)

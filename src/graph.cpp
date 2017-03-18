@@ -62,6 +62,14 @@ namespace ks
         return (*_graph)[boost::vertex(v, *_graph)];
     }
 
+    const std::shared_ptr<ks::Vertex>&
+    Graph::get_closest_vertex(const int x, const int y) const
+    {
+        const int v = y / 8 * _cols / 8 + x / 8;
+
+        return get_vertex(v);
+    }
+
     void Graph::find_path(std::shared_ptr<std::vector<ks::Vertex> >& path,
                           const int start_id, const int goal_id) const
     {
