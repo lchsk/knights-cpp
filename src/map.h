@@ -29,6 +29,9 @@ namespace ks
         void update(sf::Time delta);
         void render(sf::RenderWindow& window);
 
+        void set_position(const std::shared_ptr<ks::Unit>& unit,
+                          const int v) const;
+
     private:
         void load();
 

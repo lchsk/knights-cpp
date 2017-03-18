@@ -57,6 +57,11 @@ namespace ks
         return boost::edge(v1, v2, *_graph).second;
     }
 
+    const std::shared_ptr<ks::Vertex>& Graph::get_vertex(const int v) const
+    {
+        return (*_graph)[boost::vertex(v, *_graph)];
+    }
+
     void Graph::find_path(std::shared_ptr<std::vector<ks::Vertex> >& path,
                           const int start_id, const int goal_id) const
     {

@@ -57,6 +57,7 @@ namespace ks
                        const int start_id, const int goal_id) const;
 
         const bool is_connected(const int v1, const int v2) const;
+        const std::shared_ptr<ks::Vertex>& get_vertex(const int v) const;
 
     private:
         void _add_edge(const int v1, const int v2, const int weight) const;

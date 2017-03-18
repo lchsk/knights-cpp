@@ -15,6 +15,13 @@ namespace ks
 
         _unit_library = std::make_shared<ks::UnitLibrary>(resource_mgr);
 
+        _map = std::make_shared<ks::Map>(
+            resource_mgr,
+            data_loader,
+            window,
+            _units,
+            "map1.json");
+
         auto unit = std::make_shared<ks::Unit>(
             _unit_library->build_knights_archer()
         );
@@ -27,13 +34,6 @@ namespace ks
 
         _units->push_back(unit);
         _units->push_back(unit2);
-
-        _map = std::make_shared<ks::Map>(
-            resource_mgr,
-            data_loader,
-            window,
-            _units,
-            "map1.json");
     }
 
     Level::~Level()

@@ -22,6 +22,14 @@ namespace ks
     {
     }
 
+    void Map::set_position(const std::shared_ptr<ks::Unit>& unit,
+                           const int v) const
+    {
+        const auto& vertex = _graph->get_vertex(v);
+
+        unit->set_position(vertex->x, vertex->y);
+    }
+
     void Map::load()
     {
         _data_loader->load_map(_map_name);
@@ -91,9 +99,9 @@ namespace ks
         std::shared_ptr<std::vector<ks::Vertex> > path
             = std::make_shared<std::vector<ks::Vertex> >();
 
-        _graph->find_path(path, 0, 55);
+        _graph->find_path(path, 0, 30);
 
-        (*_units)[0]->set_path(path);
+        // (*_units)[0]->set_path(path);
     }
 
     void Map::update(sf::Time delta)
