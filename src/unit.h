@@ -33,6 +33,8 @@ namespace ks
 
         void set_path(const std::shared_ptr<std::vector<ks::Vertex> >& path);
 
+        const sf::Rect<int> get_rectangle() const;
+
         const bool is_walking() const;
     private:
         void _move_step(sf::Time& delta);

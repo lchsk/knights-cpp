@@ -145,6 +145,13 @@ namespace ks
         return sf::Vector2i(_x, _y);
     }
 
+    const sf::Rect<int> Unit::get_rectangle() const
+    {
+        sf::Rect<int> r(_x, _y, 64, 64);
+
+        return r;
+    }
+
     void Unit::set_animation(const std::string animation)
     {
         _unit_template->get_animation(_animation)->stop();

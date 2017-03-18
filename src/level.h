@@ -40,6 +40,7 @@ namespace ks
         std::shared_ptr<ks::UnitLibrary> _unit_library;
 
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _units;
+        std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _selected;
 
         void load_level_assets() const;
         void init_nations();

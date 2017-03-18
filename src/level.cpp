@@ -8,6 +8,8 @@ namespace ks
         : _resource_mgr(resource_mgr),
           _data_loader(data_loader),
           _units(std::make_shared<std::vector<std::shared_ptr<ks::Unit> > >()),
+          _selected(
+              std::make_shared<std::vector<std::shared_ptr<ks::Unit> > >()),
           _window(window)
     {
         load_level_assets();
@@ -45,13 +47,12 @@ namespace ks
     {
         auto mouse_pos = sf::Mouse::getPosition(_window->get_window());
 
-        // std::cout << mouse_pos.x << "\n";
-
-        // for (auto& unit : _units) {
-
-        // }
-
-
+        for (auto& unit : *_units) {
+            if (unit->get_rectangle().contains(mouse_pos)) {
+                _selected->clear();
+                _selected->push_back(unit);
+            }
+        }
     }
 
     void Level::update(sf::Time delta)
