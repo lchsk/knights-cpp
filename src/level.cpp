@@ -50,7 +50,6 @@ namespace ks
         if (_selected->size() == 1) {
             // Move selected unit
             _map->move_unit((*_selected)[0], mouse_pos.x, mouse_pos.y);
-            _selected->clear();
         } else {
             for (auto& unit : *_units) {
                 if (unit->get_rectangle().contains(mouse_pos)) {
