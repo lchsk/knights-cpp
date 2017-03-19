@@ -16,6 +16,7 @@ project(knights)
 #  "${PROJECT_SOURCE_DIR}/config.h.in"
 #  "${PROJECT_BINARY_DIR}/config.h"
 #  )
+include_directories(${Boost_INCLUDE_DIRS})
 include_directories("${PROJECT_BINARY_DIR}")
 
 message(STATUS "CMAKE_SYSTEM_NAME          = ${CMAKE_SYSTEM_NAME}"         )
@@ -46,6 +47,7 @@ add_executable(${EXECUTABLE_NAME}
 )
 
 
+find_package(Boost REQUIRED)
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 #Find any version 2.X of SFML
