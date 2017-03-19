@@ -116,6 +116,7 @@ namespace ks
 
     void Map::update(sf::Time delta)
     {
+        std::sort(_units->begin(), _units->end(), y_coord_pred);
     }
 
     void Map::render(sf::RenderWindow& window)

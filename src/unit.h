@@ -52,5 +52,10 @@ namespace ks
         std::vector<std::unique_ptr<sf::RectangleShape> > _debug_path;
         #endif
     };
+
+    inline const bool y_coord_pred(const std::shared_ptr<ks::Unit> u1,
+                                   const std::shared_ptr<ks::Unit> u2) {
+        return u1->get_position().y < u2->get_position().y;
+    }
 }
 #endif
