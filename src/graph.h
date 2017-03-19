@@ -33,11 +33,63 @@ namespace ks
         boost::vecS,
         boost::undirectedS,
         std::shared_ptr<ks::Vertex>,
-        boost::property<boost::edge_weight_t, int> > graph_t;
+        boost::property<boost::edge_weight_t, double> > graph_t;
 
 
     typedef boost::graph_traits<ks::graph_t>::vertex_descriptor vertex_t;
     typedef boost::graph_traits<ks::graph_t>::edge_descriptor edge_t;
+
+    class TileInfo
+    {
+    public:
+    TileInfo(const int spritesheet_id, const int tile_id) :
+        spritesheet_id(spritesheet_id), tile_id(tile_id)
+        {
+        }
+        ~TileInfo(){};
+
+        int spritesheet_id;
+        int tile_id;
+
+        bool operator==(const ks::TileInfo &other) const
+        {
+            return (spritesheet_id == other.spritesheet_id
+                    && tile_id == other.tile_id);
+        }
+    };
+
+    class TileMovement
+    {
+    public:
+    TileMovement(const ks::TileInfo from, const ks::TileInfo to) :
+        from(from), to(to){}
+        ~TileMovement(){};
+
+        bool operator==(const ks::TileMovement &other) const
+        {
+            return (from == other.from && to == other.to);
+        }
+
+
+        ks::TileInfo from;
+        ks::TileInfo to;
+    };
+
+    class TileMovementHasher
+    {
+    public:
+        std::size_t operator()(const ks::TileMovement& k) const
+        {
+            using std::size_t;
+            using std::hash;
+
+            return (
+                hash<int>()(k.from.spritesheet_id)
+                ^ (hash<int>()(k.from.tile_id) << 1)
+                ^ hash<int>()(k.to.spritesheet_id)
+                ^ (hash<int>()(k.to.tile_id) << 1));
+        }
+    };
 
     class Gps;
 
@@ -62,10 +114,15 @@ namespace ks
             get_closest_vertex(const int x, const int y) const;
 
     private:
-        void _add_edge(const int v1, const int v2, const int weight) const;
+        void _add_edge(const int v1, const int v2) const;
 
         std::unique_ptr<ks::graph_t> _graph;
         std::unique_ptr<ks::Gps> _gps;
+
+        const std::unordered_map<
+            ks::TileMovement,
+            double,
+            ks::TileMovementHasher> _weights;
 
         int _rows;
         int _cols;

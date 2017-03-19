@@ -12,16 +12,6 @@ using json = nlohmann::json;
 
 namespace ks
 {
-    class TileInfo
-    {
-    public:
-        TileInfo(int id);
-        ~TileInfo();
-
-    private:
-        int _id;
-    };
-
     class Spritesheet
     {
     public:
@@ -50,8 +40,6 @@ namespace ks
 
         int _cols;
         int _rows;
-
-        std::unordered_map<int, std::shared_ptr<ks::TileInfo> > _tiles_info;
     };
 }
 

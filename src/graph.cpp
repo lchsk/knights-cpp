@@ -6,7 +6,10 @@ namespace ks
 {
     Graph::Graph()
         : _graph(std::make_unique<ks::graph_t>()),
-          _gps(std::make_unique<ks::Gps>())
+          _gps(std::make_unique<ks::Gps>()),
+          _weights({
+                  {ks::TileMovement(ks::TileInfo(0, 0), ks::TileInfo(0, 0)), 1}
+              })
     {
     }
 
@@ -45,10 +48,10 @@ namespace ks
         _gps->v_col = cols / 8;
 
         for (int v = 0; v < _gps->v_cnt; v++) {
-            _add_edge(v, _gps->get_n(v), 1);
-            _add_edge(v, _gps->get_e(v), 1);
-            _add_edge(v, _gps->get_s(v), 1);
-            _add_edge(v, _gps->get_w(v), 1);
+            _add_edge(v, _gps->get_n(v));
+            _add_edge(v, _gps->get_e(v));
+            _add_edge(v, _gps->get_s(v));
+            _add_edge(v, _gps->get_w(v));
         }
     }
 
@@ -116,7 +119,7 @@ namespace ks
         }
     }
 
-    void Graph::_add_edge(const int v1, const int v2, const int weight) const
+    void Graph::_add_edge(const int v1, const int v2) const
     {
         if (v2 < 0) return;
 
@@ -125,13 +128,18 @@ namespace ks
         // Edge already exists
         if (edge.second) return;
 
-        auto V1 = (*_graph)[boost::vertex(v1, *_graph)];
-        auto V2 = (*_graph)[boost::vertex(v2, *_graph)];
+        auto V1 = get_vertex(v1);
+        auto V2 = get_vertex(v2);
 
-        if ((V1->tile_id == 0 && V2->tile_id == 1) || (
-                V1->tile_id == 1 && V2->tile_id == 0))
-            return;
+        auto weight = _weights.find(
+            ks::TileMovement(
+                ks::TileInfo(V1->spritesheet_id,
+                             V1->tile_id),
+                ks::TileInfo(V2->spritesheet_id,
+                             V2->tile_id)));
 
-        boost::add_edge(v1, v2, weight, *_graph);
+        if (weight == _weights.end()) return;
+
+        boost::add_edge(v1, v2, weight->second, *_graph);
     }
 }

@@ -3,17 +3,6 @@
 
 namespace ks
 {
-    TileInfo::TileInfo(int id)
-        : _id(id)
-    {
-
-    }
-
-    TileInfo::~TileInfo()
-    {
-
-    }
-
     Spritesheet::Spritesheet(
         std::string path,
         const json& j_data,
@@ -67,7 +56,9 @@ namespace ks
             for (auto const& tile_info : j_data["data"]) {
                 int id = tile_info["id"];
 
-                _tiles_info[id] = std::make_shared<TileInfo>(id);
+                // std::cout << "Add tileinfo " << id << "\n";
+
+                // _tiles_info[id] = std::make_shared<TileInfo>(id);
             }
         }
     }
