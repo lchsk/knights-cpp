@@ -12,8 +12,8 @@ matrix:
         - sudo apt-get install libsfml-dev
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
+          sources: ['ubuntu-toolchain-r-test', 'boost-latest']
+          packages: ['g++-5', 'libboost1.61-all-dev']
       env: COMPILER=g++-5
 
     - os: linux
@@ -25,8 +25,8 @@ matrix:
         - sudo apt-get install libsfml-dev
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6']
+          sources: ['ubuntu-toolchain-r-test', 'boost-latest']
+          packages: ['g++-6', 'libboost1.61-all-dev']
       env: COMPILER=g++-6
 
     - os: linux
@@ -38,8 +38,8 @@ matrix:
         - sudo apt-get install libsfml-dev
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.6']
-          packages: ['clang-3.6']
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.6', 'boost-latest']
+          packages: ['clang-3.6', 'libboost1.61-all-dev']
       env: COMPILER=clang-3.6
 
     - os: linux
@@ -51,8 +51,8 @@ matrix:
         - sudo apt-get install libsfml-dev
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.7']
-          packages: ['clang-3.7']
+          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.7', 'boost-latest']
+          packages: ['clang-3.7', 'libboost1.61-all-dev']
       env: COMPILER=clang-3.7
 
 script:
