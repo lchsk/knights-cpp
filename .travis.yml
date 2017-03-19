@@ -3,18 +3,18 @@ sudo: true
 
 matrix:
   include:
-    - os: linux
-      compiler: g++
-      before_install:
-        - sudo apt-add-repository ppa:sonkun/sfml-development -y
-        - sudo apt-get update -qq
-      install:
-        - sudo apt-get install libsfml-dev
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'boost-latest']
-          packages: ['g++-5', 'libboost-all-dev']
-      env: COMPILER=g++-5
+    # - os: linux
+      # compiler: g++
+      # before_install:
+        # - sudo apt-add-repository ppa:sonkun/sfml-development -y
+        # - sudo apt-get update -qq
+      # install:
+        # - sudo apt-get install libsfml-dev
+      # addons:
+        # apt:
+          # sources: ['ubuntu-toolchain-r-test', 'boost-latest']
+          # packages: ['g++-5', 'libboost-all-dev']
+      # env: COMPILER=g++-5
 
     - os: linux
       compiler: g++
@@ -29,31 +29,31 @@ matrix:
           packages: ['g++-6', 'libboost-all-dev']
       env: COMPILER=g++-6
 
-    - os: linux
-      compiler: clang
-      before_install:
-        - sudo apt-add-repository ppa:sonkun/sfml-development -y
-        - sudo apt-get update -qq
-      install:
-        - sudo apt-get install libsfml-dev
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.6', 'boost-latest']
-          packages: ['clang-3.6', 'libboost-all-dev']
-      env: COMPILER=clang-3.6
+    # - os: linux
+      # compiler: clang
+      # before_install:
+        # - sudo apt-add-repository ppa:sonkun/sfml-development -y
+        # - sudo apt-get update -qq
+      # install:
+        # - sudo apt-get install libsfml-dev
+      # addons:
+        # apt:
+          # sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.6', 'boost-latest']
+          # packages: ['clang-3.6', 'libboost-all-dev']
+      # env: COMPILER=clang-3.6
 
-    - os: linux
-      compiler: clang
-      before_install:
-        - sudo apt-add-repository ppa:sonkun/sfml-development -y
-        - sudo apt-get update -qq
-      install:
-        - sudo apt-get install libsfml-dev
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.7', 'boost-latest']
-          packages: ['clang-3.7', 'libboost-all-dev']
-      env: COMPILER=clang-3.7
+    # - os: linux
+      # compiler: clang
+      # before_install:
+        # - sudo apt-add-repository ppa:sonkun/sfml-development -y
+        # - sudo apt-get update -qq
+      # install:
+        # - sudo apt-get install libsfml-dev
+      # addons:
+        # apt:
+          # sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-precise-3.7', 'boost-latest']
+          # packages: ['clang-3.7', 'libboost-all-dev']
+      # env: COMPILER=clang-3.7
 
 script:
   - uname -a
