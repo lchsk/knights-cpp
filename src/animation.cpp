@@ -54,6 +54,9 @@ namespace ks
     
     void Animation::play()
     {
+        if (_frame < 0)
+            _frame = 0;
+
         _is_playing = true;
     }
 
