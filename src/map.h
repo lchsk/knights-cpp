@@ -39,6 +39,8 @@ namespace ks
 
     private:
         void load();
+        void _move_unit_step(
+            const std::shared_ptr<ks::Unit>& unit, sf::Time& delta);
 
         std::unique_ptr<ks::Graph> _graph;
 

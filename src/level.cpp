@@ -67,10 +67,6 @@ namespace ks
     void Level::update(sf::Time delta)
     {
         _map->update(delta);
-
-        for (auto& unit : *_units) {
-            unit->update(delta);
-        }
     }
 
     void Level::render(sf::RenderWindow& window)

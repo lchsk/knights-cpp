@@ -103,7 +103,7 @@ namespace ks
         std::shared_ptr<std::vector<ks::Vertex> > path
             = std::make_shared<std::vector<ks::Vertex> >();
 
-        const sf::Vector2i current_pos = unit->get_position();;
+        const sf::Vector2f current_pos = unit->get_position();
 
         const auto& from = _graph->get_closest_vertex(
             current_pos.x, current_pos.y);
@@ -117,6 +117,14 @@ namespace ks
     void Map::update(sf::Time delta)
     {
         std::sort(_units->begin(), _units->end(), y_coord_pred);
+
+        for (auto& unit : *_units) {
+            unit->update(delta);
+
+            if (unit->is_walking()) {
+                _move_unit_step(unit, delta);
+            }
+        }
     }
 
     void Map::render(sf::RenderWindow& window)
@@ -127,6 +135,82 @@ namespace ks
 
         for (auto& unit : *_units) {
             unit->render(window);
+        }
+    }
+
+    void Map::_move_unit_step(
+        const std::shared_ptr<ks::Unit>& unit, sf::Time& delta)
+    {
+        const auto& path = unit->get_path();
+
+        if (path->size() < 2) return;
+
+        auto v = (*path)[0];
+        auto next_v = (*path)[1];
+
+        int dir = get_direction(v.id, next_v.id);
+
+        auto mv = ks::TileMovement(
+            ks::TileInfo(v.spritesheet_id, v.tile_id),
+            ks::TileInfo(next_v.spritesheet_id, next_v.tile_id));
+
+        const double speed_factor = _graph->get_weight(mv);
+
+        const int speed = unit->get_template()->get_speed() * speed_factor;
+
+        const auto& pos = unit->get_position();
+
+        double x = pos.x;
+        double y = pos.y;
+
+        switch (dir) {
+        case 0:
+            y -= speed * delta.asSeconds();
+            unit->set_animation("walk_up");
+            break;
+        case 2:
+            y += speed * delta.asSeconds();
+            unit->set_animation("walk_down");
+            break;
+        case 1:
+            x += speed * delta.asSeconds();
+            unit->set_animation("walk_right");
+            break;
+        case 3:
+            x -= speed * delta.asSeconds();
+            unit->set_animation("walk_left");
+            break;
+        }
+
+        unit->set_position(x, y);
+
+        if ((dir == 1 || dir == 3) && fabs(next_v.x - x) < 0.5) {
+            x = next_v.x;
+            unit->pop_path_step();
+        } else if ((dir == 0 || dir == 2) && fabs(next_v.y - y) < 0.5) {
+            y = next_v.y;
+            unit->pop_path_step();
+        }
+
+        if (path->size() == 1) {
+            // Path finished
+
+            switch (dir) {
+            case 0:
+                unit->set_animation("stand_up");
+                break;
+            case 2:
+                unit->set_animation("stand_down");
+                break;
+            case 1:
+                unit->set_animation("stand_right");
+                break;
+            case 3:
+                unit->set_animation("stand_left");
+                break;
+            }
+
+            unit->clear_path();
         }
     }
 }

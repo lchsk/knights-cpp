@@ -113,15 +113,17 @@ namespace ks
         const std::shared_ptr<ks::Vertex>&
             get_closest_vertex(const int x, const int y) const;
 
+        const double get_weight(const ks::TileMovement& tile_mv);
+
     private:
         void _add_edge(const int v1, const int v2) const;
 
         std::unique_ptr<ks::graph_t> _graph;
         std::unique_ptr<ks::Gps> _gps;
 
-        const std::unordered_map<
-            ks::TileMovement,
-            double,
+        std::unordered_map<
+            const ks::TileMovement,
+            const double,
             ks::TileMovementHasher> _weights;
 
         int _rows;

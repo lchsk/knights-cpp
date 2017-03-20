@@ -21,73 +21,7 @@ namespace ks
 
     void Unit::update(sf::Time delta)
     {
-        if (is_walking()) {
-            _move_step(delta);
-        }
-
         _unit_template->get_animation(_animation)->update(delta);
-    }
-
-    void Unit::_move_step(sf::Time& delta)
-    {
-        if (_path->size() < 2) return;
-
-        auto v = (*_path)[0];
-        auto next_v = (*_path)[1];
-
-        int dir = get_direction(v.id, next_v.id);
-
-        const int speed = _unit_template->get_speed();
-
-        switch (dir) {
-        case 0:
-            _y -= speed * delta.asSeconds();
-            set_animation("walk_up");
-            break;
-        case 2:
-            _y += speed * delta.asSeconds();
-            set_animation("walk_down");
-            break;
-        case 1:
-            _x += speed * delta.asSeconds();
-            set_animation("walk_right");
-            break;
-        case 3:
-            _x -= speed * delta.asSeconds();
-            set_animation("walk_left");
-            break;
-        }
-
-        set_position(_x, _y);
-
-        if ((dir == 1 || dir == 3) && fabs(next_v.x - _x) < 0.5) {
-            _x = next_v.x;
-            _path->erase(_path->begin());
-        } else if ((dir == 0 || dir == 2) && fabs(next_v.y - _y) < 0.5) {
-            _y = next_v.y;
-            _path->erase(_path->begin());
-        }
-
-        if (_path->size() == 1) {
-            // Path finished
-
-            switch (dir) {
-            case 0:
-                set_animation("stand_up");
-                break;
-            case 2:
-                set_animation("stand_down");
-                break;
-            case 1:
-                set_animation("stand_right");
-                break;
-            case 3:
-                set_animation("stand_left");
-                break;
-            }
-
-            _path->clear();
-        }
     }
 
     void Unit::render(sf::RenderWindow& window)
@@ -99,6 +33,16 @@ namespace ks
         #endif
 
         _unit_template->get_animation(_animation)->render(window);
+    }
+
+    const std::shared_ptr<std::vector<ks::Vertex> > Unit::get_path() const
+    {
+        return _path;
+    }
+
+    const std::shared_ptr<ks::UnitTemplate> Unit::get_template() const
+    {
+        return _unit_template;
     }
 
     const bool Unit::is_walking() const
@@ -131,8 +75,8 @@ namespace ks
             #endif
         }
 
-        int x = (*_path)[0].x;
-        int y = (*_path)[0].y;
+        double x = (*_path)[0].x;
+        double y = (*_path)[0].y;
 
         set_position(x , y);
     }
@@ -145,9 +89,9 @@ namespace ks
         _unit_template->get_animation(_animation)->set_position(x, y);
     }
 
-    const sf::Vector2i Unit::get_position() const
+    const sf::Vector2f Unit::get_position() const
     {
-        return sf::Vector2i(_x, _y);
+        return sf::Vector2f(_x, _y);
     }
 
     const sf::Rect<int> Unit::get_rectangle() const
@@ -159,6 +103,16 @@ namespace ks
             ks::UNIT_HEIGHT);
 
         return r;
+    }
+
+    void Unit::pop_path_step() const
+    {
+        _path->erase(_path->begin());
+    }
+
+    void Unit::clear_path() const
+    {
+        _path->clear();
     }
 
     void Unit::set_animation(const std::string animation)
