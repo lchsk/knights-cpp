@@ -215,12 +215,15 @@ namespace ks
 
         inline const int get_direction(const int from, const int to)
         {
-            const int col = v_col;
+            if (is_right_col(from) && is_left_col(to)) return -1;
+            if (is_left_col(from) && is_right_col(to)) return -1;
+            if (is_top_row(from) && is_bottom_row(to)) return -1;
+            if (is_bottom_row(from) && is_top_row(to)) return -1;
 
-            if ((from + 1) == to) return 1;
-            if ((from - 1) == to) return 3;
-            if ((from + col) == to) return 2;
-            if ((from - col) == to) return 0;
+            if (from + 1 == to) return 1;
+            if (from - 1 == to) return 3;
+            if (from + v_col == to) return 2;
+            if (from - v_col == to) return 0;
 
             return -1;
         }

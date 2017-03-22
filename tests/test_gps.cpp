@@ -180,6 +180,27 @@ TEST_F(GpsTest, get_sw)
     EXPECT_EQ(gps.get_sw(15), -1);
 }
 
+TEST_F(GpsTest, get_direction)
+{
+    EXPECT_EQ(gps.get_direction(5, 6), 1);
+    EXPECT_EQ(gps.get_direction(15, 14), 3);
+    EXPECT_EQ(gps.get_direction(13, 9), 0);
+    EXPECT_EQ(gps.get_direction(13, 9), 0);
+    EXPECT_EQ(gps.get_direction(3, 7), 2);
+
+    // Doesn't exist (se)
+    EXPECT_EQ(gps.get_direction(2, 7), -1);
+
+    // Or some random numbers
+    EXPECT_EQ(gps.get_direction(35, 88), -1);
+
+    // Don't allow to move from rightmost column to leftmost etc.
+    EXPECT_EQ(gps.get_direction(3, 4), -1);
+    EXPECT_EQ(gps.get_direction(4, 3), -1);
+    EXPECT_EQ(gps.get_direction(0, 12), -1);
+    EXPECT_EQ(gps.get_direction(12, 0), -1);
+}
+
 int main (int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
 
