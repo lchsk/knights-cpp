@@ -111,7 +111,8 @@ namespace ks
 
         _graph->find_path(path, from->id, to->id);
 
-        unit->set_path(path);
+        if (path->size())
+            unit->set_path(path);
     }
 
     void Map::update(sf::Time delta)
@@ -148,7 +149,7 @@ namespace ks
         auto v = (*path)[0];
         auto next_v = (*path)[1];
 
-        int dir = get_direction(v.id, next_v.id);
+        int dir = _graph->get_gps()->get_direction(v.id, next_v.id);
 
         auto mv = ks::TileMovement(
             ks::TileInfo(v.spritesheet_id, v.tile_id),

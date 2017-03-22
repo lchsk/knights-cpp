@@ -53,6 +53,8 @@ namespace ks
     void Unit::set_path(
         const std::shared_ptr<std::vector<ks::Vertex> >& path)
     {
+        assert(path->size());
+
         _path->clear();
 
         #ifdef DEBUG_UNIT_PATHS

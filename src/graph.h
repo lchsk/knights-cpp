@@ -115,11 +115,13 @@ namespace ks
 
         const double get_weight(const ks::TileMovement& tile_mv);
 
+        const std::unique_ptr<ks::Gps>& get_gps() const;
+
     private:
         void _add_edge(const int v1, const int v2) const;
 
         std::unique_ptr<ks::graph_t> _graph;
-        std::unique_ptr<ks::Gps> _gps;
+        const std::unique_ptr<ks::Gps> _gps;
 
         std::unordered_map<
             const ks::TileMovement,
@@ -210,18 +212,18 @@ namespace ks
         {
             return v % v_col == (v_col - 1);
         }
+
+        inline const int get_direction(const int from, const int to)
+        {
+            const int col = v_col;
+
+            if ((from + 1) == to) return 1;
+            if ((from - 1) == to) return 3;
+            if ((from + col) == to) return 2;
+            if ((from - col) == to) return 0;
+
+            return -1;
+        }
     };
-
-    inline const int get_direction(const int from, const int to)
-    {
-        int col = 256 / 8;
-
-        if ((from + 1) == to) return 1;
-        if ((from - 1) == to) return 3;
-        if ((from + col) == to) return 2;
-        if ((from - col) == to) return 0;
-
-        return -1;
-    }
 }
 #endif

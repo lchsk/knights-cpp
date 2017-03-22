@@ -65,6 +65,11 @@ namespace ks
         return (*_graph)[boost::vertex(v, *_graph)];
     }
 
+    const std::unique_ptr<ks::Gps>& Graph::get_gps() const
+    {
+        return _gps;
+    }
+
     const std::shared_ptr<ks::Vertex>&
     Graph::get_closest_vertex(const int x, const int y) const
     {
@@ -126,12 +131,16 @@ namespace ks
 
     void Graph::_add_edge(const int v1, const int v2) const
     {
-        if (v2 < 0) return;
+        if (v2 < 0) {
+            return;
+        }
 
         auto edge = boost::edge(v1, v2, *_graph);
 
         // Edge already exists
-        if (edge.second) return;
+        if (edge.second) {
+            return;
+        }
 
         auto V1 = get_vertex(v1);
         auto V2 = get_vertex(v2);
@@ -143,7 +152,9 @@ namespace ks
                 ks::TileInfo(V2->spritesheet_id,
                              V2->tile_id)));
 
-        if (weight == _weights.end()) return;
+        if (weight == _weights.end()) {
+            return;
+        }
 
         boost::add_edge(v1, v2, weight->second, *_graph);
     }
