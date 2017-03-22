@@ -160,7 +160,7 @@ namespace ks
 
         const double speed_factor = _graph->get_weight(mv);
 
-        const int speed = unit->get_template()->get_speed() * speed_factor;
+        const int speed = unit->get_template()->get_speed() * 1 / speed_factor;
 
         const auto& pos = unit->get_position();
 
