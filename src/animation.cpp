@@ -82,7 +82,8 @@ namespace ks
     void Animation::set_position(const double x, const double y) const
     {
         const auto pos = sf::Vector2f(
-            x - ks::UNIT_OFFSET_W, y - ks::UNIT_OFFSET_H);
+            std::round(x - ks::UNIT_OFFSET_W),
+            std::round(y - ks::UNIT_OFFSET_H));
 
         for (auto& frame : _frames) {
             frame->setPosition(pos);
