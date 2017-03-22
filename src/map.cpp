@@ -164,37 +164,70 @@ namespace ks
 
         const auto& pos = unit->get_position();
 
+        double step_x = 0;
+        double step_y = 0;
+
         double x = pos.x;
         double y = pos.y;
 
+        const double step = speed * delta.asSeconds();
+
+        bool arrived = false;
+
         switch (dir) {
         case 0:
-            y -= speed * delta.asSeconds();
+            step_y = -step;
             unit->set_animation("walk_up");
+            arrived = y + step_y < next_v.y + 1;
+
             break;
         case 2:
-            y += speed * delta.asSeconds();
+            step_y = step;
             unit->set_animation("walk_down");
+            arrived = y + step_y > next_v.y - 1;
+
             break;
         case 1:
-            x += speed * delta.asSeconds();
+            step_x = step;
             unit->set_animation("walk_right");
+            arrived = x + step_x > next_v.x - 1;
+
             break;
         case 3:
-            x -= speed * delta.asSeconds();
+            step_x = -step;
             unit->set_animation("walk_left");
+            arrived = x + step_x < next_v.x + 1;
+
+            break;
+        }
+
+        switch(dir) {
+        case 1:
+        case 3:
+            if (arrived) {
+                x = next_v.x;
+
+                unit->pop_path_step();
+            } else {
+                x += step_x;
+            }
+
+            break;
+
+        case 0:
+        case 2:
+            if (arrived) {
+                y = next_v.y;
+
+                unit->pop_path_step();
+            } else {
+                y += step_y;
+            }
+
             break;
         }
 
         unit->set_position(x, y);
-
-        if ((dir == 1 || dir == 3) && fabs(next_v.x - x) < 0.5) {
-            x = next_v.x;
-            unit->pop_path_step();
-        } else if ((dir == 0 || dir == 2) && fabs(next_v.y - y) < 0.5) {
-            y = next_v.y;
-            unit->pop_path_step();
-        }
 
         if (path->size() == 1) {
             // Path finished
