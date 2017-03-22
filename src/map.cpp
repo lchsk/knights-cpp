@@ -1,4 +1,5 @@
 #include "map.h"
+#include "util.h"
 
 namespace ks
 {
@@ -38,7 +39,8 @@ namespace ks
         _tiles_cols = j_map["metadata"]["columns"];
         _tiles_rows = j_map["metadata"]["rows"];
 
-        _window->set_map_size(ks::TILE * _tiles_cols, ks::TILE * _tiles_rows);
+        _window->set_map_size(ks::TILE_SIZE * _tiles_cols,
+                              ks::TILE_SIZE * _tiles_rows);
 
         std::vector<ks::Spritesheet*> spritesheets;
 
@@ -67,8 +69,8 @@ namespace ks
             for (const auto& tile_info : j_layer) {
                 // 0: spritesheet_id, 1: tile_id
 
-                int c = col * ks::TILE;
-                int r = row * ks::TILE;
+                int c = col * ks::TILE_SIZE;
+                int r = row * ks::TILE_SIZE;
 
                 auto tile = std::make_unique<ks::Tile>(
                     spritesheets[tile_info[0]]->get_new_sprite(tile_info[1]),
@@ -91,8 +93,9 @@ namespace ks
             }
         }
 
-        _graph->init(_tiles_rows * ks::TILE, _tiles_cols * ks::TILE,
-            layers);
+        _graph->init(_tiles_rows * ks::TILE_SIZE,
+                     _tiles_cols * ks::TILE_SIZE,
+                     layers);
     }
 
     void Map::move_unit(

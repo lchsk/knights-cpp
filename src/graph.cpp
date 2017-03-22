@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "graph.h"
+#include "util.h"
 
 namespace ks
 {
@@ -28,10 +29,10 @@ namespace ks
 
         int id = 0;
 
-        for (int r = 0; r < rows; r += 8) {
-            for (int c = 0; c < cols; c += 8) {
-                int tile_row = r / 32;
-                int tile_col = c / 32;
+        for (int r = 0; r < rows; r += ks::PX_PER_V) {
+            for (int c = 0; c < cols; c += ks::PX_PER_V) {
+                int tile_row = r / ks::TILE_SIZE;
+                int tile_col = c / ks::TILE_SIZE;
 
                 std::vector<std::pair<int, int> > tile
                     = layers[std::make_pair(tile_row, tile_col)];
@@ -45,7 +46,7 @@ namespace ks
         }
 
         _gps->v_cnt = boost::num_vertices(*_graph);
-        _gps->v_col = cols / 8;
+        _gps->v_col = cols / ks::PX_PER_V;
 
         for (int v = 0; v < _gps->v_cnt; v++) {
             _add_edge(v, _gps->get_n(v));
@@ -73,7 +74,8 @@ namespace ks
     const std::shared_ptr<ks::Vertex>&
     Graph::get_closest_vertex(const int x, const int y) const
     {
-        const int v = y / 8 * _cols / 8 + x / 8;
+        const int v = y / ks::PX_PER_V
+            * _cols / ks::PX_PER_V + x / ks::PX_PER_V;
 
         return get_vertex(v);
     }

@@ -13,9 +13,6 @@
 
 namespace ks
 {
-    /* Side of each tile */
-    const int TILE = 32;
-
     class Map
     {
     public:
@@ -58,12 +55,6 @@ namespace ks
 
         /* Number of columns */
         int _tiles_cols;
-
-        /* Number of vertices in a column */
-        int _v_col;
-
-        /* Number of vertices per tile */
-        const int _v_per_tile = 4;
 
         std::string _map_name;
     };
