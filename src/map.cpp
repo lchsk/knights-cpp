@@ -106,10 +106,16 @@ namespace ks
         std::shared_ptr<std::vector<ks::Vertex> > path
             = std::make_shared<std::vector<ks::Vertex> >();
 
-        const sf::Vector2f current_pos = unit->get_position();
+        sf::Vector2f current_pos;
+        std::shared_ptr<ks::Vertex> from;
 
-        const auto& from = _graph->get_closest_vertex(
-            current_pos.x, current_pos.y);
+        if (unit->is_walking()) {
+            from = std::make_shared<ks::Vertex>(unit->get_current_target());
+        } else {
+            current_pos = unit->get_position();
+            from = _graph->get_closest_vertex(current_pos.x, current_pos.y);
+        }
+
         const auto& to = _graph->get_closest_vertex(x, y);
 
         _graph->find_path(path, from->id, to->id);

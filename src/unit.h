@@ -35,6 +35,7 @@ namespace ks
 
         void pop_path_step() const;
         void clear_path() const;
+        const ks::Vertex& get_current_target() const;
 
         const sf::Rect<int> get_rectangle() const;
         const std::shared_ptr<std::vector<ks::Vertex> > get_path() const;

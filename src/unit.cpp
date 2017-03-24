@@ -55,7 +55,9 @@ namespace ks
     {
         assert(path->size());
 
-        _path->clear();
+        if (is_walking()) {
+            _path->erase(_path->begin() + 1, _path->end());
+        }
 
         #ifdef DEBUG_UNIT_PATHS
         _debug_path.clear();
@@ -77,10 +79,12 @@ namespace ks
             #endif
         }
 
-        double x = (*_path)[0].x;
-        double y = (*_path)[0].y;
+        if (! is_walking()) {
+            double x = (*_path)[0].x;
+            double y = (*_path)[0].y;
 
-        set_position(x , y);
+            set_position(x , y);
+        }
     }
 
     void Unit::set_position(double x, double y)
@@ -105,6 +109,13 @@ namespace ks
             ks::UNIT_HEIGHT);
 
         return r;
+    }
+
+    const ks::Vertex& Unit::get_current_target() const
+    {
+        assert(_path->size() >= 2);
+
+        return (*_path)[1];
     }
 
     void Unit::pop_path_step() const
