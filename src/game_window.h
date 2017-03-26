@@ -26,21 +26,24 @@ namespace ks
         GameWindow(const GameWindow&) = delete;
         GameWindow& operator=(const GameWindow&) = delete;
 
-        GameWindow(std::shared_ptr<ks::ResourceMgr> resource_mgr);
+        GameWindow(const std::shared_ptr<ks::ResourceMgr>& resource_mgr);
         ~GameWindow();
 
         sf::RenderWindow& get_window() const;
-        void update(sf::Time delta);
+        void update(const sf::Time& delta);
 
-        void set_map_size(int, int);
+        void set_map_size(const int, const int);
 
     private:
-        void move_view(sf::Time delta);
+        void move_view(const sf::Time& delta);
 
-        bool cursor_in(CursorPosition pos, int move_delta, sf::Time delta,
-                       sf::Vector2i mouse_pos);
+        const bool cursor_in(
+            const CursorPosition pos,
+            const int move_delta,
+            const sf::Time& delta,
+            const sf::Vector2i& mouse_pos) const;
 
-        int _percent;
+        const int _percent;
         int _speed;
 
         /* Window  width */
