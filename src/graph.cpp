@@ -57,22 +57,47 @@ namespace ks
 
         #ifdef DEBUG_GRAPH
         for (int v = 0; v < _gps->v_cnt - 1; v++) {
-            const double weight = get_weight(v, v + 1);
-
             const auto& from = get_vertex(v);
             const auto& to = get_vertex(v + 1);
 
-            auto shape = std::make_unique<sf::RectangleShape>();
+            const std::vector<int> neighbors = {
+                _gps->get_e(v),
+                _gps->get_s(v),
+                _gps->get_w(v),
+                _gps->get_n(v)
+            };
 
-            if (weight)
-                shape->setFillColor(DebugGreen);
-            else
-                shape->setFillColor(DebugRed);
+            for (int n = 0; n < neighbors.size(); n++) {
+                const int v2 = neighbors[n];
 
-            shape->setSize(sf::Vector2f(8, 8));
-            shape->setPosition(sf::Vector2f(from->x, to->y));
+                if (v2 == -1) continue;
 
-            _debug_graph.push_back(std::move(shape));
+                const double weight = get_weight(v, v2);
+
+                auto shape = std::make_unique<sf::RectangleShape>();
+
+                if (weight) {
+                    shape->setFillColor(DebugGreen);
+                } else {
+                    shape->setFillColor(DebugRed);
+                }
+
+                shape->setSize(sf::Vector2f(4, 4));
+
+                const int x1 = std::min(from->x, to->x);
+                const int x2 = std::max(from->x, to->x);
+                const int y1 = std::min(from->y, to->y);
+                const int y2 = std::max(from->y, to->y);
+
+                int x, y;
+
+                x = x1 + x2 / 2.0;
+                y = y1 + y2 / 2.0;
+
+                shape->setPosition(sf::Vector2f(from->x + 6, from->y + 6));
+
+                _debug_graph.push_back(std::move(shape));
+            }
         }
         #endif
     }
