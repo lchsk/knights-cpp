@@ -33,6 +33,7 @@ namespace ks
         void update(const sf::Time& delta);
 
         void set_map_size(const int, const int);
+        const sf::Vector2f get_top_left() const;
 
     private:
         void move_view(const sf::Time& delta);

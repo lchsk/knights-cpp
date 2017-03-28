@@ -47,6 +47,10 @@ namespace ks
     {
         auto mouse_pos = sf::Mouse::getPosition(_window->get_window());
 
+        const auto top_left = _window->get_top_left();
+        mouse_pos.x += top_left.x;
+        mouse_pos.y += top_left.y;
+
         bool new_selection = false;
 
         for (auto& unit : *_units) {

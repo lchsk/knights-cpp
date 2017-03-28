@@ -24,10 +24,19 @@ namespace ks
 
     }
 
-    sf::RenderWindow&
-    GameWindow::get_window() const
+    sf::RenderWindow& GameWindow::get_window() const
     {
         return *_window;
+    }
+
+    const sf::Vector2f GameWindow::get_top_left() const
+    {
+        auto c = _view->getCenter();
+
+        c.x -= _w / 2.0;
+        c.y -= _h / 2.0;
+
+        return c;
     }
 
     void GameWindow::update(const sf::Time& delta)
