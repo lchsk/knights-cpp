@@ -27,5 +27,8 @@ namespace ks
 	inline int get_col(int id, int columns) {
 		return id % columns;
 	}
+
+	const sf::Color DebugRed = sf::Color(255, 0, 0, 100);
+	const sf::Color DebugGreen = sf::Color(0, 255, 0, 100);
 }
 #endif

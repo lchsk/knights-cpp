@@ -54,6 +54,27 @@ namespace ks
             _add_edge(v, _gps->get_s(v));
             _add_edge(v, _gps->get_w(v));
         }
+
+        #ifdef DEBUG_GRAPH
+        for (int v = 0; v < _gps->v_cnt - 1; v++) {
+            const double weight = get_weight(v, v + 1);
+
+            const auto& from = get_vertex(v);
+            const auto& to = get_vertex(v + 1);
+
+            auto shape = std::make_unique<sf::RectangleShape>();
+
+            if (weight)
+                shape->setFillColor(DebugGreen);
+            else
+                shape->setFillColor(DebugRed);
+
+            shape->setSize(sf::Vector2f(8, 8));
+            shape->setPosition(sf::Vector2f(from->x, to->y));
+
+            _debug_graph.push_back(std::move(shape));
+        }
+        #endif
     }
 
     const bool Graph::is_connected(const int v1, const int v2) const
@@ -93,6 +114,14 @@ namespace ks
             ks::TileInfo(to.spritesheet_id, to.tile_id));
 
         return get_weight(mv);
+    }
+
+    const double Graph::get_weight(const int from, const int to)
+    {
+        auto& f = get_vertex(from);
+        auto& t = get_vertex(to);
+
+        return get_weight(*f, *t);
     }
 
     void Graph::find_path(std::shared_ptr<std::vector<ks::Vertex> >& path,
@@ -139,6 +168,15 @@ namespace ks
         } else {
             path->clear();
         }
+    }
+
+    void Graph::render(sf::RenderWindow& window)
+    {
+        #ifdef DEBUG_GRAPH
+        for (auto& v : _debug_graph) {
+            window.draw(*v);
+        }
+        #endif
     }
 
     void Graph::_add_edge(const int v1, const int v2) const

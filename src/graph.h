@@ -3,9 +3,13 @@
 
 #include <memory>
 
+#include <SFML/Graphics.hpp>
+
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/dijkstra_shortest_paths.hpp>
+
+/* #define DEBUG_GRAPH */
 
 namespace ks
 {
@@ -116,14 +120,21 @@ namespace ks
         const double get_weight(const ks::TileMovement& tile_mv);
         const double get_weight(const ks::Vertex& from,
                                 const ks::Vertex& to);
+        const double get_weight(const int from, const int to);
 
         const std::unique_ptr<ks::Gps>& get_gps() const;
+
+        void render(sf::RenderWindow& window);
 
     private:
         void _add_edge(const int v1, const int v2) const;
 
         std::unique_ptr<ks::graph_t> _graph;
         const std::unique_ptr<ks::Gps> _gps;
+
+        #ifdef DEBUG_GRAPH
+        std::vector<std::unique_ptr<sf::RectangleShape> > _debug_graph;
+        #endif
 
         std::unordered_map<
             const ks::TileMovement,

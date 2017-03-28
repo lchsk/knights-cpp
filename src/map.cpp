@@ -146,6 +146,8 @@ namespace ks
         for (auto& unit : *_units) {
             unit->render(window);
         }
+
+        _graph->render(window);
     }
 
     void Map::_move_unit_step(
