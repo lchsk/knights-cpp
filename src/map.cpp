@@ -160,11 +160,7 @@ namespace ks
 
         int dir = _graph->get_gps()->get_direction(v.id, next_v.id);
 
-        auto mv = ks::TileMovement(
-            ks::TileInfo(v.spritesheet_id, v.tile_id),
-            ks::TileInfo(next_v.spritesheet_id, next_v.tile_id));
-
-        const double speed_factor = _graph->get_weight(mv);
+        const double speed_factor = _graph->get_weight(v, next_v);
 
         const int speed = unit->get_template()->get_speed() * 1 / speed_factor;
 

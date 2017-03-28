@@ -85,6 +85,16 @@ namespace ks
         return _weights[tile_mv];
     }
 
+    const double Graph::get_weight(const ks::Vertex& from,
+                                   const ks::Vertex& to)
+    {
+        const auto mv = ks::TileMovement(
+            ks::TileInfo(from.spritesheet_id, from.tile_id),
+            ks::TileInfo(to.spritesheet_id, to.tile_id));
+
+        return get_weight(mv);
+    }
+
     void Graph::find_path(std::shared_ptr<std::vector<ks::Vertex> >& path,
                           const int start_id, const int goal_id) const
     {

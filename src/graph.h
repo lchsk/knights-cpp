@@ -114,6 +114,8 @@ namespace ks
             get_closest_vertex(const int x, const int y) const;
 
         const double get_weight(const ks::TileMovement& tile_mv);
+        const double get_weight(const ks::Vertex& from,
+                                const ks::Vertex& to);
 
         const std::unique_ptr<ks::Gps>& get_gps() const;
 
