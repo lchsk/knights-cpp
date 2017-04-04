@@ -10,6 +10,7 @@
 namespace ks
 {
     enum class NationType {
+        Neutral,
         Knights,
         Skeletons
     };
