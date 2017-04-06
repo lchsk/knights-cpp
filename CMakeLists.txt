@@ -41,6 +41,7 @@ add_executable(${EXECUTABLE_NAME}
     src/spritesheet.cpp
     src/object_template.cpp
     src/object_library.cpp
+    src/object.cpp
     src/unit_template.cpp
     src/unit_library.cpp
     src/unit.cpp
