@@ -16,6 +16,8 @@ project(knights)
 #  "${PROJECT_SOURCE_DIR}/config.h.in"
 #  "${PROJECT_BINARY_DIR}/config.h"
 #  )
+
+find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories("${PROJECT_BINARY_DIR}")
 
@@ -24,10 +26,10 @@ message(STATUS "CMAKE_CXX_COMPILER_ID      = ${CMAKE_CXX_COMPILER_ID}"     )
 message(STATUS "CMAKE_CXX_COMPILER_VERSION = ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "CMAKE_COMPILER_IS_GNUCXX   = ${CMAKE_COMPILER_IS_GNUCXX}"  )
 
-# Define sources and executable
 set(EXECUTABLE_NAME "knights")
-# set(CMAKE_CXX_FLAGS "-std=c++11")
+
 add_definitions(-std=c++14 -O0)
+
 add_executable(${EXECUTABLE_NAME}
     src/main.cpp
     src/game.cpp
@@ -49,9 +51,6 @@ add_executable(${EXECUTABLE_NAME}
     src/data_loader.cpp
 )
 
-
-find_package(Boost REQUIRED)
-# Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 #Find any version 2.X of SFML
 #See the FindSFML.cmake file for additional details and instructions
@@ -60,7 +59,6 @@ if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
   target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
 endif()
-
 
 # Install target
 install(TARGETS ${EXECUTABLE_NAME} DESTINATION bin)
