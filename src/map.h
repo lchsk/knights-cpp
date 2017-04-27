@@ -7,6 +7,7 @@
 #include "animation.h"
 #include "tile.h"
 #include "unit.h"
+#include "object.h"
 #include "data_loader.h"
 #include "game_window.h"
 #include "graph.h"
@@ -20,6 +21,7 @@ namespace ks
             std::shared_ptr<ks::DataLoader>& data_loader,
             std::shared_ptr<ks::GameWindow>& window,
             std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > >& units,
+            std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > >& objects,
             std::string map_name);
         ~Map();
 
@@ -45,6 +47,7 @@ namespace ks
         std::shared_ptr<ks::GameWindow> _window;
         std::shared_ptr<ks::DataLoader> _data_loader;
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _units;
+        std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > > _objects;
 
         std::vector<
             std::unique_ptr<ks::Tile>

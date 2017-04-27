@@ -10,18 +10,22 @@ namespace ks
           _units(std::make_shared<std::vector<std::shared_ptr<ks::Unit> > >()),
           _selected(
               std::make_shared<std::vector<std::shared_ptr<ks::Unit> > >()),
+          _objects(
+              std::make_shared<std::vector<std::shared_ptr<ks::Object> > >()),
           _window(window)
     {
         load_level_assets();
         init_nations();
 
         _unit_library = std::make_shared<ks::UnitLibrary>(resource_mgr);
+        _object_library = std::make_shared<ks::ObjectLibrary>(resource_mgr);
 
         _map = std::make_shared<ks::Map>(
             resource_mgr,
             data_loader,
             window,
             _units,
+            _objects,
             "map1.json");
 
         auto unit = std::make_shared<ks::Unit>(
@@ -36,6 +40,12 @@ namespace ks
 
         _units->push_back(unit);
         _units->push_back(unit2);
+
+        auto tree = std::make_shared<ks::Object>(_object_library->build_tree());
+
+        tree->set_position(60, 80);
+
+        _objects->push_back(tree);
     }
 
     Level::~Level()

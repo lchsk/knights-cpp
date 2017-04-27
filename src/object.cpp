@@ -9,7 +9,7 @@ namespace ks
         : _x(0),
           _y(0),
           _path(std::make_shared<std::vector<ks::Vertex> >()),
-          _animation("stand_left"),
+          _animation("default"),
           _unit_template(unit_template)
     {
         _unit_template->get_animation(_animation)->play();

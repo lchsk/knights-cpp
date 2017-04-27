@@ -8,12 +8,14 @@ namespace ks
         std::shared_ptr<ks::DataLoader>& data_loader,
         std::shared_ptr<ks::GameWindow>& window,
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > >& units,
+        std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > >& objects,
         std::string map_name)
         : _map_name(map_name),
           _resource_mgr(resource_mgr),
           _data_loader(data_loader),
           _window(window),
           _units(units),
+          _objects(objects),
           _graph(std::make_unique<ks::Graph>())
     {
         load();
@@ -135,6 +137,10 @@ namespace ks
                 _move_unit_step(unit, delta);
             }
         }
+
+        for (auto& object : *_objects) {
+            object->update(delta);
+        }
     }
 
     void Map::render(sf::RenderWindow& window)
@@ -145,6 +151,10 @@ namespace ks
 
         for (auto& unit : *_units) {
             unit->render(window);
+        }
+
+        for (auto& object : *_objects) {
+            object->render(window);
         }
 
         _graph->render(window);

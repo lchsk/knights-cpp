@@ -15,7 +15,7 @@ namespace ks
         ObjectLibrary(std::shared_ptr<ks::ResourceMgr>& resource_mgr);
         ~ObjectLibrary();
 
-        const std::shared_ptr<ks::ObjectTemplate> build_knights_archer();
+        const std::shared_ptr<ks::ObjectTemplate> build_tree();
 
     private:
         std::unordered_map<std::string, std::shared_ptr<ks::ObjectTemplate> >

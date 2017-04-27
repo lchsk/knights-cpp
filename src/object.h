@@ -57,9 +57,9 @@ namespace ks
         #endif
     };
 
-    inline const bool y_coord_pred(const std::shared_ptr<ks::Object> u1,
-                                   const std::shared_ptr<ks::Object> u2) {
-        return u1->get_position().y < u2->get_position().y;
-    }
+    /* inline const bool y_coord_pred2(const std::shared_ptr<ks::Object> u1, */
+                                   /* const std::shared_ptr<ks::Object> u2) { */
+        /* return u1->get_position().y < u2->get_position().y; */
+    /* } */
 }
 #endif

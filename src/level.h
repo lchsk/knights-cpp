@@ -14,6 +14,9 @@
 #include "unit_template.h"
 #include "unit_library.h"
 #include "unit.h"
+#include "object_template.h"
+#include "object_library.h"
+#include "object.h"
 
 namespace ks
 {
@@ -38,9 +41,11 @@ namespace ks
         std::shared_ptr<ks::DataLoader> _data_loader;
         std::shared_ptr<ks::GameWindow> _window;
         std::shared_ptr<ks::UnitLibrary> _unit_library;
+        std::shared_ptr<ks::ObjectLibrary> _object_library;
 
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _units;
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _selected;
+        std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > > _objects;
 
         void load_level_assets() const;
         void init_nations();
