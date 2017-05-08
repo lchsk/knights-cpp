@@ -12,10 +12,10 @@ namespace ks
     class Animation
     {
     public:
-        Animation(
-            const std::shared_ptr<ks::Spritesheet>& spritesheet,
-            const std::vector<int>& frames
-        );
+        Animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
+                  const std::vector<int>& frames);
+        Animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
+                  const std::vector<sf::IntRect>& rects);
         ~Animation();
 
         void update(sf::Time delta);
@@ -30,6 +30,8 @@ namespace ks
         void set_position(const double x, const double y) const;
 
     private:
+        void _init();
+
         std::vector<std::unique_ptr<sf::Sprite> > _frames;
 
         /* Current frame */

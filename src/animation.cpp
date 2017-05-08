@@ -5,18 +5,22 @@ namespace ks
 {
     Animation::Animation(
         const std::shared_ptr<ks::Spritesheet>& spritesheet,
-        const std::vector<int>& frames
-    ) :
-        _speed(1.0f)
+        const std::vector<int>& frames)
     {
-        reset();
-
-        auto& texture = spritesheet->get_texture();
-
-        auto texture_size = texture->getSize();
+        _init();
 
         for (int frame : frames) {
             _frames.push_back(std::move(spritesheet->get_new_sprite(frame)));
+        }
+    }
+
+    Animation::Animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
+                         const std::vector<sf::IntRect>& rects)
+    {
+        _init();
+
+        for (sf::IntRect rect : rects) {
+            _frames.push_back(std::move(spritesheet->get_new_sprite(rect)));
         }
     }
 
@@ -88,5 +92,11 @@ namespace ks
         for (auto& frame : _frames) {
             frame->setPosition(pos);
         }
+    }
+
+    void Animation::_init()
+    {
+        _speed = 1.0;
+        reset();
     }
 }

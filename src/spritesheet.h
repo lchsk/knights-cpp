@@ -24,6 +24,7 @@ namespace ks
         ~Spritesheet();
 
         std::unique_ptr<sf::Sprite> get_new_sprite(int frame);
+        std::unique_ptr<sf::Sprite> get_new_sprite(sf::IntRect&);
 
         /* void set_position(double x, double y); */
 
