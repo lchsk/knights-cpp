@@ -46,6 +46,7 @@ add_executable(${EXECUTABLE_NAME}
     src/object.cpp
     src/unit_template.cpp
     src/unit_library.cpp
+    # src/map_object.h
     src/unit.cpp
     src/nation.cpp
     src/data_loader.cpp
