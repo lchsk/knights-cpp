@@ -14,6 +14,7 @@ namespace ks
         }
 
         _set_offset();
+        set_position(0, 0);
     }
 
     Animation::Animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
@@ -26,6 +27,7 @@ namespace ks
         }
 
         _set_offset();
+        set_position(0, 0);
     }
 
     Animation::~Animation()
