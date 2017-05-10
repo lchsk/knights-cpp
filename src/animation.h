@@ -31,11 +31,15 @@ namespace ks
 
     private:
         void _init();
+        void _set_offset();
 
         std::vector<std::unique_ptr<sf::Sprite> > _frames;
 
         /* Current frame */
         int _frame;
+
+        int _offset_w;
+        int _offset_h;
 
         sf::Time _since_update;
 

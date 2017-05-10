@@ -46,7 +46,7 @@ namespace ks
 
         auto tree = std::make_shared<ks::Object>(_object_library->build_tree());
 
-        tree->set_position(60, 80);
+        // tree->set_position(0, 0);
 
         _map_objects->push_back(tree);
     }

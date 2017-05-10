@@ -12,6 +12,8 @@ namespace ks
         for (int frame : frames) {
             _frames.push_back(std::move(spritesheet->get_new_sprite(frame)));
         }
+
+        _set_offset();
     }
 
     Animation::Animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
@@ -22,6 +24,8 @@ namespace ks
         for (sf::IntRect rect : rects) {
             _frames.push_back(std::move(spritesheet->get_new_sprite(rect)));
         }
+
+        _set_offset();
     }
 
     Animation::~Animation()
@@ -85,9 +89,8 @@ namespace ks
 
     void Animation::set_position(const double x, const double y) const
     {
-        const auto pos = sf::Vector2f(
-            std::round(x - ks::UNIT_OFFSET_W),
-            std::round(y - ks::UNIT_OFFSET_H));
+        const auto pos = sf::Vector2f(std::round(x - _offset_w),
+                                      std::round(y - _offset_h));
 
         for (auto& frame : _frames) {
             frame->setPosition(pos);
@@ -98,5 +101,15 @@ namespace ks
     {
         _speed = 1.0;
         reset();
+    }
+
+    void Animation::_set_offset()
+    {
+        if (_frames.size()) {
+            _offset_w = GET_SPRITEP_WIDTH(_frames[0]) / 2;
+            _offset_h = GET_SPRITEP_HEIGHT(_frames[0]) / 2;
+        } else {
+            _offset_w = _offset_h = 0;
+        }
     }
 }
