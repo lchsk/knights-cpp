@@ -18,11 +18,13 @@ namespace ks
 
         const auto& s = _resource_mgr->get_spritesheet_ptr("tiles");
 
+        sf::IntRect r1(270, 590, 100, 150);
+
         tree1->add_animation(
             s,
             "default",
             1.0,
-            {5});
+            {r1});
 
         return tree1;
     }
