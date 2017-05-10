@@ -14,13 +14,26 @@ namespace ks
     {
     }
 
-    void ObjectTemplate::add_animation(
-        const std::shared_ptr<ks::Spritesheet>& spritesheet,
-        const std::string name,
-        const double speed,
-        const std::vector<int>& frames)
+    void ObjectTemplate::add_animation(const std::shared_ptr<ks::Spritesheet>&
+                                       spritesheet,
+                                       const std::string name,
+                                       const double speed,
+                                       const std::vector<int>& frames)
     {
         auto anim = std::make_shared<ks::Animation>(spritesheet, frames);
+
+        anim->set_speed(speed);
+
+        _animations[name] = anim;
+    }
+
+    void ObjectTemplate::add_animation(const std::shared_ptr<ks::Spritesheet>&
+                                       spritesheet,
+                                       const std::string name,
+                                       const double speed,
+                                       const std::vector<sf::IntRect>& rects)
+    {
+        auto anim = std::make_shared<ks::Animation>(spritesheet, rects);
 
         anim->set_speed(speed);
 

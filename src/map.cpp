@@ -9,6 +9,8 @@ namespace ks
         std::shared_ptr<ks::GameWindow>& window,
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > >& units,
         std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > >& objects,
+        std::shared_ptr<std::vector<std::shared_ptr<ks::MapObject> > >&
+        map_objects,
         std::string map_name)
         : _map_name(map_name),
           _resource_mgr(resource_mgr),
@@ -16,6 +18,7 @@ namespace ks
           _window(window),
           _units(units),
           _objects(objects),
+          _map_objects(map_objects),
           _graph(std::make_unique<ks::Graph>())
     {
         load();
@@ -128,18 +131,16 @@ namespace ks
 
     void Map::update(sf::Time delta)
     {
-        std::sort(_units->begin(), _units->end(), y_coord_pred);
+        std::sort(_map_objects->begin(), _map_objects->end(),
+                  map_object_y_pos_sorter);
 
-        for (auto& unit : *_units) {
-            unit->update(delta);
+        for (auto& map_object : *_map_objects) {
+            map_object->update(delta);
 
-            if (unit->is_walking()) {
-                _move_unit_step(unit, delta);
+            if (map_object->is_walking()) {
+                _move_unit_step(std::dynamic_pointer_cast<ks::Unit>(map_object),
+                                delta);
             }
-        }
-
-        for (auto& object : *_objects) {
-            object->update(delta);
         }
     }
 
@@ -149,12 +150,8 @@ namespace ks
             tile->render(window);
         }
 
-        for (auto& unit : *_units) {
-            unit->render(window);
-        }
-
-        for (auto& object : *_objects) {
-            object->render(window);
+        for (auto& map_object : *_map_objects) {
+            map_object->render(window);
         }
 
         _graph->render(window);

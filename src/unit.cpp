@@ -50,6 +50,11 @@ namespace ks
         return _path->size() > 0;
     }
 
+    const ks::MapObjectType Unit::get_type() const
+    {
+        return ks::MapObjectType::Unit;
+    }
+
     void Unit::set_path(
         const std::shared_ptr<std::vector<ks::Vertex> >& path)
     {

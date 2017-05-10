@@ -22,6 +22,8 @@ namespace ks
             std::shared_ptr<ks::GameWindow>& window,
             std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > >& units,
             std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > >& objects,
+            std::shared_ptr<std::vector<std::shared_ptr<ks::MapObject> > >&
+            map_objects,
             std::string map_name);
         ~Map();
 
@@ -48,6 +50,8 @@ namespace ks
         std::shared_ptr<ks::DataLoader> _data_loader;
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _units;
         std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > > _objects;
+        std::shared_ptr<std::vector<std::shared_ptr<ks::MapObject> > >
+          _map_objects;
 
         std::vector<
             std::unique_ptr<ks::Tile>

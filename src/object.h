@@ -10,12 +10,13 @@
 
 #include "object_template.h"
 #include "graph.h"
+#include "map_object.h"
 
 #define DEBUG_UNIT_PATHS
 
 namespace ks
 {
-    class Object
+    class Object : public ks::MapObject
     {
     public:
         // TODO: unique?
@@ -42,6 +43,8 @@ namespace ks
         const std::shared_ptr<ks::ObjectTemplate> get_template() const;
 
         const bool is_walking() const;
+
+        virtual const MapObjectType get_type() const;
     private:
         const std::shared_ptr<ks::ObjectTemplate> _unit_template;
 
@@ -56,10 +59,5 @@ namespace ks
         std::vector<std::unique_ptr<sf::RectangleShape> > _debug_path;
         #endif
     };
-
-    /* inline const bool y_coord_pred2(const std::shared_ptr<ks::Object> u1, */
-                                   /* const std::shared_ptr<ks::Object> u2) { */
-        /* return u1->get_position().y < u2->get_position().y; */
-    /* } */
 }
 #endif

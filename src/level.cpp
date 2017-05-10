@@ -12,6 +12,8 @@ namespace ks
               std::make_shared<std::vector<std::shared_ptr<ks::Unit> > >()),
           _objects(
               std::make_shared<std::vector<std::shared_ptr<ks::Object> > >()),
+          _map_objects(
+              std::make_shared<std::vector<std::shared_ptr<ks::MapObject> > >()),
           _window(window)
     {
         load_level_assets();
@@ -26,6 +28,7 @@ namespace ks
             window,
             _units,
             _objects,
+            _map_objects,
             "map1.json");
 
         auto unit = std::make_shared<ks::Unit>(
@@ -38,14 +41,14 @@ namespace ks
         unit->set_position(0, 0);
         unit2->set_position(50, 60);
 
-        _units->push_back(unit);
-        _units->push_back(unit2);
+        _map_objects->push_back(unit);
+        _map_objects->push_back(unit2);
 
         auto tree = std::make_shared<ks::Object>(_object_library->build_tree());
 
         tree->set_position(60, 80);
 
-        _objects->push_back(tree);
+        _map_objects->push_back(tree);
     }
 
     Level::~Level()
@@ -63,12 +66,14 @@ namespace ks
 
         bool new_selection = false;
 
-        for (auto& unit : *_units) {
-            if (unit->get_rectangle().contains(mouse_pos)) {
+        for (auto& map_object : *_map_objects) {
+            if (map_object->get_type() == ks::MapObjectType::Unit
+                && map_object->get_rectangle().contains(mouse_pos)) {
                 new_selection = true;
 
                 _selected->clear();
-                _selected->push_back(unit);
+                _selected->push_back(std::dynamic_pointer_cast
+                                     <ks::Unit>(map_object));
             }
         }
 

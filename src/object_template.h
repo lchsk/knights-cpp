@@ -17,11 +17,15 @@ namespace ks
         ObjectTemplate(std::string name, ks::NationType nation);
         ~ObjectTemplate();
 
-        void add_animation(
-            const std::shared_ptr<ks::Spritesheet>& spritesheet,
-            const std::string name,
-            const double speed,
-            const std::vector<int>& frames);
+        void add_animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
+                           const std::string name,
+                           const double speed,
+                           const std::vector<int>& frames);
+
+        void add_animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
+                           const std::string name,
+                           const double speed,
+                           const std::vector<sf::IntRect>& rects);
 
         std::shared_ptr<ks::Animation>& get_animation(const std::string);
 

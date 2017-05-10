@@ -11,6 +11,7 @@
 #include "nation.h"
 #include "data_loader.h"
 #include "game_window.h"
+#include "map_object.h"
 #include "unit_template.h"
 #include "unit_library.h"
 #include "unit.h"
@@ -46,6 +47,8 @@ namespace ks
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _units;
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _selected;
         std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > > _objects;
+        std::shared_ptr<std::vector<std::shared_ptr<ks::MapObject> > >
+          _map_objects;
 
         void load_level_assets() const;
         void init_nations();
