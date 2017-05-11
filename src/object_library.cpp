@@ -13,8 +13,8 @@ namespace ks
 
     const std::shared_ptr<ObjectTemplate> ObjectLibrary::build_tree()
     {
-        const auto tree1 = std::make_shared<ks::ObjectTemplate>(
-            "tree1", ks::NationType::Neutral);
+        const auto tree1 = std::make_shared<ks::ObjectTemplate>
+            ("tree1", ks::NationType::Neutral, std::vector<int>({0, 0, 0, 0}));
 
         const auto& s = _resource_mgr->get_spritesheet_ptr("tiles");
 

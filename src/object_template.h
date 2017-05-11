@@ -14,7 +14,8 @@ namespace ks
     class ObjectTemplate
     {
     public:
-        ObjectTemplate(std::string name, ks::NationType nation);
+        ObjectTemplate(const std::string name, const ks::NationType nation,
+                       const std::vector<int>& block_offset);
         ~ObjectTemplate();
 
         void add_animation(const std::shared_ptr<ks::Spritesheet>& spritesheet,
@@ -30,8 +31,13 @@ namespace ks
         std::shared_ptr<ks::Animation>& get_animation(const std::string);
 
     private:
-        std::string _name;
-        ks::NationType _nation;
+        const std::string _name;
+        const ks::NationType _nation;
+
+        /* _block_offset must have exactly four elements. Each element
+           corresponds to the number of graph elements that will separate
+           each side. 0th element - top, then clockwise. */
+        const std::vector<int> _block_offset;
 
         std::unordered_map<
             std::string,

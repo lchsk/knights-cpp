@@ -4,10 +4,14 @@
 
 namespace ks
 {
-    ObjectTemplate::ObjectTemplate(std::string name, ks::NationType nation)
+    ObjectTemplate::ObjectTemplate(const std::string name,
+                                   const ks::NationType nation,
+                                   const std::vector<int>& block_offset)
         : _name(name),
-          _nation(nation)
+          _nation(nation),
+          _block_offset(block_offset)
     {
+        assert(_block_offset.size() == 4);
     }
 
     ObjectTemplate::~ObjectTemplate()
