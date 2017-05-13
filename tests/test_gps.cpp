@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 
 #include "../src/graph.h"
 
@@ -199,6 +200,12 @@ TEST_F(GpsTest, get_direction)
     EXPECT_EQ(gps.get_direction(4, 3), -1);
     EXPECT_EQ(gps.get_direction(0, 12), -1);
     EXPECT_EQ(gps.get_direction(12, 0), -1);
+}
+
+TEST(Other, get_object_graph_ids)
+{
+    std::vector<int> a;
+    EXPECT_THAT(a, ::testing::ContainerEq(ks::get_object_graph_ids(0, 0, 0, 0, 0)));
 }
 
 int main (int argc, char** argv) {
