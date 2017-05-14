@@ -1,6 +1,9 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
+
 namespace ks
 {
 	const int UNIT_WIDTH = 64;
