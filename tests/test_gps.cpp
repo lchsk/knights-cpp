@@ -202,10 +202,37 @@ TEST_F(GpsTest, get_direction)
     EXPECT_EQ(gps.get_direction(12, 0), -1);
 }
 
-TEST(Other, get_object_graph_ids)
+TEST(get_object_graph_ids, simple_exact)
 {
-    std::vector<int> a;
-    EXPECT_THAT(a, ::testing::ContainerEq(ks::get_object_graph_ids(0, 0, 0, 0, 0)));
+    EXPECT_THAT(std::vector<int>({5, 6}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(8, 8, 16, 8, 4)));
+
+    EXPECT_THAT(std::vector<int>({5, 9}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(8, 8, 8, 16, 4)));
+}
+
+TEST(get_object_graph_ids, simple_inexact)
+{
+    EXPECT_THAT(std::vector<int>({5, 6}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(12, 11, 16, 8, 4)));
+
+    EXPECT_THAT(std::vector<int>({5, 9}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(13, 10, 8, 16, 4)));
+}
+
+TEST(get_object_graph_ids, simple_inexact_widths_heights)
+{
+    EXPECT_THAT(std::vector<int>({5, 6, 7}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(12, 11, 18, 8, 4)));
+
+    EXPECT_THAT(std::vector<int>({5, 6, 9, 10, 13, 14}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(13, 10, 9, 17, 4)));
 }
 
 int main (int argc, char** argv) {

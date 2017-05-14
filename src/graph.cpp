@@ -233,4 +233,37 @@ namespace ks
 
         boost::add_edge(v1, v2, weight->second, *_graph);
     }
+
+    std::vector<int> get_object_graph_ids(int r, int c, int w, int h, int cols)
+    {
+        assert(r);
+        assert(c);
+        assert(w);
+        assert(h);
+        assert(cols);
+
+        std::vector<int> ids;
+
+        const int left_node = floor(c / 8.0);
+        const int top_node = floor(r / 8.0);
+
+        const int start_node = top_node * cols + left_node;
+
+        const int width = ceil(w / 8.0);
+        const int height = ceil(h / 8.0);
+
+        // std::cout << "\tleft_node: " << left_node
+                  // << "\ttop_node:"   << top_node
+                  // << "\twidth:"      << width
+                  // << "\theight:"     << height
+                  // << "\n";
+
+        for (int n1 = start_node, i = 0; i < height; n1 += cols, i++) {
+            for (int n2 = n1, j = 0; j < width; n2++, j++) {
+                ids.push_back(n2);
+            }
+        }
+
+        return ids;
+    }
 }

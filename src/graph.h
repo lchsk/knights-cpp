@@ -241,5 +241,7 @@ namespace ks
             return -1;
         }
     };
+
+    std::vector<int> get_object_graph_ids(int x, int y, int w, int h, int cols);
 }
 #endif
