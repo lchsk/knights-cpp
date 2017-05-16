@@ -234,23 +234,32 @@ namespace ks
         boost::add_edge(v1, v2, weight->second, *_graph);
     }
 
-    std::vector<int> get_object_graph_ids(int r, int c, int w, int h, int cols)
+    std::vector<int> get_object_graph_ids(int r, int c, int w, int h, int cols,
+                                          std::vector<int> t_offset)
     {
-        assert(r);
-        assert(c);
+        std::vector<int> offset;
+
+        if (t_offset.size() != 4) {
+            offset = {0, 0, 0, 0};
+        } else {
+            offset = t_offset;
+        }
+
+        assert(r >= 0);
+        assert(c >= 0);
         assert(w);
         assert(h);
         assert(cols);
 
         std::vector<int> ids;
 
-        const int left_node = floor(c / 8.0);
-        const int top_node = floor(r / 8.0);
+        const int left_node = floor(c / 8.0) + offset[3];
+        const int top_node = floor(r / 8.0) + offset[0];
 
         const int start_node = top_node * cols + left_node;
 
-        const int width = ceil(w / 8.0);
-        const int height = ceil(h / 8.0);
+        const int width = ceil(w / 8.0) + -offset[3] + offset[1];
+        const int height = ceil(h / 8.0) + -offset[0] + offset[2];
 
         // std::cout << "\tleft_node: " << left_node
                   // << "\ttop_node:"   << top_node

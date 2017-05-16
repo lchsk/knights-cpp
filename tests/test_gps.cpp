@@ -206,33 +206,63 @@ TEST(get_object_graph_ids, simple_exact)
 {
     EXPECT_THAT(std::vector<int>({5, 6}),
                 ::testing::ContainerEq
-                (ks::get_object_graph_ids(8, 8, 16, 8, 4)));
+                (ks::get_object_graph_ids(8, 8, 16, 8, 4, {})));
 
     EXPECT_THAT(std::vector<int>({5, 9}),
                 ::testing::ContainerEq
-                (ks::get_object_graph_ids(8, 8, 8, 16, 4)));
+                (ks::get_object_graph_ids(8, 8, 8, 16, 4, {})));
 }
 
 TEST(get_object_graph_ids, simple_inexact)
 {
     EXPECT_THAT(std::vector<int>({5, 6}),
                 ::testing::ContainerEq
-                (ks::get_object_graph_ids(12, 11, 16, 8, 4)));
+                (ks::get_object_graph_ids(12, 11, 16, 8, 4, {})));
 
     EXPECT_THAT(std::vector<int>({5, 9}),
                 ::testing::ContainerEq
-                (ks::get_object_graph_ids(13, 10, 8, 16, 4)));
+                (ks::get_object_graph_ids(13, 10, 8, 16, 4, {})));
 }
 
 TEST(get_object_graph_ids, simple_inexact_widths_heights)
 {
     EXPECT_THAT(std::vector<int>({5, 6, 7}),
                 ::testing::ContainerEq
-                (ks::get_object_graph_ids(12, 11, 18, 8, 4)));
+                (ks::get_object_graph_ids(12, 11, 18, 8, 4, {})));
 
     EXPECT_THAT(std::vector<int>({5, 6, 9, 10, 13, 14}),
                 ::testing::ContainerEq
-                (ks::get_object_graph_ids(13, 10, 9, 17, 4)));
+                (ks::get_object_graph_ids(13, 10, 9, 17, 4, {})));
+}
+
+TEST(get_object_graph_ids, top_left_offset)
+{
+    EXPECT_THAT(std::vector<int>({1, 5}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(8, 8, 8, 8, 4, {-1, 0, 0, 0})));
+
+    EXPECT_THAT(std::vector<int>({0, 1, 4, 5}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(8, 8, 8, 8, 4, {-1, 0, 0, -1})));
+}
+
+TEST(get_object_graph_ids, right_bottom_offset)
+{
+    EXPECT_THAT(std::vector<int>({0, 1, 4, 5}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(0, 0, 8, 8, 4, {0, 1, 1, 0})));
+}
+
+TEST(get_object_graph_ids, top_left_right_bottom_offset)
+{
+    EXPECT_THAT(std::vector<int>({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+                    13, 14, 15}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(8, 8, 16, 16, 4, {-1, 1, 1, -1})));
+
+    EXPECT_THAT(std::vector<int>({5}),
+                ::testing::ContainerEq
+                (ks::get_object_graph_ids(8, 8, 16, 16, 4, {0, -1, -1, 0})));
 }
 
 int main (int argc, char** argv) {
