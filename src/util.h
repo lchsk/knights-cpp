@@ -18,8 +18,9 @@ namespace ks
 	// Number of vertices in a row per tile
 	const int GRAPH_DEN = 4;
 
-	// Numbrer of pixels between two subsequent vertices in the graph
-	const int PX_PER_V = TILE_SIZE / GRAPH_DEN;
+	// Number of pixels between two subsequent vertices in the graph
+	constexpr int PX_PER_V = TILE_SIZE / GRAPH_DEN;
+	constexpr double PX_PER_VF = static_cast<double>(PX_PER_V);
 
 	inline int flatten_int(int row, int col, int columns) {
 		return row * columns + col;
