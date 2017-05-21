@@ -30,6 +30,7 @@ namespace ks
         void set_position(const double x, const double y) const;
 
         const sf::Vector2i get_size() const;
+        const sf::Vector2i get_size_tiles() const;
 
     private:
         void _init();

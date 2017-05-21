@@ -109,6 +109,13 @@ namespace ks
         }
     }
 
+    const sf::Vector2i Animation::get_size_tiles() const
+    {
+        const sf::Vector2i size = get_size();
+
+        return sf::Vector2i(ceil(size.x / PX_PER_VF), ceil(size.y / PX_PER_VF));
+    }
+
     void Animation::_init()
     {
         _speed = 1.0;
