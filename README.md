@@ -5,3 +5,7 @@
 * SFML library v2.3.2
 * boost graph v.1.61
 * [nlohmann's json library](https://github.com/nlohmann/json)
+
+# For testing
+
+* googletest
