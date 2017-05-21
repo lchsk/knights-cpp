@@ -29,6 +29,8 @@ namespace ks
         void set_speed(const float speed);
         void set_position(const double x, const double y) const;
 
+        const sf::Vector2i get_size() const;
+
     private:
         void _init();
         void _set_offset();

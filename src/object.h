@@ -31,6 +31,7 @@ namespace ks
         void set_position(const double x, const double y);
         const sf::Vector2f get_position() const;
         void set_animation(const std::string animation);
+        const std::shared_ptr<ks::Animation>& get_current_animation() const;
 
         void set_path(const std::shared_ptr<std::vector<ks::Vertex> >& path);
 

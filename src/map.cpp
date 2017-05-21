@@ -157,6 +157,21 @@ namespace ks
         _graph->render(window);
     }
 
+    void Map::add_object(const std::shared_ptr<ks::Object>& obj)
+    {
+        const auto obj_pos = obj->get_position();
+
+        const sf::Vector2i obj_size = obj->get_current_animation()->get_size();
+
+        std::vector<int> object_graph
+            = get_object_graph_ids(obj_pos.x,
+                                   obj_pos.y,
+                                   obj_size.x,
+                                   obj_size.y,
+                                   GRAPH_DEN,
+                                   {});
+    }
+
     void Map::_move_unit_step(
         const std::shared_ptr<ks::Unit>& unit, sf::Time& delta)
     {

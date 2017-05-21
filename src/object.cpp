@@ -105,6 +105,11 @@ namespace ks
         return sf::Vector2f(_x, _y);
     }
 
+    const std::shared_ptr<ks::Animation>& Object::get_current_animation() const
+    {
+        return _unit_template->get_animation(_animation);
+    }
+
     const sf::Rect<int> Object::get_rectangle() const
     {
         sf::Rect<int> r(

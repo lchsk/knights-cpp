@@ -99,6 +99,16 @@ namespace ks
         }
     }
 
+    const sf::Vector2i Animation::get_size() const
+    {
+        if (_frames.size()) {
+            return sf::Vector2i(GET_SPRITEP_WIDTH(_frames[0]),
+                                GET_SPRITEP_HEIGHT(_frames[0]));
+        } else {
+            return sf::Vector2i(0, 0);
+        }
+    }
+
     void Animation::_init()
     {
         _speed = 1.0;

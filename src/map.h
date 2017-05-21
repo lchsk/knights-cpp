@@ -38,6 +38,8 @@ namespace ks
             const int x,
             const int y) const;
 
+        void add_object(const std::shared_ptr<ks::Object>& obj);
+
     private:
         void load();
         void _move_unit_step(
