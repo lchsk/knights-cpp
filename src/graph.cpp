@@ -102,14 +102,52 @@ namespace ks
         #endif
     }
 
+    const bool Graph::vertex_exists(const int v) const
+    {
+        if (v >= get_vertex_count())
+            return false;
+
+        const auto vertex = boost::vertex(v, *_graph);
+
+        return vertex != (*_graph).null_vertex();
+    }
+
     const bool Graph::is_connected(const int v1, const int v2) const
     {
+        if (! vertex_exists(v1) || ! vertex_exists(v2))
+            return false;
+
         return boost::edge(v1, v2, *_graph).second;
     }
 
     const std::shared_ptr<ks::Vertex>& Graph::get_vertex(const int v) const
     {
         return (*_graph)[boost::vertex(v, *_graph)];
+    }
+
+    const int Graph::get_rows() const
+    {
+        return _rows;
+    }
+
+    const int Graph::get_cols() const
+    {
+        return _cols;
+    }
+
+    const int Graph::get_vertex_cols() const
+    {
+        return _gps->v_col;
+    }
+
+    const int Graph::get_vertex_count() const
+    {
+        return _gps->v_cnt;
+    }
+
+    void Graph::remove_edge(const int from, const int to)
+    {
+        boost::remove_edge(from, to, *_graph);
     }
 
     const std::unique_ptr<ks::Gps>& Graph::get_gps() const

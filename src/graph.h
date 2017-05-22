@@ -129,6 +129,8 @@ namespace ks
         /* Number of vertices in the graph */
         const int get_vertex_count() const;
 
+        const bool vertex_exists(const int v) const;
+
         const double get_weight(const ks::TileMovement& tile_mv);
         const double get_weight(const ks::Vertex& from,
                                 const ks::Vertex& to);
