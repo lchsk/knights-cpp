@@ -117,10 +117,23 @@ namespace ks
         const std::shared_ptr<ks::Vertex>&
             get_closest_vertex(const int x, const int y) const;
 
+        /* In pixels */
+        const int get_rows() const;
+
+        /* In pixels */
+        const int get_cols() const;
+
+        /* Number of vertex columns in the graph */
+        const int get_vertex_cols() const;
+
+        /* Number of vertices in the graph */
+        const int get_vertex_count() const;
+
         const double get_weight(const ks::TileMovement& tile_mv);
         const double get_weight(const ks::Vertex& from,
                                 const ks::Vertex& to);
         const double get_weight(const int from, const int to);
+        void remove_edge(const int from, const int to);
 
         const std::unique_ptr<ks::Gps>& get_gps() const;
 
