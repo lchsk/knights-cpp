@@ -162,14 +162,36 @@ namespace ks
         const auto obj_pos = obj->get_position();
 
         const sf::Vector2i obj_size = obj->get_current_animation()->get_size();
+        const sf::Vector2i obj_size_tiles
+            = obj->get_current_animation()->get_size_tiles();
 
-        std::vector<int> object_graph
-            = get_object_graph_ids(obj_pos.x,
-                                   obj_pos.y,
+        std::vector<int> object_graph_ids
+            = get_object_graph_ids(obj_pos.y,
+                                   obj_pos.x,
                                    obj_size.x,
                                    obj_size.y,
-                                   GRAPH_DEN,
+                                   _graph->get_vertex_cols(),
+                                   // TODO: Get object's offset
                                    {});
+
+        assert(object_graph_ids.size() == obj_size_tiles.x * obj_size_tiles.y);
+
+        for (const int gid : object_graph_ids) {
+            const auto& gps = _graph->get_gps();
+
+            std::vector<int> dirs = {
+                gps->get_w(gid),
+                gps->get_s(gid),
+                gps->get_e(gid),
+                gps->get_n(gid),
+            };
+
+            for (int j : dirs) {
+                if (j != -1 && _graph->is_connected(j, gid)) {
+                    _graph->remove_edge(gid, j);
+                }
+            }
+        }
     }
 
     void Map::_move_unit_step(
