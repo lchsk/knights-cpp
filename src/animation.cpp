@@ -89,14 +89,22 @@ namespace ks
         _speed = speed;
     }
 
-    void Animation::set_position(const double x, const double y) const
+    void Animation::set_position(const double x, const double y)
     {
-        const auto pos = sf::Vector2f(std::round(x - _offset_w),
-                                      std::round(y - _offset_h));
+        _x = x - _offset_w;
+        _y = y - _offset_h;
+
+        const auto pos = sf::Vector2f(std::round(_x),
+                                      std::round(_y));
 
         for (auto& frame : _frames) {
             frame->setPosition(pos);
         }
+    }
+
+    const sf::Vector2f Animation::get_position() const
+    {
+        return sf::Vector2f(_x, _y);
     }
 
     const sf::Vector2i Animation::get_size() const
@@ -119,6 +127,8 @@ namespace ks
     void Animation::_init()
     {
         _speed = 1.0;
+        _x = 0;
+        _y = 0;
         reset();
     }
 

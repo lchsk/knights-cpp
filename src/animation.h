@@ -27,7 +27,8 @@ namespace ks
         void reset();
 
         void set_speed(const float speed);
-        void set_position(const double x, const double y) const;
+        void set_position(const double x, const double y);
+        const sf::Vector2f get_position() const;
 
         const sf::Vector2i get_size() const;
         const sf::Vector2i get_size_tiles() const;
@@ -43,6 +44,9 @@ namespace ks
 
         int _offset_w;
         int _offset_h;
+
+        double _x;
+        double _y;
 
         sf::Time _since_update;
 

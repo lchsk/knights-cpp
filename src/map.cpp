@@ -159,7 +159,7 @@ namespace ks
 
     void Map::add_object(const std::shared_ptr<ks::Object>& obj)
     {
-        const auto obj_pos = obj->get_position();
+        const auto obj_pos = obj->get_current_animation()->get_position();
 
         const sf::Vector2i obj_size = obj->get_current_animation()->get_size();
         const sf::Vector2i obj_size_tiles
