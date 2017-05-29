@@ -171,8 +171,7 @@ namespace ks
                                    obj_size.x,
                                    obj_size.y,
                                    _graph->get_vertex_cols(),
-                                   // TODO: Get object's offset
-                                   {});
+                                   obj->get_template()->get_block_offset());
 
         assert(object_graph_ids.size() == obj_size_tiles.x * obj_size_tiles.y);
 

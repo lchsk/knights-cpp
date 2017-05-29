@@ -49,4 +49,9 @@ namespace ks
     {
         return _animations[name];
     }
+
+    const std::vector<int>& ObjectTemplate::get_block_offset() const
+    {
+        return _block_offset;
+    }
 }

@@ -30,6 +30,8 @@ namespace ks
 
         std::shared_ptr<ks::Animation>& get_animation(const std::string);
 
+        const std::vector<int>& get_block_offset() const;
+
     private:
         const std::string _name;
         const ks::NationType _nation;
