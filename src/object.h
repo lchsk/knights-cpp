@@ -46,6 +46,8 @@ namespace ks
         const bool is_walking() const;
 
         virtual const MapObjectType get_type() const;
+
+        void record_removed_edge(const int v1, const int v2);
     private:
         const std::shared_ptr<ks::ObjectTemplate> _unit_template;
 
@@ -55,6 +57,10 @@ namespace ks
         std::string _animation;
 
         std::shared_ptr<std::vector<ks::Vertex> > _path;
+
+        /* A vector of edges (v1, v2) that were removed from the graph */
+        /* when this object was added */
+        std::unique_ptr<std::vector<std::pair<int, int> > > _edges;
 
         #ifdef DEBUG_UNIT_PATHS
         std::vector<std::unique_ptr<sf::RectangleShape> > _debug_path;

@@ -9,6 +9,7 @@ namespace ks
         : _x(0),
           _y(0),
           _path(std::make_shared<std::vector<ks::Vertex> >()),
+          _edges(std::make_unique<std::vector<std::pair<int, int> > >()),
           _animation("default"),
           _unit_template(unit_template)
     {
@@ -147,5 +148,12 @@ namespace ks
         set_position(_x, _y);
 
         _unit_template->get_animation(_animation)->play();
+    }
+
+    // ---
+
+    void Object::record_removed_edge(const int v1, const int v2)
+    {
+        _edges->push_back(std::make_pair(v1, v2));
     }
 }

@@ -104,7 +104,7 @@ namespace ks
 
     const bool Graph::vertex_exists(const int v) const
     {
-        if (v >= get_vertex_count())
+        if (v < 0 || v >= get_vertex_count())
             return false;
 
         const auto vertex = boost::vertex(v, *_graph);
@@ -112,12 +112,27 @@ namespace ks
         return vertex != (*_graph).null_vertex();
     }
 
+    const bool Graph::vertices_exist(const int v1, const int v2) const
+    {
+        return vertex_exists(v1) && vertex_exists(v2);
+    }
+
+    const std::pair<ks::Edge, bool>
+    Graph::get_edge(const int v1, const int v2) const
+    {
+        assert(vertices_exist(v1, v2));
+
+        return boost::edge(v1, v2, *_graph);
+    }
+
     const bool Graph::is_connected(const int v1, const int v2) const
     {
-        if (! vertex_exists(v1) || ! vertex_exists(v2))
+        if (! vertices_exist(v1, v2))
             return false;
 
-        return boost::edge(v1, v2, *_graph).second;
+        const std::pair<ks::Edge, bool> e = get_edge(v1, v2);
+
+        return e.second;
     }
 
     const std::shared_ptr<ks::Vertex>& Graph::get_vertex(const int v) const
@@ -162,6 +177,16 @@ namespace ks
             * _cols / ks::PX_PER_V + x / ks::PX_PER_V;
 
         return get_vertex(v);
+    }
+
+    const double Graph::get_weight_from_graph(const int v1, const int v2) const
+    {
+        const std::pair<ks::Edge, bool> edge = get_edge(v1, v2);
+
+        if (! edge.second)
+            return -1;
+
+        return get(boost::edge_weight_t(), *_graph, edge.first);
     }
 
     const double Graph::get_weight(const ks::TileMovement& tile_mv)

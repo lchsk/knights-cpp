@@ -28,10 +28,6 @@ namespace ks
         int tile_id;
     };
 
-    class Edge
-    {
-    };
-
     typedef boost::adjacency_list<
         boost::vecS,
         boost::vecS,
@@ -39,6 +35,7 @@ namespace ks
         std::shared_ptr<ks::Vertex>,
         boost::property<boost::edge_weight_t, double> > graph_t;
 
+    typedef graph_t::edge_descriptor Edge;
 
     typedef boost::graph_traits<ks::graph_t>::vertex_descriptor vertex_t;
     typedef boost::graph_traits<ks::graph_t>::edge_descriptor edge_t;
@@ -117,6 +114,9 @@ namespace ks
         const std::shared_ptr<ks::Vertex>&
             get_closest_vertex(const int x, const int y) const;
 
+        const std::pair<ks::Edge, bool>
+            get_edge(const int v1, const int v2) const;
+
         /* In pixels */
         const int get_rows() const;
 
@@ -130,11 +130,16 @@ namespace ks
         const int get_vertex_count() const;
 
         const bool vertex_exists(const int v) const;
+        const bool vertices_exist(const int v1, const int v2) const;
 
         const double get_weight(const ks::TileMovement& tile_mv);
         const double get_weight(const ks::Vertex& from,
                                 const ks::Vertex& to);
         const double get_weight(const int from, const int to);
+
+        /* Only applicable if an edge is part of the graph */
+        const double get_weight_from_graph(const int v1, const int v2) const;
+
         void remove_edge(const int from, const int to);
 
         const std::unique_ptr<ks::Gps>& get_gps() const;

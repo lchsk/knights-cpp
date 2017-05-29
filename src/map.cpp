@@ -187,8 +187,10 @@ namespace ks
             };
 
             for (int j : dirs) {
-                if (j != -1 && _graph->is_connected(j, gid)) {
+                if (_graph->vertices_exist(j, gid)
+                    && _graph->is_connected(j, gid)) {
                     _graph->remove_edge(gid, j);
+                    obj->record_removed_edge(gid, j);
                 }
             }
         }
