@@ -156,4 +156,10 @@ namespace ks
     {
         _edges->push_back(std::make_pair(v1, v2));
     }
+
+    std::unique_ptr<std::vector<std::pair<int, int> > >&&
+    Object::get_edges()
+    {
+        return std::move(_edges);
+    }
 }

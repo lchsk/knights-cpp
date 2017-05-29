@@ -49,10 +49,10 @@ namespace ks
         _gps->v_col = cols / ks::PX_PER_V;
 
         for (int v = 0; v < _gps->v_cnt; v++) {
-            _add_edge(v, _gps->get_n(v));
-            _add_edge(v, _gps->get_e(v));
-            _add_edge(v, _gps->get_s(v));
-            _add_edge(v, _gps->get_w(v));
+            add_edge(v, _gps->get_n(v));
+            add_edge(v, _gps->get_e(v));
+            add_edge(v, _gps->get_s(v));
+            add_edge(v, _gps->get_w(v));
         }
 
         #ifdef DEBUG_GRAPH
@@ -267,7 +267,7 @@ namespace ks
         #endif
     }
 
-    void Graph::_add_edge(const int v1, const int v2) const
+    void Graph::add_edge(const int v1, const int v2) const
     {
         if (v2 < 0) {
             return;

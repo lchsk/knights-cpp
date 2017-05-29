@@ -159,6 +159,8 @@ namespace ks
 
     void Map::add_object(const std::shared_ptr<ks::Object>& obj)
     {
+        _map_objects->push_back(obj);
+
         const auto obj_pos = obj->get_current_animation()->get_position();
 
         const sf::Vector2i obj_size = obj->get_current_animation()->get_size();
@@ -193,6 +195,21 @@ namespace ks
                     obj->record_removed_edge(gid, j);
                 }
             }
+        }
+    }
+
+    void Map::remove_object(const std::shared_ptr<ks::Object>& obj)
+    {
+        auto it = std::find(_map_objects->begin(), _map_objects->end(), obj);
+
+        if (it != _map_objects->end())
+            _map_objects->erase(it);
+
+        std::unique_ptr<std::vector<std::pair<int, int> > > edges
+            = obj->get_edges();
+
+        for (auto edge : *edges) {
+            _graph->add_edge(edge.first, edge.second);
         }
     }
 

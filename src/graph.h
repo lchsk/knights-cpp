@@ -140,6 +140,7 @@ namespace ks
         /* Only applicable if an edge is part of the graph */
         const double get_weight_from_graph(const int v1, const int v2) const;
 
+        void add_edge(const int v1, const int v2) const;
         void remove_edge(const int from, const int to);
 
         const std::unique_ptr<ks::Gps>& get_gps() const;
@@ -147,8 +148,6 @@ namespace ks
         void render(sf::RenderWindow& window);
 
     private:
-        void _add_edge(const int v1, const int v2) const;
-
         std::unique_ptr<ks::graph_t> _graph;
         const std::unique_ptr<ks::Gps> _gps;
 

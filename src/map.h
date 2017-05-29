@@ -39,6 +39,7 @@ namespace ks
             const int y) const;
 
         void add_object(const std::shared_ptr<ks::Object>& obj);
+        void remove_object(const std::shared_ptr<ks::Object>& obj);
 
     private:
         void load();

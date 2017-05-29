@@ -48,6 +48,9 @@ namespace ks
         virtual const MapObjectType get_type() const;
 
         void record_removed_edge(const int v1, const int v2);
+
+        std::unique_ptr<std::vector<std::pair<int, int> > >&& get_edges();
+
     private:
         const std::shared_ptr<ks::ObjectTemplate> _unit_template;
 
