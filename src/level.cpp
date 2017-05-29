@@ -10,8 +10,6 @@ namespace ks
           _units(std::make_shared<std::vector<std::shared_ptr<ks::Unit> > >()),
           _selected(
               std::make_shared<std::vector<std::shared_ptr<ks::Unit> > >()),
-          _objects(
-              std::make_shared<std::vector<std::shared_ptr<ks::Object> > >()),
           _map_objects(
               std::make_shared<std::vector<std::shared_ptr<ks::MapObject> > >()),
           _window(window)
@@ -27,7 +25,6 @@ namespace ks
             data_loader,
             window,
             _units,
-            _objects,
             _map_objects,
             "map1.json");
 

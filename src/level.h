@@ -46,7 +46,6 @@ namespace ks
 
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _units;
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > > _selected;
-        std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > > _objects;
         std::shared_ptr<std::vector<std::shared_ptr<ks::MapObject> > >
           _map_objects;
 

@@ -8,7 +8,6 @@ namespace ks
         std::shared_ptr<ks::DataLoader>& data_loader,
         std::shared_ptr<ks::GameWindow>& window,
         std::shared_ptr<std::vector<std::shared_ptr<ks::Unit> > >& units,
-        std::shared_ptr<std::vector<std::shared_ptr<ks::Object> > >& objects,
         std::shared_ptr<std::vector<std::shared_ptr<ks::MapObject> > >&
         map_objects,
         std::string map_name)
@@ -17,7 +16,6 @@ namespace ks
           _data_loader(data_loader),
           _window(window),
           _units(units),
-          _objects(objects),
           _map_objects(map_objects),
           _graph(std::make_unique<ks::Graph>())
     {
