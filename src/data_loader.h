@@ -23,7 +23,7 @@ namespace ks
         void load_jsons();
 
         const json& get_json(const std::string name);
-        const json& load_map(const std::string filename);
+        void load_map(const std::string filename);
 
     private:
         void load_json(std::string path, std::string identifier);

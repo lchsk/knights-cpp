@@ -37,7 +37,7 @@ namespace ks
         return _jsons[name];
     }
 
-    const json& DataLoader::load_map(const std::string filename)
+    void DataLoader::load_map(const std::string filename)
     {
         load_json(MAPS_DIR + filename, filename);
     }
