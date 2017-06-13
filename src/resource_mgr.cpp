@@ -10,7 +10,7 @@ namespace ks
 
         _spritesheets["tiles"] = std::make_shared
             <ks::Spritesheet>("assets/images/knights_tiles.png",
-                              _data_loader->get_json("knights_tiles"), 32, 32);
+                              nullptr, 32, 32);
 
         _spritesheets["knights_archer_walk"] = std::make_shared
             <ks::Spritesheet>("assets/images/knights_archer_walk.png",
