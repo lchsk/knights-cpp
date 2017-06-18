@@ -22,11 +22,11 @@ namespace ks
 
         void load_jsons();
 
-        const json& get_json(const std::string name);
-        void load_map(const std::string filename);
+        const json& get_json(const std::string& name);
+        void load_map(const std::string& filename);
 
     private:
-        void load_json(std::string path, std::string identifier);
+        void load_json(const std::string& path, const std::string& identifier);
         std::unordered_map<std::string, json> _jsons;
         json _map;
     };
