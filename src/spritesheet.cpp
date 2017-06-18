@@ -3,18 +3,12 @@
 
 namespace ks
 {
-    Spritesheet::Spritesheet(
-        std::string path,
-        const json& j_data,
-        int tile_width,
-        int tile_height
-    ) :
-        _path(path),
-        _tile_width(tile_width),
-        _tile_height(tile_height)
+    Spritesheet::Spritesheet(std::string path, int tile_width, int tile_height)
+        : _path(path),
+          _tile_width(tile_width),
+          _tile_height(tile_height),
+          _type(SpritesheetType::Grid)
     {
-        _insert_tile_info(j_data);
-
         _texture = std::make_unique<sf::Texture>();
 
         if (! _texture->loadFromFile(_path)) {
@@ -27,12 +21,29 @@ namespace ks
         _rows = texture_size.y / tile_height;
     }
 
+    Spritesheet::Spritesheet(std::string path, const json& data)
+        : _path(path),
+          _type(SpritesheetType::Named)
+    {
+        _texture = std::make_unique<sf::Texture>();
+
+        if (! _texture->loadFromFile(_path)) {
+            throw std::runtime_error("Unable to load " + _path);
+        }
+
+        _load_desc(data);
+    }
+
     Spritesheet::~Spritesheet()
     {
     }
 
     std::unique_ptr<sf::Sprite> Spritesheet::get_new_sprite(int frame)
     {
+        if (_type == SpritesheetType::Named) {
+            return get_new_sprite(_desc_frames[frame]);
+        }
+
         return std::make_unique<sf::Sprite>(*_texture.get(), _get_rect(frame));
     }
 
@@ -46,25 +57,22 @@ namespace ks
         return _texture;
     }
 
-    // void Spritesheet::set_position(double x, double y)
-    // {
-        // const auto& pos = sf::Vector2f(x, y);
-
-        // for (auto& sprite : _sprites) {
-            // sprite->setPosition(pos);
-        // }
-    // }
-
-    void Spritesheet::_insert_tile_info(const json& j_data)
+    void Spritesheet::_load_desc(const json& desc)
     {
-        if (j_data != nullptr) {
-            for (auto const& tile_info : j_data["data"]) {
-                int id = tile_info["id"];
+        if (desc == nullptr)
+            return;
 
-                // std::cout << "Add tileinfo " << id << "\n";
+        for (auto const& tile : desc) {
+            const sf::IntRect r = sf::IntRect(tile["x"],
+                                              tile["y"],
+                                              tile["w"],
+                                              tile["h"]);
 
-                // _tiles_info[id] = std::make_shared<TileInfo>(id);
-            }
+            const std::string s = tile["params"]["id"];
+            const int id = std::atoi(s.c_str());
+
+            _desc[tile["name"]] = r;
+            _desc_frames[id] = r;
         }
     }
 
