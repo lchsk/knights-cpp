@@ -1,0 +1,26 @@
+{
+  "grass1": {
+    "x": 0,
+    "y": 0,
+    "w": 32,
+    "h": 32,
+    "name": "grass1",
+    "ext": ".png",
+    "image": "tiles.1.png",
+    "params": {
+      "id": "0"
+    }
+  },
+  "stone1": {
+    "x": 0,
+    "y": 40,
+    "w": 32,
+    "h": 32,
+    "name": "stone1",
+    "ext": ".png",
+    "image": "tiles.1.png",
+    "params": {
+      "id": "1"
+    }
+  }
+}
