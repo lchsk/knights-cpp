@@ -34,7 +34,7 @@ namespace ks
         void update(sf::Time delta);
         void render(sf::RenderWindow& window);
 
-        void select_objects();
+        bool select_objects(const sf::Vector2i&);
 
     private:
         std::shared_ptr<ks::Map> _map;

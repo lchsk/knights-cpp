@@ -54,9 +54,10 @@ namespace ks
 
     }
 
-    void Level::select_objects()
+    bool Level::select_objects(const sf::Vector2i& pos)
     {
-        auto mouse_pos = sf::Mouse::getPosition(_window->get_window());
+        // TODO
+        sf::Vector2i mouse_pos = pos;
 
         const auto top_left = _window->get_top_left();
         mouse_pos.x += top_left.x;
@@ -78,7 +79,11 @@ namespace ks
         if (! new_selection && _selected->size() == 1) {
             // Move selected unit
             _map->move_unit((*_selected)[0], mouse_pos.x, mouse_pos.y);
+
+            return true;
         }
+
+        return false;
     }
 
     void Level::update(sf::Time delta)
