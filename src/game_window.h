@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "resource_mgr.h"
+#include "hud.h"
 
 namespace ks
 {
@@ -31,6 +32,7 @@ namespace ks
 
         sf::RenderWindow& get_window() const;
         void update(const sf::Time& delta);
+        void render();
 
         void set_map_size(const int, const int);
         const sf::Vector2f get_top_left() const;
@@ -61,6 +63,7 @@ namespace ks
 
         std::unique_ptr<sf::RenderWindow> _window;
         std::unique_ptr<sf::View> _view;
+        std::unique_ptr<ks::Hud> _hud;
     };
 }
 

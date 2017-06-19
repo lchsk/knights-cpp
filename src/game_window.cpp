@@ -16,6 +16,8 @@ namespace ks
 
         _view = std::make_unique<sf::View>(sf::FloatRect(0, 0, _w - 2, _h));
 
+        _hud = std::make_unique<ks::Hud>();
+
         _window->setView(*_view);
     }
 
@@ -42,7 +44,16 @@ namespace ks
     void GameWindow::update(const sf::Time& delta)
     {
         move_view(delta);
+
+        // Is it needed?
         _window->setView(*_view);
+
+        _hud->update(delta);
+    }
+
+    void GameWindow::render()
+    {
+        _hud->render(*_window);
     }
 
     void GameWindow::move_view(const sf::Time& delta)

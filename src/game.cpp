@@ -51,6 +51,7 @@ namespace ks
         _current_level->render(_window->get_window());
 
         _window->get_window().display();
+        _window->render();
     }
 
     void Game::handle_events()
