@@ -5,8 +5,8 @@ namespace ks
     GameWindow::GameWindow(const std::shared_ptr<ks::ResourceMgr>& resource_mgr)
         : _map_h(600),
           _map_w(800),
-          _w(800),
-          _h(450),
+          _w(950),
+          _h(600),
           _percent(5),
           _speed(200)
     {
