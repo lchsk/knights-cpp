@@ -59,10 +59,16 @@ namespace ks
         sf::Event event;
 
         while(_window->get_window().pollEvent(event)) {
+            const sf::Vector2i pos = sf::Mouse::getPosition(_window->get_window());
+
+			_window->get_hud()->update_events(pos);
+
             if (event.type == sf::Event::Closed)
                 _window->get_window().close();
             else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                _current_level->select_objects();
+                if (! _window->get_hud()->left_click(pos)) {
+                    _current_level->select_objects(pos);
+                }
             } else if (
                 event.type == sf::Event::KeyPressed
                 and event.key.code == sf::Keyboard::Escape
