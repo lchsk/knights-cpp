@@ -31,6 +31,11 @@ namespace ks
         return *_window;
     }
 
+    std::unique_ptr<ks::Hud>&& GameWindow::get_hud()
+    {
+        return std::move(_hud);
+    }
+
     const sf::Vector2f GameWindow::get_top_left() const
     {
         auto c = _view->getCenter();

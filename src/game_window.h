@@ -31,6 +31,8 @@ namespace ks
         ~GameWindow();
 
         sf::RenderWindow& get_window() const;
+        std::unique_ptr<ks::Hud>&& get_hud();
+
         void update(const sf::Time& delta);
         void render();
 
