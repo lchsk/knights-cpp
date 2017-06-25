@@ -35,6 +35,7 @@ namespace ks
 
         std::unique_ptr<sf::Sprite> get_new_sprite(int frame);
         std::unique_ptr<sf::Sprite> get_new_sprite(sf::IntRect&);
+        std::unique_ptr<sf::Sprite> get_new_sprite_by_key(const std::string&);
 
         const std::unique_ptr<sf::Texture>& get_texture() const;
 

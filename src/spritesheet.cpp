@@ -52,6 +52,12 @@ namespace ks
         return std::make_unique<sf::Sprite>(*_texture.get(), r);
     }
 
+    std::unique_ptr<sf::Sprite>
+    Spritesheet::get_new_sprite_by_key(const std::string& key)
+    {
+        return std::make_unique<sf::Sprite>(*_texture.get(), _desc[key]);
+    }
+
     const std::unique_ptr<sf::Texture>& Spritesheet::get_texture() const
     {
         return _texture;
