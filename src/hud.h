@@ -8,6 +8,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "gui/button.h"
+
 namespace ks
 {
     class Hud
@@ -19,7 +21,13 @@ namespace ks
         void update(sf::Time delta);
         void render(sf::RenderWindow& window);
 
+        void update_events(const sf::Vector2i&);
+        bool left_click(const sf::Vector2i&);
+
+        void add_widget(std::unique_ptr<ks::Button>&&);
+
     private:
+		std::vector<std::unique_ptr<ks::Button> > _widgets;
     };
 }
 
