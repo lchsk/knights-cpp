@@ -25,8 +25,13 @@ namespace ks
 
     bool Hud::left_click(const sf::Vector2i& pos)
     {
-        std::cout << "hello\n";
-        std::cout << pos.x << " " << pos.y << std::endl;
+        for (const auto& c : _containers) {
+            if (c->left_click(pos)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void Hud::render(sf::RenderWindow& window)

@@ -23,8 +23,12 @@ namespace ks
 
         void pack(std::unique_ptr<ks::Button>&& w);
 
+        bool left_click(const sf::Vector2i& pos);
+
     private:
-      std::vector<std::unique_ptr<ks::Button> > _widgets;
+        std::vector<std::unique_ptr<ks::Button> > _widgets;
+
+        sf::Vector2i _last_pos;
     };
 }
 #endif

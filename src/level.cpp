@@ -49,19 +49,31 @@ namespace ks
         _map->remove_object(tree);
 
         std::unique_ptr<ks::Container> c = std::make_unique<ks::Container>();
-        std::unique_ptr<ks::Button> b = std::make_unique<ks::Button>();
+        std::unique_ptr<ks::Button> b1 = std::make_unique<ks::Button>();
+        std::unique_ptr<ks::Button> b2 = std::make_unique<ks::Button>();
 
-        b->add_state(ks::ButtonState::Ready,
+        b1->add_state(ks::ButtonState::Ready,
                      std::move(_resource_mgr
                                ->get_spritesheet_ptr("tiles")
                                ->get_new_sprite_by_key("stone1")));
 
-        b->add_state(ks::ButtonState::Hover,
+        b2->add_state(ks::ButtonState::Ready,
+                     std::move(_resource_mgr
+                               ->get_spritesheet_ptr("tiles")
+                               ->get_new_sprite_by_key("stone1")));
+
+        b1->add_state(ks::ButtonState::Hover,
                      std::move(_resource_mgr
                                ->get_spritesheet_ptr("tiles")
                                ->get_new_sprite_by_key("grass1")));
 
-        c->pack(std::move(b));
+        b2->add_state(ks::ButtonState::Hover,
+                     std::move(_resource_mgr
+                               ->get_spritesheet_ptr("tiles")
+                               ->get_new_sprite_by_key("grass1")));
+
+        c->pack(std::move(b1));
+        c->pack(std::move(b2));
 
         _window->get_hud()->add(std::move(c));
     }
