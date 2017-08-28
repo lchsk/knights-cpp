@@ -53,6 +53,7 @@ add_executable(${EXECUTABLE_NAME}
     src/hud.cpp
 
     src/gui/button.cpp
+    src/gui/container.cpp
 )
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})

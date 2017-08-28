@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "gui/button.h"
+#include "gui/container.h"
 
 namespace ks
 {
@@ -24,10 +24,10 @@ namespace ks
         void update_events(const sf::Vector2i&);
         bool left_click(const sf::Vector2i&);
 
-        void add_widget(std::unique_ptr<ks::Button>&&);
+        void add(std::unique_ptr<ks::Container>&&);
 
     private:
-		std::vector<std::unique_ptr<ks::Button> > _widgets;
+		std::vector<std::unique_ptr<ks::Container> > _containers;
     };
 }
 

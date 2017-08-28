@@ -18,25 +18,26 @@ namespace ks
 
     void Hud::update_events(const sf::Vector2i& pos)
     {
-        for (const auto& w : _widgets) {
-            w->update_events(pos);
+        for (const auto& c : _containers) {
+            c->update_events(pos);
         }
     }
 
-    bool Hud::left_click(const sf::Vector2i&)
+    bool Hud::left_click(const sf::Vector2i& pos)
     {
-
+        std::cout << "hello\n";
+        std::cout << pos.x << " " << pos.y << std::endl;
     }
 
     void Hud::render(sf::RenderWindow& window)
     {
-        for (const auto& w : _widgets) {
-            w->render(window);
+        for (const auto& c : _containers) {
+            c->render(window);
         }
     }
 
-    void Hud::add_widget(std::unique_ptr<ks::Button>&& w)
+    void Hud::add(std::unique_ptr<ks::Container>&& c)
     {
-        _widgets.push_back(std::move(w));
+        _containers.push_back(std::move(c));
     }
 }

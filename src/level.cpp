@@ -48,6 +48,7 @@ namespace ks
         _map->add_object(tree);
         _map->remove_object(tree);
 
+        std::unique_ptr<ks::Container> c = std::make_unique<ks::Container>();
         std::unique_ptr<ks::Button> b = std::make_unique<ks::Button>();
 
         b->add_state(ks::ButtonState::Ready,
@@ -60,7 +61,9 @@ namespace ks
                                ->get_spritesheet_ptr("tiles")
                                ->get_new_sprite_by_key("grass1")));
 
-        _window->get_hud()->add_widget(std::move(b));
+        c->pack(std::move(b));
+
+        _window->get_hud()->add(std::move(c));
     }
 
     Level::~Level()
