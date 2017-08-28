@@ -37,6 +37,9 @@ namespace ks
 #define GET_SPRITEP_WIDTH(sprite) sprite->getLocalBounds().width
 #define GET_SPRITEP_HEIGHT(sprite) sprite->getLocalBounds().height
 
+#define GET_SPRITE_WIDTH(sprite) sprite.getLocalBounds().width
+#define GET_SPRITE_HEIGHT(sprite) sprite.getLocalBounds().height
+
 	const sf::Color DebugRed = sf::Color(255, 0, 0, 100);
 	const sf::Color DebugGreen = sf::Color(0, 255, 0, 100);
 }
